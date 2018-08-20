@@ -1,0 +1,46 @@
+﻿@model CodeAcademy.Models.ViewModels.LoginViewModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>Login</title>
+</head>
+<body>
+
+<div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <br />
+                <h4 style="text-align:center;">Log In</h4>
+                <br />
+                <form class="form-group" method="post" asp-controller="Home" asp-action="Login">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <label asp-for="Email"></label><br />
+                    <input class="form-control" asp-for="Email" /><br />
+                    <span asp-validation-for="Email"></span>
+                    <label asp-for="Password"></label><br />
+                    <input class="form-control" asp-for="Password" /><br />
+                    <span asp-validation-for="Password"></span>
+                    <label asp-for="RememberMe"></label>
+                    <input class="checkbox " asp-for="RememberMe" /><br />
+                    <input class="btn btn-success" type="submit" value="Daxil ol" />
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

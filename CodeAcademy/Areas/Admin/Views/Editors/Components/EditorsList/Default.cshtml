@@ -1,0 +1,15 @@
+﻿@model IEnumerable<CodeAcademy.Areas.Admin.Models.ViewModels.UserViewModel>
+@{
+    if (!Model.Any())
+    {
+        <h5>No editors...</h5>
+    }
+
+    @foreach (var editor in Model)
+    {
+        <span>@editor.Email</span>
+        <a asp-area="Admin" asp-controller="Editors" asp-action="Edit">Edit</a>
+        <a asp-area="Admin" asp-controller="Editors" asp-action="Delete">Delete</a>
+        <br />
+    }
+}

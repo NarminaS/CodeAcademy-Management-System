@@ -1,0 +1,204 @@
+﻿@using CodeAcademy.Areas.Admin.Models.ViewModels
+@model IEnumerable<UserViewModel>
+@{ 
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+        <h3 style="color:red">Editors CRUD page</h3>
+        <br />
+        <input type="button" id="showform" value="Create new editor" class="btn btn-info" />
+        <br />
+        <br />
+    </div>
+    <div class="container-fluid">
+        <div class="row">
+            <div id="editorsList" class="col-sm-5">
+                @{
+                    if (!Model.Any())
+                    {
+                        <h5>No editors...</h5>
+                    }
+                }
+
+                @foreach (var editor in Model)
+                {
+                    <span class="h5">@editor.Name &nbsp </span>
+                    <span class="h5">@editor.Email &nbsp</span>
+                    <input type="button" class="btn btn-info editInfo" value="Edit" />
+                    <input type="button" value="Delete" class="openSubmit btn btn-danger" />
+                    <br />
+                    <hr />
+                    <div class="submitDelete col-sm-8">
+                        <h6>The user @editor.Name will be deleted permanently. Are you sure?</h6>
+                        <form asp-controller="Editors" asp-action="Delete" method="post">
+                            <input type="hidden" value="@editor.Id" />
+                            <input type="submit" class="submitInput btn btn-danger btn-sm" value="Yes" />
+                        </form>
+                        <input type="button" value="No" class="closeSubmit btn btn-primary btn-sm" />
+                    </div>
+                }
+            </div>
+            <div class="col-sm-5">
+                <div id="editForm">
+                    <form method="post" asp-controller="Editors" asp-action="Edit" asp-area="Admin">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <label name="Name">Name</label><br />
+                        <input class="form-control" type="text" name="Name"><br />
+                        <label name="GenderId">Gender</label>
+                        <select class="form-control" name="GenderId">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        <br />
+                        <input type="button" class="btn btn-warning" id = "confirmChange" value="Change Info"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="createform">
+                    <form method="post" asp-area="Admin" asp-controller="Editors" asp-action="Create">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <label name="Name">Name</label><br />
+                        <input class="form-control" type="text" name="Name"><br />
+                        <label name="Email">Email</label><br />
+                        <input class="form-control" type="email" name="Email"><br />
+                        <label name="Password">Password</label><br />
+                        <input class="form-control" type="password" name="Password" /><br /><br />
+                        <select class="form-control" name="GenderId">
+                            <option value="1">Male</option>
+                            <option value="2">Female</option>
+                        </select>
+                        <br />
+                        <input type="submit" value="Create" class="btn btn-success" />
+                        <input type="button" value="Close" id="closeCreate" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <style>
+        .submitDelete {
+            line-height: 0 !important;
+            height: 0;
+            overflow: hidden;
+            transition: 0.3s ease-in-out;
+            /*padding: 1vh;*/
+            /*border: 1px solid black;*/
+        }
+
+        #createform {
+            display: none;
+        }
+
+        .editor {
+            border: 1px solid aqua;
+            border-radius: 1vh;
+            padding: 1vh;
+            margin: 1vh;
+        }
+
+            .editor span {
+                font-family: 'Comic Sans MS'sans-serif;
+            }
+    </style>
+
+    <script>
+        var userName;
+        var userMail;
+
+        $(".editInfo").click(function (e) {
+            userName = $(e.target).prev().prev().text();
+            userMail = $(e.target).prev().text();
+            $("#editForm form input.form-control").val(userName);
+        })
+
+        $("#confirmChange").click(function (e) {
+            $.ajax({
+                method: "POST",
+                url: "/Admin/Editors/Edit/email",
+                data: {
+                    email: userMail,
+                    name: $("#editForm form input.form-control").val(),
+                    genderId: $(e.target).prev().prev().val()
+                }
+                    
+            })
+                .done(function (obj) {
+                    document.location.reload()
+                })
+        });
+
+        $(".submitInput").click(function (e) {
+            var userId = $(e.target).prev().val();
+            $.ajax({
+                method: "POST",
+                url: "/Admin/Editors/Delete/id",
+                data: { id: userId }
+            })
+                .done(function (obj) {
+                    document.location.reload()
+                })
+
+        })
+
+        $(".openSubmit").click(function (e) {
+            $(e.target).next().next().next().css("height", "100%");
+        })
+
+        $(".closeSubmit").click(function (e) {
+            $(e.target.parentElement).css("height", "0px");
+        })
+
+        $("#showform").click(function () {
+            $("#createform").css("display", "block");
+        });
+
+        $("#closeCreate").click(function () {
+            $("#createform").css("display", "none");
+        });
+
+        function ProcessData() {
+            $.ajax({
+                method: "POST",
+                url: "/Admin/Editors/Create",
+                data: {
+                    email: Email.value,
+                    password: Password.value,
+                    genderId: GenderId.value
+                }
+            })
+                .done(function (obj) {
+                    alert(obj)
+                    //var newuser = document.createElement("span")
+                    //newuser.innerHTML = obj.Id;
+                    //var container = document.getElementById("editorsList")
+                    //container.appendChild(newuser)
+                })
+            //.done(function (data) {
+            //    var newuser = document.createElement("span")
+            //    newuser.innerHTML = data;
+            //    var container = document.getElementById("editorsList")
+            //    container.appendChild(newuser)
+
+            //})
+        }
+    </script>
+</body>
+</html>

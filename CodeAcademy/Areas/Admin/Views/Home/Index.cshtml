@@ -1,0 +1,71 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <h1 class="h1">Admin panel page!</h1>
+                <br />
+
+                <form asp-area="Admin" asp-controller="Home" asp-action="LogOut" method="post">
+                    <input class="btn glyphicon-log-out" type="submit" value="Log Out" />
+                </form>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6">
+                <a class="menu navbar-link btn btn-outline-info" asp-area="Admin" asp-controller="Editors" asp-action="List">CRUD EDITORS</a>
+                <a class="menu navbar-link btn btn-outline-info" asp-area="Admin" asp-controller="Events" asp-action="List">EVENTS</a>
+                <a class="menu navbar-link btn btn-outline-info" asp-area="Admin" asp-controller="Statistics" asp-action="List">STATISTICS</a>
+                <a class="menu navbar-link btn btn-outline-info" asp-area="Admin" asp-controller="Design" asp-action="Index">DESIGN</a>
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+    </div>
+
+
+
+    <style>
+        h1.h1 {
+            color: red;
+            text-align:center;
+        }
+
+        .menu {
+            display: block;
+            padding: 2vh;
+            margin: 1vh;
+            border: 1px solid black;
+            border-radius: 2vh;
+        }
+
+        .log-out {
+            text-align: right;
+            margin-right: 2vw;
+            padding: 1vh;
+            border: 1px solid red;
+            border-radius: 1vh;
+            text-decoration: none;
+        }
+    </style>
+
+</body>
+</html>

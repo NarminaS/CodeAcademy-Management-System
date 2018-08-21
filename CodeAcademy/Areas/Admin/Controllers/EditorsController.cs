@@ -46,7 +46,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                                       GenderId = model.GenderId,
                                       Name = model.Name,
                                       Email = model.Email,
-                                      CreatingDate = DateTime.Now 
+                                      CreatingDate = DateTime.Now,
                                     };
                 if (_userManager.FindByEmailAsync(model.Email).Result == null)
                 {

@@ -3,7 +3,7 @@
 @{ 
     Layout = null;
 }
-<!DOCTYPE html>
+
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
@@ -39,7 +39,7 @@
                     <hr />
                     <div class="submitDelete col-sm-8">
                         <h6>The user @editor.Name will be deleted permanently. Are you sure?</h6>
-                        <form asp-controller="Editors" asp-action="Delete" method="post">
+                        <form asp-antiforgery="true" asp-controller="Editors" asp-action="Delete" method="post">
                             <input type="hidden" value="@editor.Id" />
                             <input type="submit" class="submitInput btn btn-danger btn-sm" value="Yes" />
                         </form>
@@ -49,7 +49,7 @@
             </div>
             <div class="col-sm-5">
                 <div id="editForm">
-                    <form method="post" asp-controller="Editors" asp-action="Edit" asp-area="Admin">
+                    <form asp-antiforgery="true" method="post" asp-controller="Editors" asp-action="Edit" asp-area="Admin">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
                         <input class="form-control" type="text" name="Name"><br />
@@ -65,21 +65,20 @@
             </div>
         </div>
     </div>
-
-
+    
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div id="createform">
-                    <form method="post" asp-area="Admin" asp-controller="Editors" asp-action="Create">
+                    <form asp-antiforgery="true" method="post" asp-area="Admin" asp-controller="Editors" asp-action="Create">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
-                        <input class="form-control" type="text" name="Name"><br />
-                        <label name="Email">Email</label><br />
+                        <input class="form-control" type="text" name="Name" id="Name"><br />
+                        <label id="Email">Email</label><br />
                         <input class="form-control" type="email" name="Email"><br />
                         <label name="Password">Password</label><br />
                         <input class="form-control" type="password" name="Password" /><br /><br />
-                        <select class="form-control" name="GenderId">
+                        <select class="form-control" name="GenderId" id="GenderId">
                             <option value="1">Male</option>
                             <option value="2">Female</option>
                         </select>
@@ -99,8 +98,6 @@
             height: 0;
             overflow: hidden;
             transition: 0.3s ease-in-out;
-            /*padding: 1vh;*/
-            /*border: 1px solid black;*/
         }
 
         #createform {
@@ -179,26 +176,17 @@
                 method: "POST",
                 url: "/Admin/Editors/Create",
                 data: {
+                    name:Name.value,
                     email: Email.value,
                     password: Password.value,
                     genderId: GenderId.value
                 }
             })
                 .done(function (obj) {
-                    alert(obj)
-                    //var newuser = document.createElement("span")
-                    //newuser.innerHTML = obj.Id;
-                    //var container = document.getElementById("editorsList")
-                    //container.appendChild(newuser)
+                    document.location.reload()
                 })
-            //.done(function (data) {
-            //    var newuser = document.createElement("span")
-            //    newuser.innerHTML = data;
-            //    var container = document.getElementById("editorsList")
-            //    container.appendChild(newuser)
-
-            //})
         }
+
     </script>
 </body>
 </html>

@@ -95,7 +95,7 @@ using CodeAcademy.Areas.Admin.Models;
             WriteLiteral("</span>\r\n        ");
             EndContext();
             BeginContext(239, 71, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9f1e85687fce454ebfce34121d644240", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "40e555d15a614bd3b0aa70420005a075", async() => {
                 BeginContext(302, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -121,7 +121,7 @@ using CodeAcademy.Areas.Admin.Models;
             WriteLiteral("\r\n        ");
             EndContext();
             BeginContext(320, 75, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b99a602b185b4f95af5f36854580dbbc", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e0a8d7bf439477d96deae2b7a43e615", async() => {
                 BeginContext(385, 6, true);
                 WriteLiteral("Delete");
                 EndContext();

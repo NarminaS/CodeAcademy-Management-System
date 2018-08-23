@@ -34,4 +34,5 @@ C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\_ViewStart.g.cshtml.cs
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Editors\List.g.cshtml.cs
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csprojAssemblyReference.cache
-C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Editors\Components\EditorsList\Default.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Home\Index.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Components\UpperPanel\Default.g.cshtml.cs

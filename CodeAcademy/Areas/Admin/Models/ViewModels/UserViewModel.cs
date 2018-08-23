@@ -8,6 +8,7 @@ namespace CodeAcademy.Areas.Admin.Models.ViewModels
 {
     public class UserViewModel
     {
+        [ScaffoldColumn(true)]
         public string Id { get; set; }  
 
         [Required]

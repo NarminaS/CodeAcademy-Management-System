@@ -14,24 +14,19 @@ namespace CodeAcademy.Areas.Admin.Controllers
     public class HomeController : Controller
     {
         SignInManager<User> _signInManager;
+        UserManager<User> _userManager;
 
-        public HomeController(SignInManager<User> signInManager)
+        public HomeController(SignInManager<User> signInManager, UserManager<User> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
+            var userName = HttpContext.User.Identity.Name;
             return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LogOut()
-        {
-            await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Home", new { area = "" });
         }
     }
 }

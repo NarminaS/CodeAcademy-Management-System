@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
@@ -35,7 +36,12 @@ namespace CodeAcademy.Models
 
             if (await userManager.FindByNameAsync(adminMail) == null)
             {
-                User admin = new User { Email = adminMail, UserName = adminMail, GenderId = 1 };
+                User admin = new User { Email = adminMail,
+                                        UserName = adminMail,
+                                        GenderId = 1,
+                                        ProfilePhotoPath = "/images/avatars/avatar-default.png",
+                                        Name = "Administrator"
+                                      };
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {

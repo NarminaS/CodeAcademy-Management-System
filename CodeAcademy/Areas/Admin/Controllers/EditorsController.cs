@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeAcademy.Areas.Admin.Models.ViewModels;
 using CodeAcademy.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,16 +17,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
     public class EditorsController : Controller
     {
         UserManager<User> _userManager;
-        RoleManager<IdentityRole> _roleManager;
-        SignInManager<User> _signInManager;
-        AppDbContext _dbContext;
 
-        public EditorsController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager, AppDbContext dbContext)
+        public EditorsController(UserManager<User> userManager)
         {
             _userManager = userManager;
-            _roleManager = roleManager;
-            _signInManager = signInManager;
-            _dbContext = dbContext;
         }
 
         [HttpGet]
@@ -38,6 +34,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(UserViewModel model)
         {
+            string defaultAvatarPath = "/images/avatars/avatar-default.png";
             if (ModelState.IsValid)
             {
                 User editor = new User()
@@ -47,6 +44,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                                       Name = model.Name,
                                       Email = model.Email,
                                       CreatingDate = DateTime.Now,
+                                      ProfilePhotoPath = defaultAvatarPath
                                     };
                 if (_userManager.FindByEmailAsync(model.Email).Result == null)
                 {

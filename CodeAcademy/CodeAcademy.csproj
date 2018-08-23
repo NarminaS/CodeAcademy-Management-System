@@ -17,7 +17,6 @@
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Editor\Data\" />
     <Folder Include="Areas\Editor\Models\" />
-    <Folder Include="Areas\Editor\Views\" />
   </ItemGroup>
 
   <ItemGroup>

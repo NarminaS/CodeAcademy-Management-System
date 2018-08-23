@@ -46,10 +46,19 @@ namespace CodeAcademy.Controllers
                     var user = await _userManager.FindByEmailAsync(model.Email);
                     if (await _userManager.IsInRoleAsync(user, "Admin"))
                         return RedirectToAction("Index","Home", new { area = "Admin"});
+                    else if(await _userManager.IsInRoleAsync(user, "Editor"))
+                        return RedirectToAction("Index", "Home", new { area = "Editor" });
                 }
             }
             return View();
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Login", "Home", new { area = "" });
+        }
     }
 }

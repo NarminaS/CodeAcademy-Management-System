@@ -12,6 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
     <div class="container-fluid">
         <h3 style="color:red">Editors CRUD page</h3>
         <br />
@@ -59,13 +60,13 @@
                             <option value="2">Female</option>
                         </select>
                         <br />
-                        <input type="button" class="btn btn-warning" id = "confirmChange" value="Change Info"/>
+                        <input type="button" class="btn btn-warning" id="confirmChange" value="Change Info" />
                     </form>
                 </div>
             </div>
         </div>
     </div>
-    
+
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
@@ -135,7 +136,7 @@
                     name: $("#editForm form input.form-control").val(),
                     genderId: $(e.target).prev().prev().val()
                 }
-                    
+
             })
                 .done(function (obj) {
                     document.location.reload()
@@ -176,7 +177,7 @@
                 method: "POST",
                 url: "/Admin/Editors/Create",
                 data: {
-                    name:Name.value,
+                    name: Name.value,
                     email: Email.value,
                     password: Password.value,
                     genderId: GenderId.value

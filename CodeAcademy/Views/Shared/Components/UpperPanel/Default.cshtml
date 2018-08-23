@@ -1,0 +1,35 @@
+﻿@model CodeAcademy.Components.ViewModels.UpperPanelViewModel
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6"></div>
+        <div class="col-sm-4">
+            <a asp-area="Admin" asp-controller="Account" asp-action="Index" class="profile">
+                <ul class="nav navbar-nav list-inline">
+                    <li class="list-inline-item">@Model.Name &nbsp;
+                        <img src="@Model.AvatarPath" id="avatar" class="img-responsive list-inline-item" alt="Avatar" />
+                    </li>
+                </ul>
+            </a>
+        </div>
+        <div class="col-sm-2">
+            <form asp-area="" asp-controller="Home" asp-action="LogOut" method="post">
+                <input class="btn btn-danger" type="submit" value="Log Out" />
+            </form>
+        </div>
+    </div>
+</div>
+
+<style>
+    .profile{
+        display:block;
+        text-align:right;
+    }
+        .profile:hover {
+            text-decoration: none;
+        }
+    #avatar{
+        height:70%;
+    }
+</style>

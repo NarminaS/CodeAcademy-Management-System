@@ -77,8 +77,7 @@ namespace CodeAcademy
 ;
                 routes.MapRoute(
                 name: null,
-                template: "{controller=Home}/{action=Login}/{id?}");
-
+                template: "{controller=Home}/{action=Login}/{id?}");  
             });
         }
     }

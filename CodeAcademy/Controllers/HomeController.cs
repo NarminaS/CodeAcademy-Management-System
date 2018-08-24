@@ -44,10 +44,24 @@ namespace CodeAcademy.Controllers
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByEmailAsync(model.Email);
-                    if (await _userManager.IsInRoleAsync(user, "Admin"))
-                        return RedirectToAction("Index","Home", new { area = "Admin"});
-                    else if(await _userManager.IsInRoleAsync(user, "Editor"))
-                        return RedirectToAction("Index", "Home", new { area = "Editor" });
+                    user.IsActive = true;
+                    user.LastLoginDate = DateTime.Now;
+                    var updateResult = await _userManager.UpdateAsync(user);
+                    if(updateResult.Succeeded)
+                    {
+                        if (await _userManager.IsInRoleAsync(user, "Admin"))
+                            return RedirectToAction("Index", "Home", new { area = "Admin" });
+                        else if (await _userManager.IsInRoleAsync(user, "Editor"))
+                            return RedirectToAction("Index", "Home", new { area = "Editor" });
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Update failed...");
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Credentials are invalid. Please try again");
                 }
             }
             return View();

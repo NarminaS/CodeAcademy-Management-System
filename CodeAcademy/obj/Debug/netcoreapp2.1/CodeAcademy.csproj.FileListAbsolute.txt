@@ -36,3 +36,10 @@ C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csprojAssemblyReference.cache
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Home\Index.g.cshtml.cs
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\Shared\Components\UpperPanel\Default.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Shared\Error.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\_ViewImports.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\_ViewStart.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Group\Index.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Roles\Index.g.cshtml.cs
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Faculties\Index.g.cshtml.cs

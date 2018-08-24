@@ -20,7 +20,13 @@ namespace CodeAcademy.Models
         public Room Room { get; set; }
 
         public List<UserGroup> UserGroups { get; set; }   
+
         public DateTime CreationDate { get; set; }
-        
+
+        public DateTime LessonsStartDate { get; set; }
+
+        public DateTime LessonsEndDate { get; set; }    
+
+        public bool IsAssembled { get; set; }   
     }
 }

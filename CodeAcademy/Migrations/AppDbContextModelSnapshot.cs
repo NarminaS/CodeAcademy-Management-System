@@ -21,9 +21,11 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Faculty", b =>
                 {
-                    b.Property<byte>("Id");
+                    b.Property<byte>("Id").ValueGeneratedOnAdd();
 
-                    b.Property<int>("Name");
+                    b.Property<string>("LogoImagePath");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -51,6 +53,12 @@ namespace CodeAcademy.Migrations
 
                     b.Property<byte>("FacultyId");
 
+                    b.Property<bool>("IsAssembled");
+
+                    b.Property<DateTime>("LessonsEndDate");
+
+                    b.Property<DateTime>("LessonsStartDate");
+
                     b.Property<string>("Name");
 
                     b.Property<byte>("RoomId");
@@ -72,7 +80,26 @@ namespace CodeAcademy.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Room");
+                    b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.Tag", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("FacultyId");
+
+                    b.Property<byte?>("FacultyId1");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacultyId1");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.User", b =>
@@ -294,6 +321,13 @@ namespace CodeAcademy.Migrations
                         .WithMany("Groups")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.Tag", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany("Tags")
+                        .HasForeignKey("FacultyId1");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.User", b =>

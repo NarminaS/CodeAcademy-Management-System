@@ -1,0 +1,44 @@
+﻿@using CodeAcademy.Areas.Editor.Models.ViewModels
+@model List<GroupViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Grop CRUUD</title>
+</head>
+<body>
+    <h3>Group crud page</h3>
+    @if (!Model.Any())
+    {
+        <h4 class="lead">No groups...</h4>
+    }
+
+    <form class="form-inline" method="post">
+        <input type="button" class="btn btn-info" value="Add new group" />
+    </form>
+
+
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 20vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+</body>
+</html>

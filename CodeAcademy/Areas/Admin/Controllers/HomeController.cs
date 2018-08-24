@@ -25,7 +25,6 @@ namespace CodeAcademy.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var userName = HttpContext.User.Identity.Name;
             return View();
         }
     }

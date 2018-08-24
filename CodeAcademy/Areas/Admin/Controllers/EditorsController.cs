@@ -69,7 +69,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>Delete(string id)
+        public async Task<IActionResult> Delete(string id)
         {
            User user = await _userManager.FindByIdAsync(id);
             if (user != null)
@@ -84,7 +84,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult>Edit(string email, string name, byte genderId)
+        public async Task<IActionResult> Edit(string email, string name, byte genderId)
         {
             User user = await _userManager.FindByNameAsync(email.Trim());
             if (user != null)
@@ -98,6 +98,8 @@ namespace CodeAcademy.Areas.Admin.Controllers
                 {
                     user.GenderId = genderId;
                 }
+
+                user.LastUpdateDate = DateTime.Now;
 
                 IdentityResult result = await _userManager.UpdateAsync(user);
 

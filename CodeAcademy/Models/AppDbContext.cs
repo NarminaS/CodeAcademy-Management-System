@@ -13,10 +13,16 @@ namespace CodeAcademy.Models
         public DbSet<Faculty> Faculties { get; set; }   
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Gender> Genders { get; set; }
+        public DbSet<Tag> Tags { get; set; }    
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {
 
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Faculty>().Property(x => x.Id).UseSqlServerIdentityColumn();
         }
     }
 }

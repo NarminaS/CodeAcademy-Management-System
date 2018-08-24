@@ -36,12 +36,17 @@ namespace CodeAcademy.Models
 
             if (await userManager.FindByNameAsync(adminMail) == null)
             {
-                User admin = new User { Email = adminMail,
-                                        UserName = adminMail,
-                                        GenderId = 1,
-                                        ProfilePhotoPath = "/images/avatars/avatar-default.png",
-                                        Name = "Administrator"
-                                      };
+                User admin = new User
+                {
+                    Email = adminMail,
+                    UserName = adminMail,
+                    GenderId = 1,
+                    ProfilePhotoPath = "/images/avatars/avatar-default.png",
+                    Name = "Administrator",
+                    IsActive = true,
+                    CreatingDate = DateTime.Now
+                };
+
                 IdentityResult result = await userManager.CreateAsync(admin, adminPassword);
                 if (result.Succeeded)
                 {

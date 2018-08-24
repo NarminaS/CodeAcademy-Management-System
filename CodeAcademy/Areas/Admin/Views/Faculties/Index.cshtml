@@ -1,0 +1,69 @@
+﻿@using CodeAcademy.Areas.Admin.Models.ViewModels
+@model List<FacultyViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h1>Faculty CRUD!!!</h1>
+    <input type="button" id="open-fac-create" class="btn btn-info" value="New Faculty" />
+    @if (!Model.Any())
+    {
+        <h5>No faculties...</h5>
+    }
+
+    @* New faculty form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="new-fac" class="custom-modal">
+                    <h5 class="h5 text-center">New Faculty</h5>
+                    <form asp-area="Admin" asp-controller="Faculties" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
+                        <label>Name</label>
+                        <input type="text" name="name" id="create-fac-name" placeholder="Faculty name..." class="form-control" />
+                        <br />
+                        <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
+                        <input type="submit" value="Create Faculty" id="confirm-create" class="btn btn-success" />
+                        <input type="button" value="Close" id="closeCreateFac" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+    <script>
+        $("#open-fac-create").click(function () {
+            $("#new-fac").css("display", "block");
+        });
+
+        $("#closeCreateFac").click(function () {
+            $("#new-fac").css("display", "none");
+        });
+    </script>
+</body>
+</html>

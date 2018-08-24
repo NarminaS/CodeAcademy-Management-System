@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Components
 {
-    [ViewComponent(Name ="UpperPanel")]
+    [ViewComponent(Name = "UpperPanel")]
     public class UpperPanel:ViewComponent
     {
         UpperPanelViewModel _model;

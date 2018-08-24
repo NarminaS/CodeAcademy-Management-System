@@ -69,8 +69,9 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <div id="createform">
+            <div class="col-sm-8">
+                <div id="createform" class="custom-modal">
+                    <h3 class="text-center">New Editor</h3>
                     <form asp-antiforgery="true" method="post" asp-area="Admin" asp-controller="Editors" asp-action="Create">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
@@ -93,6 +94,7 @@
         </div>
     </div>
 
+
     <style>
         .submitDelete {
             line-height: 0 !important;
@@ -101,8 +103,18 @@
             transition: 0.3s ease-in-out;
         }
 
-        #createform {
+        .custom-modal {
+            padding: 2vh;
             display: none;
+            position: fixed;
+            width: 20vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
         }
 
         .editor {
@@ -112,14 +124,18 @@
             margin: 1vh;
         }
 
-            .editor span {
-                font-family: 'Comic Sans MS'sans-serif;
+         .editor span {
+            font-family: 'Comic Sans MS'sans-serif;
             }
     </style>
 
     <script>
         var userName;
         var userMail;
+
+        $("#show-role-form").click(function () {
+            $("#manage-roles").css("display", "block");
+        })
 
         $(".editInfo").click(function (e) {
             userName = $(e.target).prev().prev().text();

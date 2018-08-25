@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeAcademy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180824071100_Group-creationAndLessonStartDate_IsAssembledAdded")]
-    partial class GroupcreationAndLessonStartDate_IsAssembledAdded
+    [Migration("20180824173145_Second")]
+    partial class Second
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,9 +23,13 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Faculty", b =>
                 {
-                    b.Property<byte>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("Name");
+                    b.Property<string>("LogoImagePath");
+
+                    b.Property<string>("Name");
 
                     b.HasKey("Id");
 
@@ -51,15 +55,17 @@ namespace CodeAcademy.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<byte>("FacultyId");
+                    b.Property<int>("FacultyId");
 
                     b.Property<bool>("IsAssembled");
+
+                    b.Property<DateTime>("LessonsEndDate");
 
                     b.Property<DateTime>("LessonsStartDate");
 
                     b.Property<string>("Name");
 
-                    b.Property<byte>("RoomId");
+                    b.Property<int>("RoomId");
 
                     b.HasKey("Id");
 
@@ -72,7 +78,9 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Room", b =>
                 {
-                    b.Property<byte>("Id");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
 
@@ -89,13 +97,11 @@ namespace CodeAcademy.Migrations
 
                     b.Property<int>("FacultyId");
 
-                    b.Property<byte?>("FacultyId1");
-
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FacultyId1");
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Tags");
                 });
@@ -325,7 +331,8 @@ namespace CodeAcademy.Migrations
                 {
                     b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
                         .WithMany("Tags")
-                        .HasForeignKey("FacultyId1");
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.User", b =>

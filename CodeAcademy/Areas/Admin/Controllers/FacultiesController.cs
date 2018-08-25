@@ -41,10 +41,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
             if (!String.IsNullOrEmpty(name) && file != null)
             {
                await UploadToServer(DefinePath(file), file);
-               Faculty faculty = new Faculty { Name = name, LogoImagePath = Path.Combine("images", file.FileName) };
+               Faculty faculty = new Faculty { Name = name, LogoImagePath = Path.Combine("/images", file.FileName) };
                await _dbContext.Faculties.AddAsync(faculty);
                int affected = await _dbContext.SaveChangesAsync();
-               if (affected>0)
+               if (affected > 0)
                 {
                     return RedirectToAction("Index", "Faculties");
                 }

@@ -14,17 +14,34 @@
 </head>
 <body>
     @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
-    <h1>Faculty CRUD!!!</h1>
-    <input type="button" id="open-fac-create" class="btn btn-info" value="New Faculty" />
+   
     @if (!Model.Any())
     {
         <h5>No faculties...</h5>
     }
-
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-4">
+                    <input type="button" id="open-fac-create" class="btn btn-dark" value="New Faculty" />
+                    <br />
+                    <br />
+                    <ul class="list-group list-inline mx-auto justify-content-center">
+                        @foreach (var faculty in Model)
+                        {
+                            <li class="list-group-item list-inline-item faculty">
+                                <p class="h4 btn-info">@faculty.Name <span class="badge badge-light">@faculty.GroupsInFacultyCount</span></p>
+                                <img class="img-responsive" src="@faculty.LogoImagePath" alt="Faculty Logo" />
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
     @* New faculty form *@
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
+            <div class="col-sm-6">
                 <div id="new-fac" class="custom-modal">
                     <h5 class="h5 text-center">New Faculty</h5>
                     <form asp-area="Admin" asp-controller="Faculties" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
@@ -32,6 +49,7 @@
                         <input type="text" name="name" id="create-fac-name" placeholder="Faculty name..." class="form-control" />
                         <br />
                         <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
+                         
                         <input type="submit" value="Create Faculty" id="confirm-create" class="btn btn-success" />
                         <input type="button" value="Close" id="closeCreateFac" class="btn btn-danger" />
                     </form>
@@ -41,6 +59,25 @@
     </div>
 
     <style>
+        #confirm-create,#closeCreateFac{
+            margin-top:2vh;
+        }
+        ul{
+            display:flex;
+        }
+        li{
+            padding:0.5vh;
+        }
+        .faculty *{
+            display:inline-block;
+        }
+
+        .faculty img{
+            width:15%;
+        }
+        .faculty p{
+            padding:1vh;
+        }
         .custom-modal {
             padding: 2vh;
             display: none;

@@ -17,10 +17,10 @@ namespace CodeAcademy.Areas.Editor.Models.ViewModels
         public string Name { get; set; }
 
         [Required]
-        public byte FacultyId { get; set; }
+        public int FacultyId { get; set; }
 
         [Required]
-        public byte RoomId { get; set; }   
+        public int RoomId { get; set; }   
         
         [Required]
         [DataType(DataType.Date)]

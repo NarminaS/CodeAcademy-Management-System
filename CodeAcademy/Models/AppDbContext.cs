@@ -22,7 +22,7 @@ namespace CodeAcademy.Models
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
-            builder.Entity<Faculty>().Property(x => x.Id).UseSqlServerIdentityColumn();
+            base.OnModelCreating(builder);  
         }
     }
 }

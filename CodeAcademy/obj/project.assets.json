@@ -12224,11 +12224,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy\\CodeAcademy.csproj",
+      "projectUniqueName": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
       "projectName": "CodeAcademy",
-      "projectPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy\\CodeAcademy.csproj",
+      "projectPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
       "packagesPath": "C:\\Users\\Руфат\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy\\obj\\",
+      "outputPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

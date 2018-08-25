@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodeAcademy.Areas.Admin.Models.ViewModels;
 using CodeAcademy.Models;
+using CodeAcademy.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -30,7 +31,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         {
             var model = _dbContext.Faculties
                                 .Select(x => new FacultyViewModel()
-                                { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.LogoImagePath })
+                                    { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.LogoImagePath })
                                                     .ToList();
             return View(model);
         }
@@ -57,9 +58,29 @@ namespace CodeAcademy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(byte id)
+        public async Task<IActionResult> Edit(FacultyViewModel model, IFormFile file)
         {
-            return View();
+            var faculty = _dbContext.Faculties.Where(x => x.Id == model.Id).FirstOrDefault();
+
+            if (ModelState.IsValid && faculty != null)
+            {
+                faculty.Name = model.Name;
+                if (file !=null && !faculty.LogoImagePath.Contains(file.FileName))
+                {
+                    OldFileRemover remover = new OldFileRemover(_environment);
+                    await remover.DeleteOldFacultyLogoAsync(faculty);
+                    await UploadToServer(DefinePath(file), file);
+                    faculty.LogoImagePath = Path.Combine("/images", file.FileName);
+                }
+                _dbContext.Update(faculty);
+                int affected = await _dbContext.SaveChangesAsync();
+                if (affected>0)
+                {
+                    return RedirectToAction("Index", "Faculties");
+                }
+                return RedirectToAction("Index", "Faculties");
+            }
+            return RedirectToAction("Index", "Faculties");
         }
 
         [HttpPost]

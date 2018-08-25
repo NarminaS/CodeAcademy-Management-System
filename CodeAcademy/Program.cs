@@ -28,8 +28,8 @@ namespace CodeAcademy
                     var userManager = services.GetRequiredService<UserManager<User>>();
                     var rolesManager = services.GetRequiredService<RoleManager<IdentityRole>>();
                     var appContext = scope.ServiceProvider.GetService<AppDbContext>();
-                    await RoleInitializer.SeedGenders(appContext);
-                    await RoleInitializer.InitializeAsync(userManager, rolesManager);
+                    await Initializer.SeedGenders(appContext);
+                    await Initializer.InitializeAsync(userManager, rolesManager);
                 }
                 catch (Exception ex)
                 {

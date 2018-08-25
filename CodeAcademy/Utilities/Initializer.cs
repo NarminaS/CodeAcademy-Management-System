@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class RoleInitializer
+    public class Initializer
     {
         public static async Task SeedGenders(AppDbContext context)
         {

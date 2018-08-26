@@ -88,3 +88,4 @@ C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy-Management-System\CodeA
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy-Management-System\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.dll
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy-Management-System\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.pdb
 C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy-Management-System\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csproj.CopyComplete
+C:\Users\Руфат\source\repos\CodeAcademy\CodeAcademy-Management-System\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Tags\Index.g.cshtml.cs

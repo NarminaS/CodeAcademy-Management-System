@@ -67,8 +67,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                 faculty.Name = model.Name;
                 if (file !=null && !faculty.LogoImagePath.Contains(file.FileName))
                 {
-                    OldFileRemover remover = new OldFileRemover(_environment);
-                    await remover.DeleteOldFacultyLogoAsync(faculty);
+                    await new OldFileRemover(_environment).DeleteOldFacultyLogoAsync(faculty);
                     await UploadToServer(DefinePath(file), file);
                     faculty.LogoImagePath = Path.Combine("/images", file.FileName);
                 }

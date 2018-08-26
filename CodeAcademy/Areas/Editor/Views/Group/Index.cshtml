@@ -12,6 +12,7 @@
     <title>Grop CRUUD</title>
 </head>
 <body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
     <h3>Group crud page</h3>
     @if (!Model.Any())
     {

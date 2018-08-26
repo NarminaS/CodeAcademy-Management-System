@@ -84,7 +84,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(137, 194, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7c0cbd94d298499b98c6f0cb02d08267", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9635b8b51adc44cc89d5e9a26ce9a365", async() => {
                 BeginContext(143, 181, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Index</title>\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n");
                 EndContext();
@@ -104,7 +104,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(333, 5272, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e871f807cbbd415f9982a7287f51a01e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6070cbd76b32461cbe18571f7f9fc662", async() => {
                 BeginContext(339, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -206,7 +206,7 @@ WriteAttributeValue("", 1165, faculty.LogoImagePath, 1165, 22, false);
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n                <div id=\"new-fac\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">New Faculty</h5>\r\n                    ");
                 EndContext();
                 BeginContext(1745, 711, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff3246bd7ab0442cb9a6e7845cd54118", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e3ba986cac7d4c62a7554f24fc576eda", async() => {
                     BeginContext(1878, 571, true);
                     WriteLiteral(@"
                         <label>Name</label>
@@ -249,7 +249,7 @@ WriteAttributeValue("", 1165, faculty.LogoImagePath, 1165, 22, false);
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n                <div id=\"edit-fac\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">Edit Faculty</h5>\r\n                    ");
                 EndContext();
                 BeginContext(2799, 769, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9245e94398f9455b8ac0ae569f339638", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6e45d985f8384503ad5ee966b84ae232", async() => {
                     BeginContext(2930, 631, true);
                     WriteLiteral(@"
                         <label>Name</label>

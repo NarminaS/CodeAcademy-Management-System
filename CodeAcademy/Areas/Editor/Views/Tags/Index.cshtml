@@ -1,0 +1,155 @@
+﻿@using CodeAcademy.Areas.Editor.Models.ViewModels
+@model TagFacultyViewModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Tag Crud page</title>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h1>TAG CRUD!!!</h1>
+    <br />
+
+    @if (!Model.Tags.Any())
+    {
+        <h4>No tags...</h4>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="button" class="btn btn-info" id="open-create-tag" value="New Tag" />
+            </div>
+        </div>
+    </div>
+    <br />
+    <div class="container">
+        <div class="row col-sm-5">
+            <div class="tags">
+                @foreach (var tag in Model.Tags)
+                {
+                    <span class="badge badge-dark tag">
+                        <input hidden value="@tag.Id" />
+                        <p class="lead">@tag.Name</p>
+                    </span>
+                }
+            </div>
+        </div>
+    </div>
+
+
+
+    @* New tag form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="new-tag" class="custom-modal">
+                    <h5 class="h5 text-center">New Tag</h5>
+                    <form asp-area="Editor" asp-controller="Tags" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
+                        <label for="FacultyId">Choose Faculty</label>
+                        <select name="FacultyId" class="form-control">
+                            @foreach (var faculty in Model.Faculties)
+                            {
+                                <option value="@faculty.Id">@faculty.Name</option>
+                            }
+                        </select>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="create-tag-name" placeholder="Tag name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Create Tag" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-tag" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Edit tag form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="edit-tag" class="custom-modal">
+                    <h5 class="h5 text-center">Edit Tag</h5>
+                    <form asp-area="Editor" asp-controller="Tags" asp-action="Edit" class="form-group" method="post" enctype="multipart/form-data">
+                        <input type="hidden" id="id" name="Id" value="" />
+                        <label>Choose Faculty</label>
+                        <select name="FacultyId" class="form-control">
+                            @foreach (var faculty in Model.Faculties)
+                            {
+                                <option value="@faculty.Id">@faculty.Name</option>
+                            }
+                        </select>
+                        <label for="name">Name</label>
+                        <input type="text" name="name" id="edit-tag-name" placeholder="Tag name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Update Tag" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-edit-tag" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: flex-start;
+            align-content: flex-start;
+        }
+        .tags >*{
+            margin:.5vh;
+        }
+
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+    <script>
+        var tagId;
+        var tagName;
+
+        $("#open-create-tag").click(function () {
+            $("#new-tag").css("display", "block");
+        });
+
+        $("#close-create-tag").click(function () {
+            $("#new-tag").css("display", "none");
+        });
+
+        $(".tag").click(function (e) {
+            tagId = $(e.target).children().first().val();
+            console.log($(e.target).children().first())
+            tagName = $(e.target).contents().get(0).nodeValue;
+            $("#open-edit-tag").toggleClass("text-success");
+        });
+
+        $("#open-edit-tag").click(function () {
+            $("#edit-tag").css("display", "block");
+            $("#edit-tag form #id").val(tagId);
+            $("#edit-tag form #edit-tag-name").val(tagName);
+        });
+
+        $("#close-edit-tag").click(function () {
+            $("#edit-tag").css("display", "none");
+        });
+    </script>
+</body>
+</html>

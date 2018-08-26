@@ -11,11 +11,11 @@ namespace CodeAcademy.Areas.Editor.Controllers
 {
     [Authorize(Roles = "Editor")]
     [Area("Editor")]
-    public class GroupController : Controller
+    public class GroupsController : Controller
     {
         AppDbContext _dbContext;
 
-        public GroupController(AppDbContext dbContext)
+        public GroupsController(AppDbContext dbContext)
         {
             _dbContext = dbContext;
         }

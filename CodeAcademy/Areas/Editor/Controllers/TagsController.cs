@@ -36,17 +36,24 @@ namespace CodeAcademy.Areas.Editor.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TagCreateViewModel model)
+        public async Task<IActionResult> Create(TagCreateViewModel model, string name, int facultyId)
         {
             if (ModelState.IsValid)
             {
                 Tag tag = new Tag() { FacultyId = model.FacultyId, Name = model.Name };
-                if (await _dbContext.Tags.AddAsync(tag) != null)
+                if (IsUniqueTag(tag.Name,tag.FacultyId))
                 {
-                    if (await _dbContext.SaveChangesAsync() > 0)
+                    if (await _dbContext.Tags.AddAsync(tag) != null)
                     {
-                        return RedirectToAction("Index", "Tags");
+                        if (await _dbContext.SaveChangesAsync() > 0)
+                        {
+                            return RedirectToAction("Index", "Tags");
+                        }
                     }
+                }
+                else
+                {
+                    ModelState.AddModelError("", "Tag already exists in daatabase");
                 }
             }
             else
@@ -61,13 +68,39 @@ namespace CodeAcademy.Areas.Editor.Controllers
         {
             if (ModelState.IsValid)
             {
-
+                Tag tag = _dbContext.Tags.Where(x => x.Id == model.Id).SingleOrDefault();
+                if (tag != null)
+                {
+                    tag.Name = model.Name;
+                    tag.FacultyId = model.FacultyId;
+                    _dbContext.Update(tag);
+                    if ( await _dbContext.SaveChangesAsync() > 0)
+                    {
+                        return RedirectToAction("Index", "Tags");
+                    }
+                    else
+                    {
+                        //SQL EXCEPTION...
+                    }
+                }
             }
             else
             {
                 ModelState.AddModelError("", "Enter correct data");
             }
             return RedirectToAction("Index", "Tags");
+        }
+
+
+
+        private bool IsUniqueTag(string name, int facultyId)
+        {
+            var found = _dbContext.Tags.Where(x => x.Name.ToLower() == name.ToLower() && x.FacultyId == facultyId).FirstOrDefault();
+            if (found != null)
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

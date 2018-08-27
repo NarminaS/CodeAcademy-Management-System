@@ -71,9 +71,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
                     await UploadToServer(DefinePath(file), file);
                     faculty.LogoImagePath = Path.Combine("/images", file.FileName);
                 }
+
                 _dbContext.Update(faculty);
-                int affected = await _dbContext.SaveChangesAsync();
-                if (affected>0)
+
+                if (await _dbContext.SaveChangesAsync() > 0)
                 {
                     return RedirectToAction("Index", "Faculties");
                 }

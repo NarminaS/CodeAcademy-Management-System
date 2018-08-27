@@ -26,7 +26,7 @@ namespace CodeAcademy.Utilities
             {
                 if (File.Exists(path))
                 {
-                    return Task.Factory.StartNew(() => System.IO.File.Delete(path));
+                    return Task.Factory.StartNew(() => File.Delete(path));
                 }
             }
             catch (IOException ex)

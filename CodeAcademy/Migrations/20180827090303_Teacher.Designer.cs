@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CodeAcademy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20180824173145_Second")]
-    partial class Second
+    [Migration("20180827090303_Teacher")]
+    partial class Teacher
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -67,11 +67,15 @@ namespace CodeAcademy.Migrations
 
                     b.Property<int>("RoomId");
 
+                    b.Property<string>("TeacherId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("FacultyId");
 
                     b.HasIndex("RoomId");
+
+                    b.HasIndex("TeacherId");
 
                     b.ToTable("Groups");
                 });
@@ -121,6 +125,9 @@ namespace CodeAcademy.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<DateTime>("CreatingDate");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -181,6 +188,8 @@ namespace CodeAcademy.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.UserGroup", b =>
@@ -314,6 +323,19 @@ namespace CodeAcademy.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CodeAcademy.Models.Teacher", b =>
+                {
+                    b.HasBaseType("CodeAcademy.Models.User");
+
+                    b.Property<int>("FacultyId");
+
+                    b.HasIndex("FacultyId");
+
+                    b.ToTable("Teacher");
+
+                    b.HasDiscriminator().HasValue("Teacher");
+                });
+
             modelBuilder.Entity("CodeAcademy.Models.Group", b =>
                 {
                     b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
@@ -325,6 +347,10 @@ namespace CodeAcademy.Migrations
                         .WithMany("Groups")
                         .HasForeignKey("RoomId")
                         .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CodeAcademy.Models.Teacher")
+                        .WithMany("Groups")
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.Tag", b =>
@@ -397,6 +423,14 @@ namespace CodeAcademy.Migrations
                     b.HasOne("CodeAcademy.Models.User")
                         .WithMany()
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.Teacher", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

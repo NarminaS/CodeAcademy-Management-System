@@ -11,6 +11,18 @@
   <ItemGroup>
     <Compile Remove="Migrations\20180824171825_FacultyIdAndRoomIdByteToInt.cs" />
     <Compile Remove="Migrations\20180824171825_FacultyIdAndRoomIdByteToInt.Designer.cs" />
+    <Compile Remove="Migrations\20180826132620_PC.cs" />
+    <Compile Remove="Migrations\20180826132620_PC.Designer.cs" />
+    <Compile Remove="Migrations\20180826133229_PC.cs" />
+    <Compile Remove="Migrations\20180826133229_PC.Designer.cs" />
+    <Compile Remove="Migrations\20180827090038_Teacher.cs" />
+    <Compile Remove="Migrations\20180827090038_Teacher.Designer.cs" />
+    <Compile Remove="Migrations\20180827090938_Student.cs" />
+    <Compile Remove="Migrations\20180827090938_Student.Designer.cs" />
+    <Compile Remove="Migrations\20180827105557_CourseCompletionStatus.cs" />
+    <Compile Remove="Migrations\20180827105557_CourseCompletionStatus.Designer.cs" />
+    <Compile Remove="Migrations\20180827111455_LessonHourAdded.cs" />
+    <Compile Remove="Migrations\20180827111455_LessonHourAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

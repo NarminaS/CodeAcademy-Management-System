@@ -34,15 +34,15 @@
             <div class="tags">
                 @foreach (var tag in Model.Tags)
                 {
-                    <span class="badge badge-dark tag">
+                    <div class="badge badge-dark tag">
                         <input hidden value="@tag.Id" />
                         <p class="lead">@tag.Name</p>
-                    </span>
+                        <input type="button" class="btn btn-sm btn-warning tag-edit" value="Edit" />
+                    </div>
                 }
             </div>
         </div>
     </div>
-
 
 
     @* New tag form *@
@@ -62,7 +62,7 @@
                         <label for="name">Name</label>
                         <input type="text" name="name" id="create-tag-name" placeholder="Tag name..." class="form-control" />
                         <br />
-                        <input type="submit" value="Create Tag" class="btn btn-success" />
+                        <input type="submit" value="Create Tag" id="submit-create" class="btn btn-success" />
                         <input type="button" value="Close" id="close-create-tag" class="btn btn-danger" />
                     </form>
                 </div>
@@ -131,17 +131,13 @@
         });
 
         $("#close-create-tag").click(function () {
-            $("#new-tag").css("display", "none");
+            $("#new-tag").css("display","none");
         });
 
-        $(".tag").click(function (e) {
-            tagId = $(e.target).children().first().val();
-            console.log($(e.target).children().first())
-            tagName = $(e.target).contents().get(0).nodeValue;
-            $("#open-edit-tag").toggleClass("text-success");
-        });
 
-        $("#open-edit-tag").click(function () {
+        $(".tag-edit").click(function (e) {
+            tagId = $(e.target).parent().children().first().val();
+            tagName = $(e.target).parent().children().first().next().text()
             $("#edit-tag").css("display", "block");
             $("#edit-tag form #id").val(tagId);
             $("#edit-tag form #edit-tag-name").val(tagName);
@@ -150,6 +146,13 @@
         $("#close-edit-tag").click(function () {
             $("#edit-tag").css("display", "none");
         });
+
+        document.getElementById("submit-create").addEventListener("click", function () {
+            $.ajax({
+
+            })
+                .done
+        })
     </script>
 </body>
 </html>

@@ -19,6 +19,7 @@
     {
         <h5>No faculties...</h5>
     }
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn-link">Go back to menu</a>
     <div class="container">
         <div class="row">
             <div class="col-sm-4">
@@ -32,7 +33,7 @@
             @foreach (var faculty in Model)
             {
                 <div class="fac-item ">
-                    <input type="hidden" value="@faculty.Id"/>
+                    <input type="hidden" value="@faculty.Id" />
                     <p class="h4 btn-info">@faculty.Name <span class="badge badge-light">@faculty.GroupsInFacultyCount</span></p>
                     <img class="img-responsive" src="@faculty.LogoImagePath" alt="Faculty Logo" />
                     <input type="button" class="btn btn-sm btn-warning fac-edit" value="Edit" />
@@ -72,7 +73,7 @@
                     <h5 class="h5 text-center">Edit Faculty</h5>
                     <form asp-area="Admin" asp-controller="Faculties" asp-action="Edit" class="form-group" method="post" enctype="multipart/form-data">
                         <label>Name</label>
-                        <input hidden name="id" value="" id="id"/>
+                        <input hidden name="id" value="" id="id" />
                         <input type="text" name="name" id="edit-fac-name" placeholder="Faculty name..." class="form-control" />
                         <br />
                         <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />

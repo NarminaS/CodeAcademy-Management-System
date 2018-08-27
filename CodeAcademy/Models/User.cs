@@ -10,7 +10,7 @@ namespace CodeAcademy.Models
     {
         public User()
         {
-            UserGroups = new List<UserGroup>(); 
+            
         }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -22,8 +22,6 @@ namespace CodeAcademy.Models
 
         public string ProfilePhotoPath { get; set; }
         public string AcademyEmail { get; set; }
-
-        public List<UserGroup> UserGroups { get; set; }
 
         public DateTime CreatingDate { get; set; }
         public DateTime LastUpdateDate { get; set; }

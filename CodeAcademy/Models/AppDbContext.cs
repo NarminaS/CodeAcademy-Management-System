@@ -14,6 +14,10 @@ namespace CodeAcademy.Models
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Gender> Genders { get; set; }
         public DbSet<Tag> Tags { get; set; }    
+        public DbSet<Teacher> Teachers { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<CourseCompletionStatus> CourseCompletionStatuses { get; set; } 
+        public DbSet<LessonHour> LessonHours { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {

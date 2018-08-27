@@ -9,8 +9,9 @@ namespace CodeAcademy.Models
     {
         public Group()
         {
+            Teacher = new Teacher();
             Faculty = new Faculty();
-            UserGroups = new List<UserGroup>();
+            Students = new List<Student>();
         }
         public int Id { get; set; }
 
@@ -19,10 +20,16 @@ namespace CodeAcademy.Models
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
 
+        public int TeacherId { get; set; }
+        public Teacher Teacher { get; set; }    
+
         public int RoomId { get; set; }
         public Room Room { get; set; }
 
-        public List<UserGroup> UserGroups { get; set; }
+        public int LessonHourId { get; set; }
+        public LessonHour LessonHour { get; set; }
+
+        public List<Student>Students { get; set; }
 
         public DateTime CreationDate { get; set; }
 

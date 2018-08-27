@@ -12218,23 +12218,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Руфат\\.nuget\\packages\\": {},
+    "C:\\Users\\Нармина\\.nuget\\packages\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
+      "projectUniqueName": "D:\\Project\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
       "projectName": "CodeAcademy",
-      "projectPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
-      "packagesPath": "C:\\Users\\Руфат\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Руфат\\source\\repos\\CodeAcademy\\CodeAcademy-Management-System\\CodeAcademy-Management-System\\CodeAcademy\\obj\\",
+      "projectPath": "D:\\Project\\CodeAcademy-Management-System\\CodeAcademy\\CodeAcademy.csproj",
+      "packagesPath": "C:\\Users\\Нармина\\.nuget\\packages\\",
+      "outputPath": "D:\\Project\\CodeAcademy-Management-System\\CodeAcademy\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
-        "C:\\Users\\Руфат\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Нармина\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

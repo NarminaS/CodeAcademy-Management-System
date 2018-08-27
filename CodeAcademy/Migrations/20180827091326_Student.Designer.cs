@@ -4,33 +4,22 @@ using CodeAcademy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeAcademy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180827091326_Student")]
+    partial class Student
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("CodeAcademy.Models.CourseCompletionStatus", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CourseCompletionStatuses");
-                });
 
             modelBuilder.Entity("CodeAcademy.Models.Faculty", b =>
                 {
@@ -319,11 +308,7 @@ namespace CodeAcademy.Migrations
                 {
                     b.HasBaseType("CodeAcademy.Models.User");
 
-                    b.Property<int>("CourseCompletionStatusId");
-
                     b.Property<int>("GroupId");
-
-                    b.HasIndex("CourseCompletionStatusId");
 
                     b.HasIndex("GroupId");
 
@@ -425,11 +410,6 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Student", b =>
                 {
-                    b.HasOne("CodeAcademy.Models.CourseCompletionStatus", "CourseCompletionStatus")
-                        .WithMany("Students")
-                        .HasForeignKey("CourseCompletionStatusId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
                     b.HasOne("CodeAcademy.Models.Group", "Group")
                         .WithMany("Students")
                         .HasForeignKey("GroupId")

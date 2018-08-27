@@ -39,6 +39,8 @@ namespace CodeAcademy.Areas.Editor.Controllers
 
         public async Task<IActionResult> Create()
         {
+            //.......
+            await _dbContext.AddAsync(new Group());
             return View();
         }
     }

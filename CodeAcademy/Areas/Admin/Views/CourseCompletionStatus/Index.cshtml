@@ -1,0 +1,122 @@
+﻿@using CodeAcademy.Areas.Admin.Models.ViewModels
+@model List<CourseCompletionStatusViewModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h3 class="h3">Ders status!!!</h3>
+    @if (!Model.Any())
+    {
+        <h4>No completion statuses...</h4>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4">
+                <input type="button" class="btn btn-success" id="create-status" value="Create" />
+                <br />
+                <br />
+                <ul class="list-group">
+                    @foreach (var status in Model)
+                    {
+                        <li class="list-group-item">
+                            <input type="hidden" value="@status.Id" />
+                            <p class="text-info">@status.Name</p>
+                            <input type="button" class="btn btn-warning edit-status" value="Edit" />
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    @* New status form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="new-status" class="custom-modal">
+                    <h5 class="h5 text-center">New Status</h5>
+                    <form asp-antiforgery="true" asp-area="Admin" asp-controller="CourseCompletionStatus" asp-action="Create" class="form-group" method="post">
+                        <label>Name</label>
+                        <input type="text" name="Name" placeholder="Status name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Create Status" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-status" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Edit status form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="edit-status" class="custom-modal">
+                    <h5 class="h5 text-center">Edit Status</h5>
+                    <form asp-antiforgery="true" asp-area="Admin" asp-controller="CourseCompletionStatus" asp-action="Edit" class="form-group" method="post">
+                        <input type="hidden" id="id" name="Id" value="" />
+                        <label>Name</label>
+                        <input type="text" id="edit-status-name" name="name" placeholder="Status name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Update Status" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-edit-status" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+    <script>
+        var statusId;
+        var statusName;
+
+        $("#create-status").click(function () {
+            $("#new-status").css("display", "block");
+        });
+
+        $("#close-create-status").click(function () {
+            $("#new-status").css("display", "none");
+        });
+
+        $(".edit-status").click(function (e) {
+            statusId = $(e.target).parent().children().first().val();
+            statusName = $(e.target).parent().children().first().next().text();
+            $("#edit-status").css("display", "block");
+            $("#edit-status form #id").val(statusId);
+            $("#edit-status form #edit-status-name").val(statusName);
+        });
+
+        $("#close-edit-status").click(function () {
+            $("#edit-status").css("display", "none");
+        });
+    </script>
+</body>
+</html>

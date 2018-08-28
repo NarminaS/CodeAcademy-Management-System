@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class Comment<T> where T:PostBase
+    public class Comment<T> where T:Post
     {
         public int PostId { get; set; } 
     }

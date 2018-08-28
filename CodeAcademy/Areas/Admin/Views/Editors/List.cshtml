@@ -54,7 +54,7 @@
                     <form asp-antiforgery="true" method="post" asp-controller="Editors" asp-action="Edit" asp-area="Admin">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
-                        <input class="form-control" type="text" name="Name"><br />
+                        <input class="form-control" type="text" required name="Name"><br />
                         <label name="GenderId">Gender</label>
                         <select class="form-control" name="GenderId">
                             <option value="1">Male</option>
@@ -76,11 +76,11 @@
                     <form asp-antiforgery="true" method="post" asp-area="Admin" asp-controller="Editors" asp-action="Create">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
-                        <input class="form-control" type="text" name="Name" id="Name"><br />
+                        <input class="form-control" type="text" required name="Name" id="Name"><br />
                         <label id="Email">Email</label><br />
-                        <input class="form-control" type="email" name="Email"><br />
+                        <input class="form-control" type="email" required name="Email"><br />
                         <label name="Password">Password</label><br />
-                        <input class="form-control" type="password" name="Password" /><br /><br />
+                        <input class="form-control" type="password" required name="Password" /><br /><br />
                         <select class="form-control" name="GenderId" id="GenderId">
                             <option value="1">Male</option>
                             <option value="2">Female</option>
@@ -133,10 +133,6 @@
     <script>
         var userName;
         var userMail;
-
-        $("#show-role-form").click(function () {
-            $("#manage-roles").css("display", "block");
-        })
 
         $(".editInfo").click(function (e) {
             userName = $(e.target).prev().prev().text();

@@ -11,6 +11,7 @@ namespace CodeAcademy.Models
         {
             Groups = new List<Group>();
         }
+
         public int Id { get; set; }
 
         public string Name { get; set; }

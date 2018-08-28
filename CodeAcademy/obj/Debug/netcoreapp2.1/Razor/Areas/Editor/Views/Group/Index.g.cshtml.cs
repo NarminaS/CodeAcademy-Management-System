@@ -79,7 +79,7 @@ using CodeAcademy.Areas.Editor.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(136, 105, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d47ffac0f621417793696ccfeedda537", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0886866cf144405a92f0ce3b5ff1a26c", async() => {
                 BeginContext(142, 92, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Grop CRUUD</title>\r\n");
                 EndContext();
@@ -99,7 +99,7 @@ using CodeAcademy.Areas.Editor.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(243, 744, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f780ff3d14574f4f84363e256c894600", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "54ff718a2881477f9a40f7ce439670eb", async() => {
                 BeginContext(249, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -131,7 +131,7 @@ Write(await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name
                 WriteLiteral("\r\n    ");
                 EndContext();
                 BeginContext(453, 129, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6a047abf349d440faffc6ebb991df49d", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "3b96c0eefc62448e91013c1f69210bfb", async() => {
                     BeginContext(493, 82, true);
                     WriteLiteral("\r\n        <input type=\"button\" class=\"btn btn-info\" value=\"Add new group\" />\r\n    ");
                     EndContext();

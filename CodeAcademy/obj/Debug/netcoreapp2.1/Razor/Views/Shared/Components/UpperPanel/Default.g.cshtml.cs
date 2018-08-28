@@ -69,7 +69,7 @@ using CodeAcademy.Models;
             ");
             EndContext();
             BeginContext(413, 396, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ce059192e9ba4eb9af96c8974caa54b6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7d996475fe574d11bf8e1f397d89f541", async() => {
                 BeginContext(493, 108, true);
                 WriteLiteral("\r\n                <ul class=\"nav navbar-nav list-inline\">\r\n                    <li class=\"list-inline-item\">");
                 EndContext();
@@ -116,7 +116,7 @@ WriteAttributeValue("", 655, Model.AvatarPath, 655, 17, false);
             WriteLiteral("\r\n        </div>\r\n        <div class=\"col-sm-2\">\r\n            ");
             EndContext();
             BeginContext(871, 175, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "19de0cd1102642d6a5e014291322322e", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "45b5dda512cf4611987511e6abf067f8", async() => {
                 BeginContext(945, 94, true);
                 WriteLiteral("\r\n                <input class=\"btn btn-danger\" type=\"submit\" value=\"Log Out\" />\r\n            ");
                 EndContext();

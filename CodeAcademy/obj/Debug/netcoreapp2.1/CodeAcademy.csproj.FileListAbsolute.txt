@@ -136,3 +136,5 @@ D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Cod
 D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.pdb
 D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csproj.CopyComplete
 D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\CourseCompletionStatus\Index.g.cshtml.cs
+D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\LessonHours\Index.g.cshtml.cs
+D:\Project\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Rooms\Index.g.cshtml.cs

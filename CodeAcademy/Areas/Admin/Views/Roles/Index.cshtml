@@ -52,7 +52,7 @@
                     <h5 class="h5 text-center">New Role</h5>
                     <form asp-antiforgery="true" asp-area="Admin" asp-controller="Roles" asp-action="Create" class="form-group" method="post">
                         <label>Name</label>
-                        <input type="text" id="create-role-name" placeholder="Role name..." class="form-control" />
+                        <input type="text" required id="create-role-name" placeholder="Role name..." class="form-control" />
                         <br />
                         <input type="button" value="Create Role" id="confirm-create" class="btn btn-success" />
                         <input type="button" value="Close" id="closeCreate" class="btn btn-danger" />
@@ -70,7 +70,7 @@
                     <h5 class="h5 text-center">Edit Role</h5>
                     <form asp-antiforgery="true" asp-area="Admin" asp-controller="Roles" asp-action="Edit" class="form-group" method="post">
                         <label>Name</label>
-                        <input type="text" id="edit-role-name" placeholder="Role name..." class="form-control" />
+                        <input type="text" required id="edit-role-name" placeholder="Role name..." class="form-control" />
                         <br />
                         <input type="button" value="Update Role" id="confirm-edit" class="btn btn-success" />
                         <input type="button" value="Close" id="closeEdit" class="btn btn-danger" />

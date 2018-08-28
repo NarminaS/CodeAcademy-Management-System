@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class PostBase
+    public class Post
     {
-        public int Id { get; set; }
+        public Guid Id { get; set; }
         public string UserId { get; set; }
         public DateTime CreationDate { get; set; }
         public int LikeCount { get; set; }

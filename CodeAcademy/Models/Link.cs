@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class Link:PostBase
+    public class Link:Post
     {
         public string Url { get; set; }
         public string Description { get; set; }

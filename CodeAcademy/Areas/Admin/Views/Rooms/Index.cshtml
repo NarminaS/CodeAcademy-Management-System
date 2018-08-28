@@ -1,0 +1,121 @@
+﻿@using CodeAcademy.Areas.Admin.Models.ViewModels
+@model List<RoomViewModel>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h3>Rooms CRUD</h3>
+    @if (!Model.Any())
+    {
+        <h4>No rooms...</h4>
+    }
+    <br />
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <input type="button" id="room-create" class="btn btn-success" value="Create new" />
+                <br />
+                <br />
+                <ul class="list-group">
+                    @foreach (var room in Model)
+                    {
+                        <li class="list-group-item">
+                            <input type="hidden" value="@room.Id" />
+                            <p class="lead">@room.Name</p>
+                            <input type="button" class="room-edit btn btn-warning" value="Edit" />
+                        </li>
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    @* New room form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="new-room" class="custom-modal">
+                    <h5 class="h5 text-center">New Room</h5>
+                    <form asp-antiforgery="true" asp-area="Admin" asp-controller="Rooms" asp-action="Create" class="form-group" method="post">
+                        <label>Name</label>
+                        <input type="text" required name="Name" placeholder="Hour name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Create Room" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-room" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @* Edit room form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <div id="edit-room" class="custom-modal">
+                    <h5 class="h5 text-center">Edit Room</h5>
+                    <form asp-antiforgery="true" asp-area="Admin" asp-controller="Rooms" asp-action="Edit" class="form-group" method="post">
+                        <input type="hidden" id="id" name="Id" value="" />
+                        <label>Name</label>
+                        <input type="text" required id="edit-room-name" name="name" value="" placeholder="Room name..." class="form-control" />
+                        <br />
+                        <input type="submit" value="Update Room" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-edit-room" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+    <script>
+        var roomId;
+        var roomName;
+
+        $("#room-create").click(function () {
+            $("#new-room").css("display", "block");
+        });
+
+        $("#close-create-room").click(function () {
+            $("#new-room").css("display", "none");
+        });
+
+        $(".room-edit").click(function (e) {
+            roomId = $(e.target).prev().prev().val();
+            roomName = $(e.target).prev().text();
+            $("#edit-room").css("display", "block");
+            $("#edit-room form #id").val(roomId);
+            $("#edit-room form #edit-room-name").val(roomName);
+        });
+
+        $("#close-edit-room").click(function () {
+            $("#edit-room").css("display", "none");
+        });
+    </script>
+</body>
+</html>

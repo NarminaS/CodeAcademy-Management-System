@@ -79,7 +79,7 @@ using CodeAcademy.Components.ViewModels;
             WriteLiteral("<html>\r\n");
             EndContext();
             BeginContext(53, 323, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9adb776386d3412785f5bec70af1e1e8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4493146d840942fe93e6f399f7ebaca4", async() => {
                 BeginContext(59, 310, true);
                 WriteLiteral(@"
     <meta name=""viewport"" content=""width=device-width"" />
@@ -103,7 +103,7 @@ using CodeAcademy.Components.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(378, 899, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "01bd76071335448bb5659a44b1fb4bf1", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "46d6a35bff4a4bbca65f1315234e5450", async() => {
                 BeginContext(384, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -134,7 +134,7 @@ Write(await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name
                 ");
                 EndContext();
                 BeginContext(949, 107, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "da55cd27bcd941179ebfc239fc29f35a", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2ae252f78c5e42529e9c1680ac5a1c22", async() => {
                     BeginContext(1042, 10, true);
                     WriteLiteral("GROUP CRUD");
                     EndContext();
@@ -161,7 +161,7 @@ Write(await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name
                 WriteLiteral("\r\n                ");
                 EndContext();
                 BeginContext(1074, 104, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "29aef037bb5d415ba212434b47119a7f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "44efc63789cc460fad8b1b30d0fee22c", async() => {
                     BeginContext(1165, 9, true);
                     WriteLiteral("TAGS CRUD");
                     EndContext();

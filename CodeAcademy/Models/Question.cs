@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class Question:PostBase
+    public class Question:Post
     {
         public bool HasApprovedAnswer { get; set; } 
 

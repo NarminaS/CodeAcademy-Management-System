@@ -11,6 +11,7 @@ namespace CodeAcademy.Models
         {
             Teacher = new Teacher();
             Faculty = new Faculty();
+            LessonHour = new LessonHour();
             Students = new List<Student>();
         }
         public int Id { get; set; }

@@ -52,7 +52,7 @@
                     <h5 class="h5 text-center">New Faculty</h5>
                     <form asp-area="Admin" asp-controller="Faculties" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
                         <label>Name</label>
-                        <input type="text" name="name" id="create-fac-name" placeholder="Faculty name..." class="form-control" />
+                        <input type="text" name="name" required id="create-fac-name" placeholder="Faculty name..." class="form-control" />
                         <br />
                         <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
 
@@ -74,7 +74,7 @@
                     <form asp-area="Admin" asp-controller="Faculties" asp-action="Edit" class="form-group" method="post" enctype="multipart/form-data">
                         <label>Name</label>
                         <input hidden name="id" value="" id="id" />
-                        <input type="text" name="name" id="edit-fac-name" placeholder="Faculty name..." class="form-control" />
+                        <input type="text" name="name" required id="edit-fac-name" placeholder="Faculty name..." class="form-control" />
                         <br />
                         <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
                         <input type="submit" value="Update Faculty" id="confirm-edit" class="btn btn-success" />

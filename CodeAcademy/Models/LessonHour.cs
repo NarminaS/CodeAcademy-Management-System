@@ -7,10 +7,13 @@ namespace CodeAcademy.Models
 {
     public class LessonHour
     {
+        public LessonHour()
+        {
+            Groups = new List<Group>();
+        }
         public int Id { get; set; }
-        public int Name { get; set; }
+        public string Name { get; set; }
 
         public List<Group> Groups { get; set; }
-
     }
 }

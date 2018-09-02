@@ -11,12 +11,23 @@ namespace CodeAcademy.Models
         {
             Language = new Language();
         }
-        public string Author { get; set; } //Class?? List???
+
+        public string Author { get; set; } 
+
         public string Name { get; set; }
+
         public string Description { get; set; }
+
+        public short PageCount { get; set; } 
+
         public int LanguageId { get; set; }
         public Language Language { get; set; }
+
+        public string FilePath { get; set; }    
+
         public bool IsApproved { get; set; }
-        public string CoverImagePath { get; set; }  
+
+        public int ImageId { get; set; }
+        public Image Image { get; set; }
     }
 }

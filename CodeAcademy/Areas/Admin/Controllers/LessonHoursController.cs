@@ -23,62 +23,21 @@ namespace CodeAcademy.Areas.Admin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            var hours = _dbContext.LessonHours
-                            .Select(x => new LessonHourViewModel()
-                            { Id = x.Id, Name = x.Name })
-                                    .ToList();
-            return View(hours);
+           
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(LessonHourCreateViewModel model)
+        public async Task<IActionResult> Create(LessonHour model)
         {
-            if (ModelState.IsValid)
-            {
-                LessonHour hour = new LessonHour() { Name = model.Name };
-                if (await _dbContext.AddAsync(hour) != null)
-                {
-                    if (await _dbContext.SaveChangesAsync() > 0)
-                    {
-                        return RedirectToAction("Index", "LessonHours");
-                    }
-                    else
-                    {
-                        //SQL EXCEPTION....
-                    }
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Enter correct data...");
-            }
+           
             return RedirectToAction("Index", "LessonHours");
         }
 
         [HttpPost]
         public async Task<IActionResult> Edit(LessonHourViewModel model)
         {
-            if (ModelState.IsValid)
-            {
-                var hour = _dbContext.LessonHours.Where(x => x.Id == model.Id).SingleOrDefault();
-                if (hour != null && hour.Name != model.Name)
-                {
-                    hour.Name = model.Name;
-                    _dbContext.Update(hour);
-                    if (await _dbContext.SaveChangesAsync() > 0)
-                    {
-                        return RedirectToAction("Index", "LessonHours");
-                    }
-                }
-                else
-                {
-                    ModelState.AddModelError("", "Change name...");
-                }
-            }
-            else
-            {
-                ModelState.AddModelError("", "Something is wrong...");
-            }
+          
             return RedirectToAction("Index", "LessonHours");
         }
     }

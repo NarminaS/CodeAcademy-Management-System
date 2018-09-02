@@ -7,7 +7,8 @@ namespace CodeAcademy.Models
 {
     public class Question:Post
     {
-        public bool HasApprovedAnswer { get; set; } 
+        public bool HasApprovedAnswer { get; set; }
 
+        public string Description { get; set; } 
     }
 }

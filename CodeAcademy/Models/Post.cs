@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -7,10 +8,32 @@ namespace CodeAcademy.Models
 {
     public class Post
     {
-        public Guid Id { get; set; }
+        public Post()
+        {
+            User = new User();
+            Likes = new List<Like>();
+            Comments = new List<Comment>();
+            TagPosts = new List<TagPost>();
+            Images = new List<Image>();
+        }
+        public int Id { get; set; }
+
         public string UserId { get; set; }
+        public User User { get; set; }  
+
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
-        public int LikeCount { get; set; }
+
+        public List<Like> Likes { get; set; }
+
+        public List<Comment> Comments { get; set; }
+
         public DateTime LastUpdateDate { get; set; }
+
+        public List<TagPost> TagPosts { get; set; }
+
+        public List<Image> Images { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

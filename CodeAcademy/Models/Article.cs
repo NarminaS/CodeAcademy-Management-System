@@ -5,8 +5,10 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    public class Article
+    public class Article:Post
     {
+        public string Header { get; set; }
 
+        public string Description { get; set; } 
     }
 }

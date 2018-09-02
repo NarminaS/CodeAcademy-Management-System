@@ -26,12 +26,7 @@ namespace CodeAcademy.Areas.Editor.Controllers
             var groups = _dbContext.Groups
                 .Select(x => new GroupViewModel()
                 {
-                    Id = x.Id,
-                    FacultyId = x.FacultyId,
-                    LessonsStartDate = x.LessonsStartDate,
-                    Name = x.Name,
-                    RoomId = x.RoomId,
-                    LessonsEndDate = x.LessonsEndDate
+                   
                 }).ToList();
 
             return View(groups);

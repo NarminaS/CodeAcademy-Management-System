@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -21,7 +22,7 @@ namespace CodeAcademy.Models
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
 
-        public int TeacherId { get; set; }
+        public int UserId { get; set; } 
         public Teacher Teacher { get; set; }    
 
         public int RoomId { get; set; }
@@ -32,6 +33,7 @@ namespace CodeAcademy.Models
 
         public List<Student>Students { get; set; }
 
+        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
 
         public DateTime LessonsStartDate { get; set; }
@@ -39,5 +41,7 @@ namespace CodeAcademy.Models
         public DateTime LessonsEndDate { get; set; }
 
         public bool IsAssembled { get; set; }
+
+        public bool IsDeleted { get; set; }
     }
 }

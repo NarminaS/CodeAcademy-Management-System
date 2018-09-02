@@ -18,6 +18,19 @@ namespace CodeAcademy.Models
         public DbSet<Student> Students { get; set; }
         public DbSet<CourseCompletionStatus> CourseCompletionStatuses { get; set; } 
         public DbSet<LessonHour> LessonHours { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<Article> Articles { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Certificate> Certificates { get; set; }
+        public DbSet<Comment> Comments { get; set; }
+        public DbSet<Language> Languages { get; set; }
+        public DbSet<Like> Likes { get; set; }
+        public DbSet<Link> Links { get; set; }
+        public DbSet<MenuItem> MenuItems { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<SocialProfile> SocialProfiles { get; set; }
+
 
         public AppDbContext(DbContextOptions<AppDbContext> options):base(options)
         {

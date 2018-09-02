@@ -10,13 +10,20 @@ namespace CodeAcademy.Models
         public Faculty()
         {
             Groups = new List<Group>();
+            Teachers = new List<Teacher>();
+            Tags = new List<Tag>();
         }
 
         public int Id { get; set; }
 
         public string Name { get; set; }
 
-        public string LogoImagePath { get; set; }
+        public int ImageId { get; set; }
+        public Image Image { get; set; }    
+
+        public short HourCount { get; set; }
+
+        public bool IsDeleted { get; set; }
 
         public List<Group> Groups { get; set; }
 

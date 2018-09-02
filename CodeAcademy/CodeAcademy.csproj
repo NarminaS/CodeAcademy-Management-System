@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20180827105557_CourseCompletionStatus.Designer.cs" />
     <Compile Remove="Migrations\20180827111455_LessonHourAdded.cs" />
     <Compile Remove="Migrations\20180827111455_LessonHourAdded.Designer.cs" />
+    <Compile Remove="Migrations\20180828145113_CreationDateAttribute.cs" />
+    <Compile Remove="Migrations\20180828145113_CreationDateAttribute.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

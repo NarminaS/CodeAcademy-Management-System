@@ -32,7 +32,7 @@ namespace CodeAcademy
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<User, IdentityRole>()
+            services.AddIdentity<User,Role>()
                                     .AddEntityFrameworkStores<AppDbContext>();
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -64,6 +64,8 @@ namespace CodeAcademy
             app.UseCookiePolicy();
 
             app.UseAuthentication();
+
+            app.UseStatusCodePages();
 
             app.UseMvc(routes =>
             {

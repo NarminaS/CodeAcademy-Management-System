@@ -12,6 +12,7 @@ namespace CodeAcademy.Models
             Groups = new List<Group>();
             Faculty = new Faculty();
         }
+
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
 

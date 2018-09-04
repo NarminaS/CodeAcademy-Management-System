@@ -16,10 +16,10 @@ namespace CodeAcademy.Controllers
     {
         UserManager<User> _userManager;
         SignInManager<User> _signInManager;
-        RoleManager<IdentityRole> _roleManager;
+        RoleManager<Role> _roleManager;
         AppDbContext _dbContext;
 
-        public HomeController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<IdentityRole> roleManager,AppDbContext dbContext)
+        public HomeController(UserManager<User> userManager, SignInManager<User> signInManager, RoleManager<Role> roleManager,AppDbContext dbContext)
         {
             _userManager = userManager;
             _signInManager = signInManager;

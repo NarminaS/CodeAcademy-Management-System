@@ -19,8 +19,8 @@ namespace CodeAcademy.Utilities
 
         public Task DeleteOldFacultyLogoAsync(Faculty faculty)     
         {
-            int indexOf = faculty.LogoImagePath.IndexOf("/images\\");
-            string fileName = faculty.LogoImagePath.Remove(indexOf,"/images\\".Length);
+            int indexOf = faculty.Image.Path.IndexOf("/images\\");
+            string fileName = faculty.Image.Path.Remove(indexOf,"/images\\".Length);
             string path = Path.Combine(_environment.WebRootPath, "images", fileName);
             try
             {

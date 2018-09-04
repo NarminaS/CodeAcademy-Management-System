@@ -25,9 +25,16 @@
     <Compile Remove="Migrations\20180827111455_LessonHourAdded.Designer.cs" />
     <Compile Remove="Migrations\20180828145113_CreationDateAttribute.cs" />
     <Compile Remove="Migrations\20180828145113_CreationDateAttribute.Designer.cs" />
+    <Compile Remove="Migrations\20180903195730_Temp1.cs" />
+    <Compile Remove="Migrations\20180903195730_Temp1.Designer.cs" />
+    <Compile Remove="Migrations\20180904130245_Temp.cs" />
+    <Compile Remove="Migrations\20180904130245_Temp.Designer.cs" />
+    <Compile Remove="Migrations\20180904132205_04.09.2018.cs" />
+    <Compile Remove="Migrations\20180904132205_04.09.2018.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="microsoft.aspnet.signalR" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>

@@ -14,6 +14,6 @@ namespace CodeAcademy.Models
         }
         public bool IsDeleted { get; set; }
 
-        public List<RoleMenuItem> RoleMenuItems { get; set; }   
+        public List<RoleMenuItem> RoleMenuItems { get; set; }
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Models
 {
-    [Table(name: "CourseCompletionStatuses")]
+    [Table(name:"CourseCompletionStatuses")]
 
     public class CourseCompletionStatus
     {

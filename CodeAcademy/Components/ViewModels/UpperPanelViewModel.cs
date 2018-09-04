@@ -8,6 +8,7 @@ namespace CodeAcademy.Components.ViewModels
     public class UpperPanelViewModel
     {
         public string Name { get; set; }
+
         public string AvatarPath { get; set; }  
     }
 }

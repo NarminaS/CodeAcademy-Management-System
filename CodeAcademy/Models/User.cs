@@ -12,6 +12,9 @@ namespace CodeAcademy.Models
         public User()
         {
             SocialProfiles = new List<SocialProfile>();
+            Posts = new List<Post>();
+            Gender = new Gender();
+            ProfileImage = new ProfileImage();
         }
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -19,12 +22,11 @@ namespace CodeAcademy.Models
         public DateTime BirthDate { get; set; }
 
         public byte GenderId { get; set; }
-        public Gender Gender { get; set; }  
+        public Gender Gender { get; set; }
 
-        public string ImageId { get; set; }
-        public Image Image { get; set; }
+        public int ImageId { get; set; }    
+        public ProfileImage ProfileImage { get; set; }    
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreatingDate { get; set; }
         public DateTime LastUpdateDate { get; set; }
         public DateTime LastLoginDate { get; set; }
@@ -33,7 +35,11 @@ namespace CodeAcademy.Models
         public bool IsActive { get; set; }
         public bool IsDeleted { get; set; }
 
-        public List<SocialProfile> SocialProfiles { get; set; } 
+        public List<SocialProfile> SocialProfiles { get; set; }
+
+        public List<Post> Posts { get; set; }
+
+        public List<Like> Likes { get; set; }
     }
 
 }

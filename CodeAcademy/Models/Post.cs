@@ -14,14 +14,13 @@ namespace CodeAcademy.Models
             Likes = new List<Like>();
             Comments = new List<Comment>();
             TagPosts = new List<TagPost>();
-            Images = new List<Image>();
+            PostImages = new List<PostImage>();
         }
         public int Id { get; set; }
 
         public string UserId { get; set; }
         public User User { get; set; }  
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
 
         public List<Like> Likes { get; set; }
@@ -32,7 +31,7 @@ namespace CodeAcademy.Models
 
         public List<TagPost> TagPosts { get; set; }
 
-        public List<Image> Images { get; set; }
+        public List<PostImage> PostImages { get; set; }
 
         public bool IsDeleted { get; set; }
     }

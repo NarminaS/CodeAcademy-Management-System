@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeAcademy.Hubs;
 using CodeAcademy.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -42,7 +43,7 @@ namespace CodeAcademy
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-
+            services.AddSignalR();
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -61,6 +62,13 @@ namespace CodeAcademy
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+
+            app.UseSignalR(routes=>
+              {
+                  routes.MapHub<NotificationHub>("/notification");
+              }  
+            );
+
             app.UseCookiePolicy();
 
             app.UseAuthentication();

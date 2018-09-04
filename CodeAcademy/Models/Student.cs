@@ -19,7 +19,6 @@ namespace CodeAcademy.Models
         public int GroupId { get; set; }
         public Group Group { get; set; }
 
-        public int CertificateId { get; set; }
         public Certificate Certificate { get; set; }    
     }
 }

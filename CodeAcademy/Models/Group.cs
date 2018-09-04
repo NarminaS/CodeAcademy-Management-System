@@ -22,11 +22,14 @@ namespace CodeAcademy.Models
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
 
-        public int UserId { get; set; } 
+        public string UserId { get; set; } 
         public Teacher Teacher { get; set; }    
 
         public int RoomId { get; set; }
         public Room Room { get; set; }
+
+        public int CourseCompletionStatusId { get; set; }   
+        public CourseCompletionStatus CourseCompletionStatus { get; set; }
 
         public int LessonHourId { get; set; }
         public LessonHour LessonHour { get; set; }

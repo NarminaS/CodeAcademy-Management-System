@@ -16,7 +16,7 @@
     <div class="container-fluid">
         <h3 style="color:red">Editors CRUD page</h3>
         <br />
-        <input type="button" id="showform" value="Create new editor" class="btn btn-info" />
+        <input type="button" id="show-form" value="Create new editor" class="btn btn-info" />
         <br />
         <br />
     </div>
@@ -43,14 +43,14 @@
                         <h6>The user @editor.Name will be deleted permanently. Are you sure?</h6>
                         <form asp-antiforgery="true" asp-controller="Editors" asp-action="Delete" method="post">
                             <input type="hidden" value="@editor.Id" />
-                            <input type="submit" class="submitInput btn btn-danger btn-sm" value="Yes" />
+                            <input type="button" class="submitInput btn btn-danger btn-sm" value="Yes" />
                         </form>
                         <input type="button" value="No" class="closeSubmit btn btn-primary btn-sm" />
                     </div>
                 }
             </div>
             <div class="col-sm-5">
-                <div id="editForm">
+                <div id="editForm" class="custom-modal">
                     <form asp-antiforgery="true" method="post" asp-controller="Editors" asp-action="Edit" asp-area="Admin">
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
@@ -68,6 +68,7 @@
         </div>
     </div>
 
+    @* Create form *@
     <div class="container">
         <div class="row">
             <div class="col-sm-8">
@@ -77,16 +78,16 @@
                         <div asp-validation-summary="ModelOnly"></div>
                         <label name="Name">Name</label><br />
                         <input class="form-control" type="text" required name="Name" id="Name"><br />
-                        <label id="Email">Email</label><br />
-                        <input class="form-control" type="email" required name="Email"><br />
+                        <label name="Email">Email</label><br />
+                        <input class="form-control" type="email" id="Email" required name="Email"><br />
                         <label name="Password">Password</label><br />
-                        <input class="form-control" type="password" required name="Password" /><br /><br />
+                        <input class="form-control" type="password" id="Password" required name="Password" /><br /><br />
                         <select class="form-control" name="GenderId" id="GenderId">
                             <option value="1">Male</option>
                             <option value="2">Female</option>
                         </select>
                         <br />
-                        <input type="submit" value="Create" class="btn btn-success" />
+                        <input type="button" id="submit-create" value="Create" class="btn btn-success" />
                         <input type="button" value="Close" id="closeCreate" class="btn btn-danger" />
                     </form>
                 </div>
@@ -164,7 +165,11 @@
                 data: { id: userId }
             })
                 .done(function (obj) {
-                    document.location.reload()
+                    console.log(obj)
+                    //document.location.reload()
+                })
+                .fail(function (msg) {
+                    console.log(msg)
                 })
 
         })
@@ -177,7 +182,7 @@
             $(e.target.parentElement).css("height", "0px");
         })
 
-        $("#showform").click(function () {
+        $("#show-form").click(function (e) {
             $("#createform").css("display", "block");
         });
 
@@ -185,21 +190,26 @@
             $("#createform").css("display", "none");
         });
 
-        function ProcessData() {
-            $.ajax({
-                method: "POST",
-                url: "/Admin/Editors/Create",
-                data: {
-                    name: Name.value,
-                    email: Email.value,
-                    password: Password.value,
-                    genderId: GenderId.value
-                }
-            })
-                .done(function (obj) {
-                    document.location.reload()
+        $("#submit-create").click(function () {
+                $.ajax({
+                    method: "POST",
+                    url: "/Admin/Editors/Create/",
+                    data: {
+                        name: Name.value,
+                        email: $("#Email").val(),
+                        password: Password.value,
+                        genderId: GenderId.value
+                    }
                 })
-        }
+                    .done(function (obj) {
+                        console.log(obj);
+                    })
+                    .fail(function (msg) {
+                        alert(msg);
+                    })
+            }
+        );
+
 
     </script>
 </body>

@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeAcademy.Areas.Admin.Controllers
 {
@@ -30,8 +31,9 @@ namespace CodeAcademy.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = _dbContext.Faculties
+                            .Include(x=>x.Image)
                                 .Select(x => new FacultyViewModel()
-                                    { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.LogoImagePath })
+                                    { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.Image.Path })
                                                     .ToList();
             return View(model);
         }
@@ -41,9 +43,13 @@ namespace CodeAcademy.Areas.Admin.Controllers
         {
             if (!String.IsNullOrEmpty(name) && file != null)
             {
+               Image img = new Image() { Path = Path.Combine("/images", file.FileName) };
+               await _dbContext.Images.AddAsync(img);
                await UploadToServer(DefinePath(file), file);
-               Faculty faculty = new Faculty { Name = name, LogoImagePath = Path.Combine("/images", file.FileName) };
+
+               Faculty faculty = new Faculty { Name = name, Image = img };
                await _dbContext.Faculties.AddAsync(faculty);
+
                int affected = await _dbContext.SaveChangesAsync();
                if (affected > 0)
                 {
@@ -65,11 +71,11 @@ namespace CodeAcademy.Areas.Admin.Controllers
             if (ModelState.IsValid && faculty != null)
             {
                 faculty.Name = model.Name;
-                if (file !=null && !faculty.LogoImagePath.Contains(file.FileName))
+                if (file !=null && !faculty.Image.Path.Contains(file.FileName))
                 {
                     await new OldFileRemover(_environment).DeleteOldFacultyLogoAsync(faculty);
                     await UploadToServer(DefinePath(file), file);
-                    faculty.LogoImagePath = Path.Combine("/images", file.FileName);
+                    faculty.Image.Path = Path.Combine("/images", file.FileName);
                 }
 
                 _dbContext.Update(faculty);

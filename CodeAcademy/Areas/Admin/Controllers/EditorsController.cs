@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -17,10 +18,12 @@ namespace CodeAcademy.Areas.Admin.Controllers
     public class EditorsController : Controller
     {
         UserManager<User> _userManager;
+        AppDbContext _context;
 
-        public EditorsController(UserManager<User> userManager)
+        public EditorsController(UserManager<User> userManager, AppDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet]
@@ -32,20 +35,19 @@ namespace CodeAcademy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(UserViewModel model)
+        public async Task<IActionResult> Create(EditorCreateViewModel model)
         {
-            string defaultAvatarPath = "/images/avatars/avatar-default.png";
             if (ModelState.IsValid)
             {
                 User editor = new User()
-                                    {
-                                      UserName = model.Email,
-                                      GenderId = model.GenderId,
-                                      Name = model.Name,
-                                      Email = model.Email,
-                                      CreatingDate = DateTime.Now,
-                                      ProfilePhotoPath = defaultAvatarPath
-                                    };
+                {
+                    UserName = model.Email,
+                    GenderId = model.GenderId,
+                    Name = model.Name,
+                    Email = model.Email,
+                    CreatingDate = DateTime.Now,
+                    ImageId = 1
+                };
                 if (_userManager.FindByEmailAsync(model.Email).Result == null)
                 {
                     var result = await _userManager.CreateAsync(editor, model.Password);
@@ -53,7 +55,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                     {
                         await _userManager.AddToRoleAsync(editor, "Editor");
                         JsonResult js = Json(editor);
-                        return RedirectToAction(nameof(List));
+                        return Json(editor);
                     }
                     else
                     {
@@ -74,13 +76,20 @@ namespace CodeAcademy.Areas.Admin.Controllers
            User user = await _userManager.FindByIdAsync(id);
             if (user != null)
             {
-                IdentityResult result = await _userManager.DeleteAsync(user);
-                if (result.Succeeded)
+                try
                 {
-                    return RedirectToAction("List");
+                   IdentityResult result = await _userManager.DeleteAsync(user);
+                    if (result.Succeeded)
+                    {
+                        return Json("ok");
+                    }
+                }
+                 catch (Exception ex)
+                {
+
                 }
             }
-           return RedirectToAction("List");
+           return Json("List");
         }
 
         [HttpPost]

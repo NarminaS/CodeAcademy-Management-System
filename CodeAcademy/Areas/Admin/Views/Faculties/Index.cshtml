@@ -134,7 +134,8 @@
             background-color: #ababab;
         }
     </style>
-
+    <script src="~/js/signalr.min.js"></script>
+    <script src="~/signalr/hubs"></script>
     <script>
         var facultyName;
         var facultyId;
@@ -157,6 +158,16 @@
         $("#closeEditFac").click(function () {
             $("#edit-fac").css("display", "none");
         })
+
+        const connection = new signalR.HubConnectionBuilder()
+            .withUrl("/notification")
+            .build();
+
+   
+        connection.on( () => {
+            alert("Connect!");
+        });
+
     </script>
 </body>
 </html>

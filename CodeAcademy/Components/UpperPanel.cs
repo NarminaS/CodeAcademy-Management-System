@@ -2,6 +2,7 @@
 using CodeAcademy.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,17 +14,20 @@ namespace CodeAcademy.Components
     public class UpperPanel:ViewComponent
     {
         UpperPanelViewModel _model;
-        UserManager<User> _userManager;
+        AppDbContext _dbContext;
 
-        public UpperPanel(UserManager<User> userManager)
+        public UpperPanel(AppDbContext dbContext)
         {
-            _userManager = userManager;
+            _dbContext = dbContext;
         }
 
-        public IViewComponentResult Invoke(string email)
+        public IViewComponentResult Invoke(string email)   
         {
-            var authenticated = _userManager.FindByEmailAsync(email).Result;
-            _model = new UpperPanelViewModel() { Name = authenticated.Name, AvatarPath = authenticated.ProfilePhotoPath };
+            var authenticated =  _dbContext.Users
+                                        .Where(x => x.UserName == email)
+                                            .Include(x => x.ProfileImage)
+                                                .FirstOrDefaultAsync().Result;
+            _model = new UpperPanelViewModel() { Name = authenticated.Name, AvatarPath = authenticated.ProfileImage.Path };
             return View(_model);
         }
     }

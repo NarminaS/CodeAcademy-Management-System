@@ -17,6 +17,8 @@ namespace CodeAcademy.Areas.Admin.Models.ViewModels
 
         public string LogoImagePath { get; set; }
 
+        public short HourCount { get; set; }    
+
         public int GroupsInFacultyCount { get; set; }
     }
 }

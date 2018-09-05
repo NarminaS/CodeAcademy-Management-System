@@ -52,7 +52,7 @@ namespace CodeAcademy.Models
                     Email = adminMail,
                     UserName = adminMail,
                     GenderId = 1,
-                    ProfileImage = context.ProfileImages.Where(x => x.Id == 1).FirstOrDefault(),
+                    ImageId = 1,
                     Name = "Administrator",
                     IsActive = true,
                     CreatingDate = DateTime.Now

@@ -596,7 +596,7 @@ namespace CodeAcademy.Migrations
                 name: "IX_AspNetUsers_ImageId",
                 table: "AspNetUsers",
                 column: "ImageId",
-                unique: true);
+                unique: false);
 
             migrationBuilder.CreateIndex(
                 name: "EmailIndex",

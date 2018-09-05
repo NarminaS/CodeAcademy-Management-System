@@ -15,10 +15,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
     public class RolesController : Controller
     {
         UserManager<User> _userManager;
-        RoleManager<IdentityRole> _roleManager;
+        RoleManager<Role> _roleManager;
         AppDbContext _dbContext;
 
-        public RolesController(RoleManager<IdentityRole> roleManager, AppDbContext dbContext, UserManager<User> userManager)
+        public RolesController(RoleManager<Role> roleManager, AppDbContext dbContext, UserManager<User> userManager)
         {
             _roleManager = roleManager;
             _dbContext = dbContext;
@@ -50,7 +50,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
             {
                 if (_roleManager.FindByNameAsync(name).Result==null)
                 {
-                    IdentityRole role = new IdentityRole(name);
+                    Role role = new Role() { Name = name };
                     var result = await _roleManager.CreateAsync(role);
                     if (result.Succeeded)
                     {
@@ -58,7 +58,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                     }
                 }
             }
-            return View();
+            return RedirectToAction("Index","Roles");
         }
 
         public IActionResult Edit()

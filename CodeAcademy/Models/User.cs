@@ -13,8 +13,6 @@ namespace CodeAcademy.Models
         {
             SocialProfiles = new List<SocialProfile>();
             Posts = new List<Post>();
-            Gender = new Gender();
-            ProfileImage = new ProfileImage();
         }
         public string Name { get; set; }
         public string Surname { get; set; }

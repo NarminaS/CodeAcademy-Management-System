@@ -37,9 +37,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EditorCreateViewModel model)
         {
+            User editor=null;
             if (ModelState.IsValid)
             {
-                User editor = new User()
+                 editor = new User()
                 {
                     UserName = model.Email,
                     GenderId = model.GenderId,
@@ -50,24 +51,32 @@ namespace CodeAcademy.Areas.Admin.Controllers
                 };
                 if (_userManager.FindByEmailAsync(model.Email).Result == null)
                 {
-                    var result = await _userManager.CreateAsync(editor, model.Password);
-                    if (result.Succeeded)
+                    try
                     {
-                        await _userManager.AddToRoleAsync(editor, "Editor");
-                        JsonResult js = Json(editor);
-                        return Json(editor);
-                    }
-                    else
-                    {
-                        foreach (IdentityError error in result.Errors)
+                        var result = await _userManager.CreateAsync(editor, model.Password);
+                        if (result.Succeeded)
                         {
-                            ModelState.AddModelError("", error.Description);
+
+                            await _userManager.AddToRoleAsync(editor, "Editor");
+                            JsonResult js = Json(editor);
+                            return js;
                         }
+                        else
+                        {
+                            foreach (IdentityError error in result.Errors)
+                            {
+                                ModelState.AddModelError("", error.Description);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        //
                     }
                 }
                 ModelState.AddModelError("", $"User with {model.Email} email already exists");
             }
-            return RedirectToAction("List");
+            return Json(editor);
         }
 
         [HttpPost]

@@ -34,7 +34,10 @@
             {
                 <div class="fac-item ">
                     <input type="hidden" value="@faculty.Id" />
-                    <p class="h4 btn-info">@faculty.Name <span class="badge badge-light">@faculty.GroupsInFacultyCount</span></p>
+                    <p class="h4 btn-info">@faculty.Name 
+                        <span class="badge badge-light">@faculty.GroupsInFacultyCount</span>
+                        <span class="hour badge badge-light">@faculty.HourCount</span>
+                    </p>
                     <img class="img-responsive" src="@faculty.LogoImagePath" alt="Faculty Logo" />
                     <input type="button" class="btn btn-sm btn-warning fac-edit" value="Edit" />
                     <input type="button" class="btn btn-sm btn-danger fac-del" value="Deactivate" />
@@ -52,9 +55,11 @@
                     <h5 class="h5 text-center">New Faculty</h5>
                     <form asp-area="Admin" asp-controller="Faculties" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
                         <label>Name</label>
-                        <input type="text" name="name" required id="create-fac-name" placeholder="Faculty name..." class="form-control" />
+                        <input type="text" name="name" required id="createFacName" placeholder="Faculty name..." class="form-control" />
+                        <label>Hour Count</label>
+                        <input type="text" name="hourcount" required id="createFacHour" placeholder="Hour count..." class="form-control" />
                         <br />
-                        <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
+                        <input type="file" name="file" id="file" accept="image/*" class="btn btn-info" value="Upload logo" />
 
                         <input type="submit" value="Create Faculty" id="confirm-create" class="btn btn-success" />
                         <input type="button" value="Close" id="closeCreateFac" class="btn btn-danger" />
@@ -75,6 +80,8 @@
                         <label>Name</label>
                         <input hidden name="id" value="" id="id" />
                         <input type="text" name="name" required id="edit-fac-name" placeholder="Faculty name..." class="form-control" />
+                        <label>Hour Count</label>
+                        <input type="text" name="hourcount" required id="edit-fac-hour" placeholder="Hour count..." class="form-control" />
                         <br />
                         <input type="file" name="file" accept="image/*" class="btn btn-info" value="Upload logo" />
                         <input type="submit" value="Update Faculty" id="confirm-edit" class="btn btn-success" />
@@ -134,11 +141,12 @@
             background-color: #ababab;
         }
     </style>
-    <script src="~/js/signalr.min.js"></script>
-    <script src="~/signalr/hubs"></script>
+
     <script>
+        var image;
         var facultyName;
-        var facultyId;
+        var hourcount;
+
         $("#open-fac-create").click(function () {
             $("#new-fac").css("display", "block");
         });
@@ -150,23 +158,16 @@
         $(".fac-edit").click(function (e) {
             facultyName = $(e.target).prev().prev().contents().get(0).nodeValue;
             facultyId = $(e.target).prev().prev().prev().val();
+            hourcount = $(e.target).prev().prev().contents().get(3).innerText
             $("#edit-fac").css("display", "block");
             $("#edit-fac form #edit-fac-name").val(facultyName);
+            $("#edit-fac form #edit-fac-hour").val(hourcount);
             $("#edit-fac form #id").val(facultyId);
         });
 
         $("#closeEditFac").click(function () {
             $("#edit-fac").css("display", "none");
         })
-
-        const connection = new signalR.HubConnectionBuilder()
-            .withUrl("/notification")
-            .build();
-
-   
-        connection.on( () => {
-            alert("Connect!");
-        });
 
     </script>
 </body>

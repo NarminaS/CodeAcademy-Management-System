@@ -30,7 +30,7 @@
                         <h5>No editors...</h5>
                     }
                 }
-
+                
                 @foreach (var editor in Model)
                 {
                     <span class="h5">@editor.Name &nbsp </span>
@@ -39,7 +39,7 @@
                     <input type="button" value="Delete" class="openSubmit btn btn-danger" />
                     <br />
                     <hr />
-                    <div class="submitDelete col-sm-8">
+                    <div class="submitDelete custom-modal col-sm-8">
                         <h6>The user @editor.Name will be deleted permanently. Are you sure?</h6>
                         <form asp-antiforgery="true" asp-controller="Editors" asp-action="Delete" method="post">
                             <input type="hidden" value="@editor.Id" />
@@ -175,11 +175,13 @@
         })
 
         $(".openSubmit").click(function (e) {
-            $(e.target).next().next().next().css("height", "100%");
+            $(e.target).next().next().next().css("display","block");
+            $(e.target).next().next().next().css("height", "20vh");
         })
 
         $(".closeSubmit").click(function (e) {
             $(e.target.parentElement).css("height", "0px");
+            $(e.target.parentElement).css("display", "none");
         })
 
         $("#show-form").click(function (e) {
@@ -201,11 +203,11 @@
                         genderId: GenderId.value
                     }
                 })
-                    .done(function (obj) {
-                        console.log(obj);
+                    .done(function (editor) {
+                        alert(Name.value+ " added!")
                     })
                     .fail(function (msg) {
-                        alert(msg);
+                        alert("fail");
                     })
             }
         );

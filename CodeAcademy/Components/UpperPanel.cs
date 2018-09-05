@@ -25,9 +25,9 @@ namespace CodeAcademy.Components
         {
             var authenticated =  _dbContext.Users
                                         .Where(x => x.UserName == email)
-                                            .Include(x => x.ProfileImage)
-                                                .FirstOrDefaultAsync().Result;
-            _model = new UpperPanelViewModel() { Name = authenticated.Name, AvatarPath = authenticated.ProfileImage.Path };
+                                                 .FirstOrDefaultAsync().Result;
+            var path = _dbContext.ProfileImages.Where(x => x.User.Email == email).SingleOrDefaultAsync().Result.Path;
+            _model = new UpperPanelViewModel() { Name = authenticated.Name, AvatarPath = path };
             return View(_model);
         }
     }

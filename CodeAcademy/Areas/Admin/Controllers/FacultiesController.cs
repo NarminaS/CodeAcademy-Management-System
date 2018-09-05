@@ -31,23 +31,23 @@ namespace CodeAcademy.Areas.Admin.Controllers
         public IActionResult Index()
         {
             var model = _dbContext.Faculties
-                            .Include(x=>x.Image)
+                            .Include(x => x.Image)
                                 .Select(x => new FacultyViewModel()
-                                    { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.Image.Path })
+                                { Id = x.Id, Name = x.Name, GroupsInFacultyCount = x.Groups.Count, LogoImagePath = x.Image.Path, HourCount = x.HourCount })
                                                     .ToList();
             return View(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(string name,IFormFile file)
+        public async Task<IActionResult> Create(FacultyCreateViewModel model,IFormFile file)
         {
-            if (!String.IsNullOrEmpty(name) && file != null)
+            if (ModelState.IsValid && file != null)
             {
                Image img = new Image() { Path = Path.Combine("/images", file.FileName) };
                await _dbContext.Images.AddAsync(img);
                await UploadToServer(DefinePath(file), file);
 
-               Faculty faculty = new Faculty { Name = name, Image = img };
+                Faculty faculty = new Faculty { Name = model.Name, ImageId = img.Id, HourCount = model.HourCount };
                await _dbContext.Faculties.AddAsync(faculty);
 
                int affected = await _dbContext.SaveChangesAsync();

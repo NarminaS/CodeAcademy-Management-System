@@ -9,7 +9,6 @@ namespace CodeAcademy.Models
     {
         public MenuItem()
         {
-            Image = new Image();
             RoleMenuItems = new List<RoleMenuItem>();
         }
         public int Id { get; set; }

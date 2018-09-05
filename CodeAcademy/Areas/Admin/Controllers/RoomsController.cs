@@ -25,7 +25,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         {
             var rooms = _dbContext.Rooms
                             .Select(x => new RoomViewModel()
-                                 { Id = x.Id, Name = x.Name }).ToList();
+                                { Id = x.Id, Name = x.Name, Capacity = x.Capacity }).ToList();
             return View(rooms);
         }
 
@@ -34,7 +34,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                Room room = new Room() { Name = model.Name };
+                Room room = new Room() { Name = model.Name, Capacity = model.Capacity };
                 if (await _dbContext.AddAsync(room) != null)
                 {
                     if (await _dbContext.SaveChangesAsync() > 0)

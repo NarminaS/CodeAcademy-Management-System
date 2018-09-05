@@ -14,5 +14,8 @@ namespace CodeAcademy.Areas.Admin.Models.ViewModels
 
         [Required]
         public string Name { get; set; }    
+
+        [Required]
+        public byte Capacity { get; set; }  
     }
 }

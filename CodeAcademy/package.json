@@ -3,6 +3,6 @@
   "name": "asp.net",
   "private": true,
   "dependencies": {
-    "@aspnet/signalr": "1.0.0"
+    "signalr": "2.2.1"
   }
 }

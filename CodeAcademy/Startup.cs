@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CodeAcademy.Hubs;
 using CodeAcademy.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -34,7 +33,8 @@ namespace CodeAcademy
             });
 
             services.AddIdentity<User,Role>()
-                                    .AddEntityFrameworkStores<AppDbContext>();
+                                    .AddEntityFrameworkStores<AppDbContext>()
+                                            .AddDefaultTokenProviders();
 
             services.Configure<CookiePolicyOptions>(options =>
             {
@@ -63,11 +63,11 @@ namespace CodeAcademy
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseSignalR(routes=>
-              {
-                  routes.MapHub<NotificationHub>("/notification");
-              }  
-            );
+            //app.UseSignalR(routes=>
+            //  {
+            //      routes.MapHub<NotificationHub>("/notification");
+            //  }  
+            //);
 
             app.UseCookiePolicy();
 

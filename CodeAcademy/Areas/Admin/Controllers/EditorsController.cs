@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodeAcademy.Areas.Admin.Models.ViewModels;
 using CodeAcademy.Models;
+using CodeAcademy.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -37,10 +38,9 @@ namespace CodeAcademy.Areas.Admin.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(EditorCreateViewModel model)
         {
-            User editor=null;
             if (ModelState.IsValid)
             {
-                 editor = new User()
+                User editor = new User()
                 {
                     UserName = model.Email,
                     GenderId = model.GenderId,
@@ -56,8 +56,8 @@ namespace CodeAcademy.Areas.Admin.Controllers
                         var result = await _userManager.CreateAsync(editor, model.Password);
                         if (result.Succeeded)
                         {
-
                             await _userManager.AddToRoleAsync(editor, "Editor");
+                            await SendConfirmaitionMail(editor);
                             JsonResult js = Json(editor);
                             return js;
                         }
@@ -76,7 +76,7 @@ namespace CodeAcademy.Areas.Admin.Controllers
                 }
                 ModelState.AddModelError("", $"User with {model.Email} email already exists");
             }
-            return Json(editor);
+            return RedirectToAction("List");
         }
 
         [HttpPost]
@@ -134,6 +134,25 @@ namespace CodeAcademy.Areas.Admin.Controllers
                 }
             }
             return RedirectToAction("List");
+        }
+
+        private async Task SendConfirmaitionMail(User user)
+        {
+            try
+            {
+                var code = _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var callbackUrl = Url.Action("ConfirmEmail",
+                                                "Account",
+                                                new { userId = user.Id, code = code },
+                                                protocol: HttpContext.Request.Scheme);
+                await new EmailService().SendEmailAsync(user.Name, user.Email, $"CodeAcademy - {user.Name} - confirmation",
+                                                        $"Sorry, I'm Narmina from P305, just testing my app. Confirm your registration via this link: <a href='{callbackUrl}'>link</a>");
+            }
+            catch (Exception ex)
+            {
+               //
+            }
+
         }
     }
 }

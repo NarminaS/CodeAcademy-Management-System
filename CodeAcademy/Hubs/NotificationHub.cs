@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNet.SignalR;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace CodeAcademy.Hubs
 {
-    public class NotificationHub:Hub
+    public class NotificationHub: Hub
     {
-        public async Task Notify(string message)  
+        public async Task Notify()
         {
-            await Clients.All.SendAsync("Notify", message);
+            await Clients.All.ShowNotification();
         }
     }
 }

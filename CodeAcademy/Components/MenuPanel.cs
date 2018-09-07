@@ -10,6 +10,13 @@ namespace CodeAcademy.Components
     [ViewComponent(Name ="MenuPanel")]
     public class MenuPanel:ViewComponent
     {
-        
+        public MenuPanel()
+        {
+
+        }
+        public IViewComponentResult Invoke(string email)
+        {
+            return View();
+        }
     }
 }

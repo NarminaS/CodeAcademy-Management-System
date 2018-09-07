@@ -14,44 +14,52 @@
 </head>
 <body>
 
-<div>
+    <div>
 
-    <div class="container">
-        <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6">
-                <br />
-                <img src="~/images/logo.png" class="img img-responsive" alt="logo" />
-                <br />
-                <h4 style="text-align:center;">Log In</h4>
-                <br />
-                <form class="form-group" method="post" asp-controller="Home" asp-action="Login">
-                    <div asp-validation-summary="ModelOnly"></div>
-                    <label asp-for="Email"></label><br />
-                    <input class="form-control" id="name" asp-for="Email" /><br />
-                    <span asp-validation-for="Email"></span>
-                    <label asp-for="Password"></label><br />
-                    <input class="form-control" asp-for="Password" /><br />
-                    <span asp-validation-for="Password"></span>
-                    <label asp-for="RememberMe"></label>
-                    <input class="checkbox " asp-for="RememberMe" /><br />
-                    <input class="btn btn-success" type="submit" value="Daxil ol" />
-                </form>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-3"></div>
+                <div class="col-sm-6">
+                    <br />
+                    <img src="~/images/logo.png" class="img img-responsive" alt="logo" />
+                    <br />
+                    <h4 style="text-align:center;">Log In</h4>
+                    <br />
+                    <form class="form-group" method="post" asp-controller="Home" asp-action="Login">
+                        <div asp-validation-summary="ModelOnly"></div>
+                        <label asp-for="Email"></label><br />
+                        <input class="form-control" id="name" asp-for="Email" /><br />
+                        <span asp-validation-for="Email"></span>
+                        <label asp-for="Password"></label><br />
+                        <input class="form-control" asp-for="Password" /><br />
+                        <span asp-validation-for="Password"></span>
+                        <label asp-for="RememberMe"></label>
+                        <input class="checkbox " asp-for="RememberMe" /><br />
+                        <a asp-controller="Account" asp-action="ForgotPassword" class="alert-link">Forgot password?</a>
+                        <input class="btn btn-success" type="submit" value="Daxil ol" />
+                    </form>
+                </div>
+                <div class="col-sm-3"></div>
             </div>
-            <div class="col-sm-3"></div>
         </div>
-    </div>
 
-</div>
-<style>
-    img{
-        width:50%;
-        margin-bottom:5vh;
-        margin-left:7vw;
-    }
-</style>
-<script>
-    document.getElementById("name").focus();
-</script>
+    </div>
+    <style>
+        img {
+            width: 50%;
+            margin-bottom: 5vh;
+            margin-left: 7vw;
+        }
+    </style>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/signalr/jquery.signalR.min.js"></script>
+    <script src="signalr/hubs"></script>
+    <script>
+        //var myHubProxy = $.connection.hub.createHubProxy("NotificationHub");
+        $.connection.hub.start().done(function () {
+            alert("Hub works!")
+        })
+        document.getElementById("name").focus();
+    </script>
 </body>
 </html>

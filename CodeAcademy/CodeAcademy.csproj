@@ -34,6 +34,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MailKit" Version="2.0.6" />
     <PackageReference Include="microsoft.aspnet.signalR" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
@@ -42,6 +43,13 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Editor\Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\lib\signalr\jquery.signalR.js" />
+    <None Include="wwwroot\lib\signalr\jquery.signalR.min.js" />
+    <None Include="wwwroot\lib\signalr\LICENSE.md" />
+    <None Include="wwwroot\lib\signalr\README.md" />
   </ItemGroup>
 
   <ItemGroup>

@@ -52,13 +52,7 @@
         }
     </style>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/signalr/jquery.signalR.min.js"></script>
-    <script src="signalr/hubs"></script>
     <script>
-        //var myHubProxy = $.connection.hub.createHubProxy("NotificationHub");
-        $.connection.hub.start().done(function () {
-            alert("Hub works!")
-        })
         document.getElementById("name").focus();
     </script>
 </body>

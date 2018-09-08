@@ -191,3 +191,5 @@ C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\n
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\Account\ForgotPasswordConfirmation.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\Account\ResetPassword.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\Account\ResetPasswordConfirmation.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Admin\Views\Account\ConfirmEmail.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\StatusCode\Status.g.cshtml.cs

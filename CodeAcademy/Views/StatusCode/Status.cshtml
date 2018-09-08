@@ -1,0 +1,39 @@
+﻿@model int
+
+@{ 
+    Layout = null;
+}
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+@{
+    var statusCode = Model;
+    var statusmessage = "";
+    switch (statusCode)
+    {
+        case 400:
+            statusmessage = "Bad request: The request cannot be fulfilled due to bad syntax";
+            break;
+        case 401:
+            statusmessage = "Not authenticated! Sign in!";
+            break;
+        case 403:
+            statusmessage = "Access-in yoxdu, ay qaqa";
+            break;
+        case 404:
+            statusmessage = "Page not found or you don't have a permission";
+            break;
+        case 408:
+            statusmessage = "The server timed out waiting for the request";
+            break;
+        case 500:
+            statusmessage = "Internal Server Error - server was unable to finish processing the request";
+            break;
+        default:
+            statusmessage = "That’s odd... Something we didn't expect happened";
+            break;
+    }
+}
+<div class="jumbotron">
+    <h1>Error @Model</h1>
+    <h3>@statusmessage</h3>
+    <img src="~/images/logo.png" />
+</div>

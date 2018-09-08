@@ -17,7 +17,7 @@ namespace CodeAcademy.Services
             emailMessage.From.Add(new MailboxAddress("CodeAcademy Administration", "alfa_centavra581@mail.ru"));
             emailMessage.To.Add(new MailboxAddress(name, email));
             emailMessage.Subject = subject;
-            emailMessage.Body = new TextPart
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
             {
                 Text = message
             };

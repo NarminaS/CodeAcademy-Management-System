@@ -44,6 +44,7 @@ namespace CodeAcademy
             });
 
             services.AddSignalR();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -61,8 +62,6 @@ namespace CodeAcademy
             }
 
             app.UseHttpsRedirection();
-            app.UseStaticFiles();
-
             //app.UseSignalR(routes=>
             //  {
             //      routes.MapHub<NotificationHub>("/notification");
@@ -73,7 +72,9 @@ namespace CodeAcademy
 
             app.UseAuthentication();
 
-            app.UseStatusCodePages();
+            app.UseStatusCodePagesWithReExecute("/StatusCode/Status/{0}");
+
+            app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {

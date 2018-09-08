@@ -140,10 +140,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
         {
             try
             {
-                var code = _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var _code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                 var callbackUrl = Url.Action("ConfirmEmail",
                                                 "Account",
-                                                new { userId = user.Id, code = code },
+                                                new { userId = user.Id, code = _code },
                                                 protocol: HttpContext.Request.Scheme);
                 await new EmailService().SendEmailAsync(user.Name, user.Email, $"CodeAcademy - {user.Name} - confirmation",
                                                         $"Sorry, I'm Narmina from P305, just testing my app. Confirm your registration via this link: <a href='{callbackUrl}'>link</a>");

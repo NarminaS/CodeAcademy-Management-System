@@ -28,9 +28,39 @@ namespace CodeAcademy.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(LessonHour model)
+        public async Task<IActionResult> Create(LessonHourCreateViewModel model)
         {
-           
+            if (ModelState.IsValid)
+            {
+                LessonHour hour = new LessonHour()
+                {
+                    Name = model.Name,
+                    BeginHour = (byte)model.BeginTime.Hour,
+                    BeginMinute = (byte)model.BeginTime.Minute,
+                    EndHour = (byte)model.EndTime.Hour,
+                    EndMinute = (byte)model.EndTime.Minute,
+                    Monday = model.Monday,
+                    Friday = model.Friday,
+                    Saturday = model.Saturday,
+                    Sunday = model.Sunday,
+                    Thursday = model.Thursday,
+                    Tuesday = model.Tuesday,
+                    Wednesday = model.Wednesday,
+                    CreationDate=DateTime.Now
+                };
+
+                if (await _dbContext.LessonHours.AddAsync(hour) != null)
+                {
+                    if (await _dbContext.SaveChangesAsync() > 0)
+                    {
+                       return RedirectToAction("Index", "LessonHours");
+                    }
+                }
+            }
+            else
+            {
+                ModelState.AddModelError("", "Model is invalid...");
+            }
             return RedirectToAction("Index", "LessonHours");
         }
 

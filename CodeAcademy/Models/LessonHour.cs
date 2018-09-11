@@ -25,11 +25,13 @@ namespace CodeAcademy.Models
 
         public bool IsDeleted { get; set; }
 
-        [DataType(DataType.Time)]
-        public DateTime BeginTime { get; set; }
+        public byte BeginHour { get; set; }
+        public byte BeginMinute { get; set; }
 
-        [DataType(DataType.Time)]
-        public DateTime EndTime { get; set; }
+        public byte EndHour { get; set; }
+        public byte EndMinute { get; set; }
+
+        public DateTime CreationDate { get; set; }  
 
         public List<Group> Groups { get; set; }
     }

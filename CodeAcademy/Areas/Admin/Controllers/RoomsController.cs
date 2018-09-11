@@ -56,9 +56,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
             if (ModelState.IsValid)
             {
                 var room = _dbContext.Rooms.Where(x => x.Id == model.Id).SingleOrDefault();
-                if (room !=null && room.Name !=model.Name)
+                if (room !=null && room.Name !=model.Name || room.Capacity != model.Capacity)
                 {
                     room.Name = model.Name;
+                    room.Capacity = model.Capacity;
                     _dbContext.Update(room);
                     if (await _dbContext.SaveChangesAsync() > 0)
                     {

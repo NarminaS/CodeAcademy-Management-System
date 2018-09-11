@@ -78,7 +78,7 @@ using CodeAcademy.Components.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(58, 324, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f0b0a8e0893743bea2dceaca02263b17", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "73eb80b4eedd404a95ed085801e8a08c", async() => {
                 BeginContext(64, 311, true);
                 WriteLiteral(@"
     <meta name=""viewport"" content=""width=device-width"" />
@@ -102,12 +102,12 @@ using CodeAcademy.Components.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(384, 213, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6760dc67595241809dfc5867fd85cb44", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fc23c84d9727464986ccc3ccbcd106fd", async() => {
                 BeginContext(390, 93, true);
                 WriteLiteral("\r\n    <h1>Email confirmation</h1>\r\n    <p class=\"lead\">Your email has been confirmed. Please ");
                 EndContext();
                 BeginContext(483, 100, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c131bd0640d640d984d6e9dbb5ff0fd7", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0d1bb7e5822e46e989f3414a4f07195e", async() => {
                     BeginContext(559, 20, true);
                     WriteLiteral("Click here to log in");
                     EndContext();

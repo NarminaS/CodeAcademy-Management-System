@@ -36,7 +36,7 @@ namespace CodeAcademy.Areas.Editor.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(TagCreateViewModel model, string name, int facultyId)
+        public async Task<IActionResult> Create(TagCreateModel model)
         {
             if (ModelState.IsValid)
             {

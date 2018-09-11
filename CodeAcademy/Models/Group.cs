@@ -36,7 +36,6 @@ namespace CodeAcademy.Models
 
         public List<Student>Students { get; set; }
 
-        [DatabaseGenerated(DatabaseGeneratedOption.Computed)]
         public DateTime CreationDate { get; set; }
 
         public DateTime LessonsStartDate { get; set; }

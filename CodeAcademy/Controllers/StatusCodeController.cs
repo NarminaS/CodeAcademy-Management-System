@@ -10,7 +10,6 @@ namespace CodeAcademy.Controllers
 {
     public class StatusCodeController : Controller
     {
-
         public IActionResult Status(int id)   
         {
             if (!User.Identity.IsAuthenticated)
@@ -22,7 +21,7 @@ namespace CodeAcademy.Controllers
             {
                 id = 403;
             }
-
+           
             return View(id);
         }
     }

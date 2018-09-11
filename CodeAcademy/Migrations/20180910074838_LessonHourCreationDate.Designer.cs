@@ -4,14 +4,16 @@ using CodeAcademy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeAcademy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180910074838_LessonHourCreationDate")]
+    partial class LessonHourCreationDate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -95,7 +97,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<int>("CourseCompletionStatusId");
 
-                    b.Property<DateTime>("CreationDate");
+                    b.Property<DateTime>("CreationDate")
+                        .ValueGeneratedOnAddOrUpdate();
 
                     b.Property<int>("FacultyId");
 
@@ -770,7 +773,7 @@ namespace CodeAcademy.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CodeAcademy.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("UserId");
                 });
 

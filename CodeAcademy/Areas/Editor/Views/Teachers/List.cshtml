@@ -1,0 +1,117 @@
+﻿@using CodeAcademy.Areas.Editor.Models.ViewModels
+@model List<TeacherViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <title>List</title>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h1>TAG CRUD!!!</h1>
+    <br />
+
+    @if (!Model.Any())
+    {
+        <h4>No teachers...</h4>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="button" class="btn btn-info" id="open-create-teacher" value="New Teacher" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    @* New teacher form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="new-teacher" class="custom-modal">
+                    <h5 class="h5 text-center">New Teacher</h5>
+                    <form asp-area="Editor" asp-controller="Teachers" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
+                        <label>Name</label>
+                        <input type="text" class="form-control" required name="Name" value="" />
+                        <label>Surname</label>
+                        <input type="text" class="form-control" required name="Surname" value="" />
+                        <label>Birth date</label>
+                        <input type="date" class="form-control" required name="birthdate" value="" />
+                        <label>Phone Number</label>
+                        <input type="tel" class="form-control" required name="phonenumber" value="" />
+                        <label>Email</label>
+                        <input type="email" class="form-control" required name="email" value="" />
+                        <label>Password</label>
+                        <input type="password" class="form-control" required name="password" value="" />
+                        <label>Gender</label>
+                        <select name="GenderId" id="gender" class="form-control"></select>
+                        <label>Faculty</label>
+                        <select name="FacultyId" id="faculty" class="form-control"></select>
+                        <br />
+                        <input type="submit" value="Create Teacher" id="submit-create" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-teacher" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 5vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+    <script>
+        $("#open-create-teacher").click(function () {
+            $("#new-teacher").css("display", "block");
+        });
+
+        $("#close-create-teacher").click(function () {
+            $("new-teacher").css("display", "none");
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Teachers/GetFaculties",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var fac = document.createElement("option");
+                    fac.value = data[i].id;
+                    fac.innerText = data[i].name
+                    document.getElementById("faculty").appendChild(fac);
+                }
+            },
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Teachers/GetGenders",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var gen = document.createElement("option");
+                    gen.value = data[i].id;
+                    gen.innerText = data[i].name
+                    document.getElementById("gender").appendChild(gen);
+                }
+            },
+        })
+    </script>
+</body>
+</html>

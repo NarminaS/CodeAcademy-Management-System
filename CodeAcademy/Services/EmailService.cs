@@ -1,8 +1,5 @@
 ﻿using MimeKit;
-using MailKit;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using MailKit.Net.Smtp;
 
@@ -14,7 +11,7 @@ namespace CodeAcademy.Services
         {
             var emailMessage = new MimeMessage();
 
-            emailMessage.From.Add(new MailboxAddress("CodeAcademy Administration", "alfa_centavra581@mail.ru"));
+            emailMessage.From.Add(new MailboxAddress("CodeAcademy Administration", "narmings@code.edu.az"));
             emailMessage.To.Add(new MailboxAddress(name, email));
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
@@ -26,8 +23,8 @@ namespace CodeAcademy.Services
             {
                 try
                 {
-                    await client.ConnectAsync("smtp.mail.ru", 465, true);
-                    await client.AuthenticateAsync("alfa_centavra581@mail.ru", "narka91urey");
+                    await client.ConnectAsync("smtp.gmail.com", 587, false);
+                    await client.AuthenticateAsync("narmings@code.edu.az", "taurus91");
                     await client.SendAsync(emailMessage);
 
                     await client.DisconnectAsync(true);

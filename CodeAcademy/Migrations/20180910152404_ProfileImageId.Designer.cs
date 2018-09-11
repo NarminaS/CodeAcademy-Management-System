@@ -4,14 +4,16 @@ using CodeAcademy.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CodeAcademy.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180910152404_ProfileImageId")]
+    partial class ProfileImageId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -389,8 +391,6 @@ namespace CodeAcademy.Migrations
 
                     b.Property<byte>("GenderId");
 
-                    b.Property<int>("ImageId");
-
                     b.Property<bool>("IsActive");
 
                     b.Property<bool>("IsBlocked");
@@ -421,6 +421,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("PhoneNumberConfirmed");
 
+                    b.Property<int>("ProfileImageId");
+
                     b.Property<string>("SecurityStamp");
 
                     b.Property<string>("Surname");
@@ -434,9 +436,6 @@ namespace CodeAcademy.Migrations
 
                     b.HasIndex("GenderId");
 
-                    b.HasIndex("ImageId")
-                        .IsUnique();
-
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -444,6 +443,9 @@ namespace CodeAcademy.Migrations
                         .IsUnique()
                         .HasName("UserNameIndex")
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
+
+                    b.HasIndex("ProfileImageId")
+                        .IsUnique();
 
                     b.ToTable("AspNetUsers");
 
@@ -844,7 +846,7 @@ namespace CodeAcademy.Migrations
 
                     b.HasOne("CodeAcademy.Models.ProfileImage", "ProfileImage")
                         .WithOne("User")
-                        .HasForeignKey("CodeAcademy.Models.User", "ImageId")
+                        .HasForeignKey("CodeAcademy.Models.User", "ProfileImageId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

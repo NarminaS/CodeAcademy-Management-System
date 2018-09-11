@@ -14,22 +14,72 @@
 </head>
 <body>
     @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
-    <h3>Lesson Hour CRUD!!!</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <h3>Lesson Hour CRUD!!!</h3>
+                <input type="button" id="new-hour-open" value="New LessonHour" />
+            </div>
+        </div>
+    </div>
     <br />
 
-    <form asp-area="Admin" asp-controller="LessonHours" asp-action="Create" class="form-group" method="post">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" name="name" value="" />
-        <input type="radio" name="monday" value="" />
-        <input type="radio" name="tuesday" value="" />
-        <input type="radio" name="sunday" value="" />
-        <input type="time" name="begintime" value="" />
-        <input type="time" name="endtime" value="" />
-        <input type="submit" class="btn btn-success"  value="Send" />
-    </form>
+    <div class="col-sm-6">
+        <div id="new-hour" class="custom-modal">
+            <form asp-area="Admin" asp-controller="LessonHours" asp-action="Create" class="form-group" method="post">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" value="" />
+                <input type="checkbox" class="checkbox-inline" name="monday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="tuesday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="wednesday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="thursday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="friday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="saturday" value="true" />
+                <input type="checkbox" class="checkbox-inline" name="sunday" value="true" />
+                <input type="time" class="form-control" name="begintime" value="" />
+                <input type="time" class="form-control" name="endtime" value="" />
+                <input type="submit" id="new-hour-submit" class="btn btn-success" value="Send" />
+                <input type="button" id="new-hour-close" class="btn btn-danger" value="Close" />
+            </form>
+        </div>
+    </div>
 
 
 
-    
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+
+    <script>
+        $("#new-hour-open").click(function () {
+            $("#new-hour").css("display", "block");
+        });
+
+
+        $("#new-hour-close").click(function () {
+            $("#new-hour").css("display", "block");
+        })
+
+        $("#new-hour-submit").click(function () {
+            $.ajax({
+                method:"POST",
+                url: "/Admin/LessonHours/Create",
+                data:model
+            })
+        });
+    </script>
     </body>
 </html>

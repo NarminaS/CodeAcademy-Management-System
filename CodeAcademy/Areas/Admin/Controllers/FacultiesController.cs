@@ -45,9 +45,10 @@ namespace CodeAcademy.Areas.Admin.Controllers
             {
                Image img = new Image() { Path = Path.Combine("/images", file.FileName) };
                await _dbContext.Images.AddAsync(img);
-               await UploadToServer(DefinePath(file), file);
+               await Uploader.UploadToServer(new Uploader(_environment).DefinePath(file), file);
+               //await UploadToServer(DefinePath(file), file);
 
-                Faculty faculty = new Faculty { Name = model.Name, ImageId = img.Id, HourCount = model.HourCount };
+               Faculty faculty = new Faculty { Name = model.Name, ImageId = img.Id, HourCount = model.HourCount };
                await _dbContext.Faculties.AddAsync(faculty);
 
                int affected = await _dbContext.SaveChangesAsync();

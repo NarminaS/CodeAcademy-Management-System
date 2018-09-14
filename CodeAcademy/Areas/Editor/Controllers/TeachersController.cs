@@ -50,7 +50,7 @@ namespace CodeAcademy.Areas.Editor.Controllers
                     Name = model.Name,
                     Surname = model.Surname,
                     BirthDate = model.BirthDate,
-                    FacultyId = model.FacultyId,
+                    Faculty = await _dbContext.Faculties.FirstOrDefaultAsync(x => x.Id == model.FacultyId),
                     GenderId = (byte)model.GenderId,
                     Email = model.Email,
                     UserName = model.Email,
@@ -67,14 +67,11 @@ namespace CodeAcademy.Areas.Editor.Controllers
                         {
                             await _userManager.AddToRoleAsync(teacher, "Teacher");
                             await SendConfirmaitionMail(teacher);
-                            return Json(teacher);
+                            return RedirectToAction("List", "Teachers");
                         }
                         else
                         {
-                            foreach (IdentityError error in result.Errors)
-                            {
-                                ModelState.AddModelError("", error.Description);
-                            }
+                           ModelState.AddModelError("", "Something wrong");
                         }
                     }
                     catch (Exception ex)
@@ -106,6 +103,7 @@ namespace CodeAcademy.Areas.Editor.Controllers
 
         private async Task SendConfirmaitionMail(User user)
         {
+            
             try
             {
                 var _code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

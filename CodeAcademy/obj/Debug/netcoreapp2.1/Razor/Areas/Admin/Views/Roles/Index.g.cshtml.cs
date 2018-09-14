@@ -87,7 +87,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(134, 411, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "48401de071004176861b4e9797552a8d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6d822baa687b4afdb0f2f4eed7152ba4", async() => {
                 BeginContext(140, 398, true);
                 WriteLiteral(@"
     <meta name=""viewport"" content=""width=device-width"" />
@@ -112,7 +112,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(547, 6010, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d74da80fdb52402eb3a0025853078799", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e20f27a37fe94b56b54da023d6b45786", async() => {
                 BeginContext(553, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -144,7 +144,7 @@ Write(await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name
                 WriteLiteral("    ");
                 EndContext();
                 BeginContext(764, 97, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "102b570e52cf4e3abbd044175498849f", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "9e46e567c77945c09377cb48932f5c04", async() => {
                     BeginContext(842, 15, true);
                     WriteLiteral("Go back to menu");
                     EndContext();
@@ -224,7 +224,7 @@ Write(await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-8\">\r\n                <div id=\"new-role\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">New Role</h5>\r\n                    ");
                 EndContext();
                 BeginContext(2186, 570, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b6efee3b60c6456cb5e4a338b29ccccd", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e205b278b19944c0a5983d398d356f88", async() => {
                     BeginContext(2308, 441, true);
                     WriteLiteral(@"
                         <label>Name</label>
@@ -270,7 +270,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper.Antiforgery = true;
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-8\">\r\n                <div id=\"edit-role\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">Edit Role</h5>\r\n                    ");
                 EndContext();
                 BeginContext(3092, 562, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f9e50ad641d347389b72f59aca73e352", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6041e12260f448a19c9c2e2d8188b328", async() => {
                     BeginContext(3212, 435, true);
                     WriteLiteral(@"
                         <label>Name</label>
@@ -316,7 +316,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper.Antiforgery = true;
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-8\">\r\n                <div id=\"role-deactiv-confirm\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">Deactivate Role</h5>\r\n                    ");
                 EndContext();
                 BeginContext(4023, 506, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "66f67c45ac55486fa4c9454e570057c0", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "52b28aa6166540a18a82f442d1ef376d", async() => {
                     BeginContext(4143, 379, true);
                     WriteLiteral(@"
                         <p class=""lead"">The role <span id=""role-name""></span> will be deactivated. Are you sure?</p>

@@ -99,6 +99,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<int>("FacultyId");
 
+                    b.Property<int>("ImageId");
+
                     b.Property<bool>("IsAssembled");
 
                     b.Property<bool>("IsDeleted");
@@ -122,6 +124,8 @@ namespace CodeAcademy.Migrations
                     b.HasIndex("CourseCompletionStatusId");
 
                     b.HasIndex("FacultyId");
+
+                    b.HasIndex("ImageId");
 
                     b.HasIndex("LessonHourId");
 
@@ -745,6 +749,11 @@ namespace CodeAcademy.Migrations
                     b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
                         .WithMany("Groups")
                         .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CodeAcademy.Models.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CodeAcademy.Models.LessonHour", "LessonHour")

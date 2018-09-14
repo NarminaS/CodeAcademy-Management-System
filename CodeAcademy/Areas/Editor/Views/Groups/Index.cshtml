@@ -1,0 +1,166 @@
+﻿@using CodeAcademy.Areas.Editor.Models.ViewModels
+@model List<GroupViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h1>GROUP CRUD!!!</h1>
+    <br />
+
+    @if (!Model.Any())
+    {
+        <h4>No groups...</h4>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="button" class="btn btn-info" id="open-create-group" value="New Group" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    @* New group form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="new-group" class="custom-modal">
+                    <h5 class="h5 text-center">New Group</h5>
+                    <form asp-area="Editor" asp-controller="Groups" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
+                        <label>Faculty</label>
+                        <select name="facultyid" id="faculty" class="form-control"></select>
+                        <label>Number</label>
+                        <input type="number" class="form-control" required id="new-group-num" value="" />
+                        <label>Name</label>
+                        <input type="text" class="form-control" readonly id="new-group-name" name="name" value="" />
+                        <label>Teacher</label>
+                        <select name="teacherid" id="teacher" class="form-control"></select>
+                        <label>Room</label>
+                        <select name="roomid" id="room" class="form-control"></select>
+                        <label>Lesson Hours</label>
+                        <select name="hourid" id="hour" class="form-control"></select>
+                        <label>Lessons start date</label>
+                        <input type="date" name="startdate" class="form-control" value="" />
+                        <label>Lessons end date</label>
+                        <input type="date" name="enddate" class="form-control" value="" />
+                        <br />
+                        <input type="submit" value="Create Group" id="submit-create" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-group" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 5vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+    <script>
+        $("#open-create-group").click(function () {
+            $("#new-group").css("display", "block");
+        });
+
+        $("#close-create-group").click(function () {
+            $("#new-group").css("display", "none");
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Teachers/GetFaculties",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var fac = document.createElement("option");
+                    fac.value = data[i].id;
+                    fac.innerText = data[i].name
+                    document.getElementById("faculty").appendChild(fac);
+                }
+            },
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Groups/GetRooms",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var room = document.createElement("option");
+                    room.value = data[i].id;
+                    room.innerText = data[i].name
+                    document.getElementById("room").appendChild(room);
+                }
+            },
+        })
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Groups/GetLessonHours",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var hour = document.createElement("option");
+                    hour.value = data[i].id;
+                    hour.innerText = data[i].name
+                    document.getElementById("hour").appendChild(hour);
+                }
+            },
+        })
+
+        $("#faculty").change(function (e) {
+            var name = $("#faculty option:selected").text()[0] + $("#new-group-num").val()
+            $("#new-group-name").val(name);  
+            var facId = $(e.target).val();
+            $.ajax({
+                method: "POST",
+                url: "/Editor/Groups/GetTeachersByFaculty/",
+                data: {
+                    facultyId: facId
+                }
+            })
+                .done(function (data) {
+                    document.getElementById("teacher").innerHTML = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var teacher = document.createElement("option");
+                        teacher.value = data[i].id;
+                        teacher.innerText = data[i].name + " " + data[i].surname
+                        document.getElementById("teacher").appendChild(teacher);
+                    }
+                })
+                .fail(function (msg) {
+                    alert("fail");
+                })
+        })
+
+        $("#new-group-num").change(function (e) {
+            var groupName = $("#faculty option:selected").text()[0] + $(e.target).val();
+            $("#new-group-name").val(groupName);  
+        })
+
+        $("#submit-create").click(function () {
+            console.log($("#teacher").val());
+        })
+    </script>
+</body>
+</html>

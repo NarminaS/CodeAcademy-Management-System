@@ -1,6 +1,9 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\CodeAcademy\\Areas\\Editor",
+    "\\CodeAcademy\\Areas\\Editor\\Controllers"
   ],
+  "SelectedNode": "\\CodeAcademy.sln",
   "PreviewInSolutionExplorer": false
 }

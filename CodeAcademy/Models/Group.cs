@@ -28,6 +28,9 @@ namespace CodeAcademy.Models
         public int RoomId { get; set; }
         public Room Room { get; set; }
 
+        public int ImageId { get; set; }
+        public Image Image { get; set; }    
+
         public int CourseCompletionStatusId { get; set; }   
         public CourseCompletionStatus CourseCompletionStatus { get; set; }
 

@@ -16,12 +16,6 @@ namespace CodeAcademy.Areas.Editor.Models.ViewModels
         [Required]
         [MaxLength(6)]
         public string Name { get; set; }
-
-        [Required]
-        public int FacultyId { get; set; }
-
-        [Required]
-        public int RoomId { get; set; }   
         
         [Required]
         [DataType(DataType.Date)]

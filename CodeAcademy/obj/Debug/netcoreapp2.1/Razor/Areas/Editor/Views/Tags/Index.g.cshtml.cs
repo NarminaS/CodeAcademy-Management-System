@@ -24,7 +24,7 @@ using CodeAcademy.Models;
 #line default
 #line hidden
 #line 3 "C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\Areas\Editor\Views\_ViewImports.cshtml"
-using CodeAcademy.Areas.Admin.Models;
+using CodeAcademy.Areas.Editor;
 
 #line default
 #line hidden
@@ -39,7 +39,7 @@ using CodeAcademy.Areas.Editor.Models.ViewModels;
 #line default
 #line hidden
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"9c253d1f9e61887165ee1cb3fa4b3d28e7b3bf08", @"/Areas/Editor/Views/Tags/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"ac37bf94f0ab55bffa43146f51a3323212eb12dc", @"/Areas/Editor/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"93d993feb7724ee4e7c8aa754143af9eb4c94fbf", @"/Areas/Editor/Views/_ViewImports.cshtml")]
     public class Areas_Editor_Views_Tags_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<TagFacultyViewModel>
     {
         private static readonly global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute __tagHelperAttribute_0 = new global::Microsoft.AspNetCore.Razor.TagHelpers.TagHelperAttribute("asp-area", "Editor", global::Microsoft.AspNetCore.Razor.TagHelpers.HtmlAttributeValueStyle.DoubleQuotes);
@@ -85,7 +85,7 @@ using CodeAcademy.Areas.Editor.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(135, 202, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ccdd512cadec4a35bb087a458d4a4abb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ecdb3c2d809249caa1cd3f59a8cb3b93", async() => {
                 BeginContext(141, 189, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n    <title>Tag Crud page</title>\r\n");
                 EndContext();
@@ -105,7 +105,7 @@ using CodeAcademy.Areas.Editor.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(339, 5285, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7674eb04675044b593b00285c9d25bc2", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e1bf8cebb8994a249d34be299099aec2", async() => {
                 BeginContext(345, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -188,7 +188,7 @@ WriteAttributeValue("", 1061, tag.Id, 1061, 7, false);
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n                <div id=\"new-tag\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">New Tag</h5>\r\n                    ");
                 EndContext();
                 BeginContext(1584, 987, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6d8eba84a5ef4ad792ed4d2ed01788d8", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0f996334046e4251905289f2370118ab", async() => {
                     BeginContext(1713, 145, true);
                     WriteLiteral("\r\n                        <label for=\"FacultyId\">Choose Faculty</label>\r\n                        <select name=\"FacultyId\" class=\"form-control\">\r\n");
                     EndContext();
@@ -202,7 +202,7 @@ WriteAttributeValue("", 1061, tag.Id, 1061, 7, false);
                     WriteLiteral("                                ");
                     EndContext();
                     BeginContext(1992, 50, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "272ed6ea41d54143b25129926a4023e0", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "e5a3104393694337a35e51159027d96f", async() => {
                         BeginContext(2021, 12, false);
 #line 59 "C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\Areas\Editor\Views\Tags\Index.cshtml"
                                                        Write(faculty.Name);
@@ -279,7 +279,7 @@ WriteAttributeValue("", 1061, tag.Id, 1061, 7, false);
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-6\">\r\n                <div id=\"edit-tag\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">Edit Tag</h5>\r\n                    ");
                 EndContext();
                 BeginContext(2904, 1022, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bbb17d472e84619b2b1a4ff45b5c900", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "419f9cd2ac6c4a75adc433b15a7b59cd", async() => {
                     BeginContext(3031, 205, true);
                     WriteLiteral("\r\n                        <input type=\"hidden\" id=\"id\" name=\"Id\" value=\"\" />\r\n                        <label>Choose Faculty</label>\r\n                        <select name=\"FacultyId\" class=\"form-control\">\r\n");
                     EndContext();
@@ -293,7 +293,7 @@ WriteAttributeValue("", 1061, tag.Id, 1061, 7, false);
                     WriteLiteral("                                ");
                     EndContext();
                     BeginContext(3370, 50, false);
-                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2fbe66ba0ea14a8295165b9873f5e0e8", async() => {
+                    __tagHelperExecutionContext = __tagHelperScopeManager.Begin("option", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "b2e6882a705048049967b3aa87defbff", async() => {
                         BeginContext(3399, 12, false);
 #line 85 "C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\Areas\Editor\Views\Tags\Index.cshtml"
                                                        Write(faculty.Name);

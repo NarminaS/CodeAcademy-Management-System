@@ -7,11 +7,6 @@ namespace CodeAcademy.Models
 {
     public class Book:Post
     {
-        public Book()
-        {
-            Language = new Language();
-        }
-
         public string Author { get; set; } 
 
         public string Name { get; set; }

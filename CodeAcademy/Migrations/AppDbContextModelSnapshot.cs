@@ -117,8 +117,6 @@ namespace CodeAcademy.Migrations
 
                     b.Property<string>("TeacherId");
 
-                    b.Property<string>("UserId");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CourseCompletionStatusId");

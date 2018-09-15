@@ -22,7 +22,6 @@ namespace CodeAcademy.Models
         public int FacultyId { get; set; }
         public Faculty Faculty { get; set; }
 
-        public string UserId { get; set; } 
         public Teacher Teacher { get; set; }    
 
         public int RoomId { get; set; }

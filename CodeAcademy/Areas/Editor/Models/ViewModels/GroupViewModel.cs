@@ -24,5 +24,8 @@ namespace CodeAcademy.Areas.Editor.Models.ViewModels
         [Required]
         [DataType(DataType.Date)]
         public DateTime LessonsEndDate { get; set; }    
+
+        [Required]
+        public string LogoPath { get; set; }    
     }
 }

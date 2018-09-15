@@ -17,7 +17,7 @@ namespace CodeAcademy.Utilities
             _environment = environment;
         }
 
-        public string DefinePath(IFormFile file)
+        public string DefineImagePath(IFormFile file)
         {
             string folderPath = Path.Combine(_environment.WebRootPath, "images", file.FileName);
             if (!String.IsNullOrEmpty(folderPath))
@@ -41,6 +41,14 @@ namespace CodeAcademy.Utilities
             {
                 //Handle exception
             }
+        }
+
+        public string DefineBookPath(IFormFile file)
+        {
+            string folderPath = Path.Combine(_environment.WebRootPath, "books", file.FileName);
+            if (!String.IsNullOrEmpty(folderPath))
+                return folderPath;
+            return String.Empty;
         }
     }
 }

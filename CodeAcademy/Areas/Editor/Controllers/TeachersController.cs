@@ -10,8 +10,10 @@ using CodeAcademy.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeAcademy.Areas.Editor.Controllers
 {
@@ -21,11 +23,15 @@ namespace CodeAcademy.Areas.Editor.Controllers
     {
         AppDbContext _dbContext;
         UserManager<User> _userManager;
+        IUrlHelperFactory _urlHelperFactory;
+        IActionContextAccessor _actionAccessor;
 
-        public TeachersController(AppDbContext dbContext, UserManager<User> userManager)
+        public TeachersController(AppDbContext dbContext, UserManager<User> userManager, IUrlHelperFactory urlHelperFactory, IActionContextAccessor actionAccessor)
         {
             _dbContext = dbContext;
+            _urlHelperFactory = urlHelperFactory;
             _userManager = userManager;
+            _actionAccessor = actionAccessor;
         }
 
         [HttpGet]
@@ -66,7 +72,8 @@ namespace CodeAcademy.Areas.Editor.Controllers
                         if (result.Succeeded)
                         {
                             await _userManager.AddToRoleAsync(teacher, "Teacher");
-                            await SendConfirmaitionMail(teacher);
+                            var urlHelper = HttpContext.RequestServices.GetRequiredService<IUrlHelper>();
+                            await this.SendConfirmaitionMail(teacher,_userManager,urlHelper);
                             return RedirectToAction("List", "Teachers");
                         }
                         else
@@ -99,26 +106,6 @@ namespace CodeAcademy.Areas.Editor.Controllers
         {
             var data = _dbContext.Genders.ToList();
             return Json(data);
-        }
-
-        private async Task SendConfirmaitionMail(User user)
-        {
-            
-            try
-            {
-                var _code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.Action("ConfirmEmail",
-                                                "Account",
-                                                new { userId = user.Id, code = _code },
-                                                protocol: HttpContext.Request.Scheme);
-                await new EmailService().SendEmailAsync(user.Name, user.Email, $"CodeAcademy - {user.Name} - confirmation",
-                                                        $"Sorry, I'm Narmina from P305, just testing my app. Confirm your registration via this link: <a href='{callbackUrl}'>link</a>");
-            }
-            catch (Exception ex)
-            {
-                //
-            }
-
         }
     }
 }

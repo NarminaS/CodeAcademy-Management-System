@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace CodeAcademy.Areas.Editor.Controllers
 {
@@ -30,28 +31,31 @@ namespace CodeAcademy.Areas.Editor.Controllers
         public IActionResult Index()
         {
             var groups = _dbContext.Groups
+                .Include(i=>i.Image)
                 .Select(x => new GroupViewModel()
                 {
                     Id = x.Id,
                     Name = x.Name,
                     LessonsStartDate = x.LessonsStartDate,
-                    LessonsEndDate = x.LessonsEndDate
+                    LessonsEndDate = x.LessonsEndDate,
+                    LogoPath = x.Image.Path
                 }).ToList();
 
             return View(groups);
         }
 
+        [HttpPost]
         public async Task<IActionResult> Create(GroupCreateModel model, IFormFile file)
         {
             if (ModelState.IsValid && file != null)
             {
                 Image img = new Image() { Path = Path.Combine("/images", file.FileName) };
                 await _dbContext.Images.AddAsync(img);
-                await Uploader.UploadToServer(new Uploader(_environment).DefinePath(file), file);
+                await Uploader.UploadToServer(new Uploader(_environment).DefineImagePath(file), file);
 
                 Group group = new Group()
                 {
-                    FacultyId = model.FacultyId,
+                    Faculty = _dbContext.Faculties.Where(x=>x.Id==model.FacultyId).FirstOrDefault(),
                     CourseCompletionStatusId = 1,
                     CreationDate = DateTime.Now,
                     IsDeleted = false,

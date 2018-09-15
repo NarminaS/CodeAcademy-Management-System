@@ -47,12 +47,14 @@ namespace CodeAcademy.Controllers
                     user.IsActive = true;
                     user.LastLoginDate = DateTime.Now;
                     var updateResult = await _userManager.UpdateAsync(user);
-                    if(updateResult.Succeeded)
+                    if (updateResult.Succeeded)
                     {
                         if (await _userManager.IsInRoleAsync(user, "Admin"))
                             return RedirectToAction("Index", "Home", new { area = "Admin" });
                         else if (await _userManager.IsInRoleAsync(user, "Editor"))
                             return RedirectToAction("Index", "Home", new { area = "Editor" });
+                        else if (await _userManager.IsInRoleAsync(user, "Student") || await _userManager.IsInRoleAsync(user, "Teacher"))
+                            return RedirectToAction("Index", "Home", new { area = "Edu" });
                     }
                     else
                     {

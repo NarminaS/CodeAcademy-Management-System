@@ -1,0 +1,172 @@
+﻿@using CodeAcademy.Areas.Editor.Models.ViewModels
+@model List<StudentViewModel>
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Index</title>
+</head>
+<body>
+    @await Component.InvokeAsync("UpperPanel", new { email = User.Identity.Name })
+    <h1>STUDENT CRUD!!!</h1>
+    <br />
+
+    @if (!Model.Any())
+    {
+        <h4>No students...</h4>
+    }
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <input type="button" class="btn btn-info" id="open-create-student" value="New Student" />
+            </div>
+        </div>
+    </div>
+    <br />
+
+    <ul class="list-group">
+        @foreach (var student in Model)
+        {
+            <li class="list-group-item">
+                <p class="lead">
+                    @student.Name &nbsp; @student.Surname - @student.GroupName
+                </p>
+            </li>
+        }
+    </ul>
+
+    @* New student form *@
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div id="new-student" class="custom-modal">
+                    <h5 class="h5 text-center">New Student</h5>
+                    <form asp-area="Editor" asp-controller="Students" asp-action="Create" class="form-group" method="post" enctype="multipart/form-data">
+                        <label>Faculty</label>
+                        <select name="facultyid" id="faculty" required class="form-control"></select>
+                        <label>Group</label>
+                        <select name="groupid" id="group" required class="form-control"></select>
+                        <label>Name</label>
+                        <input type="text" class="form-control" id="new-student-name" name="name" value="" />
+                        <label>Surname</label>
+                        <input type="text" name="surname" required class="form-control" value="" />
+                        <label>Gender</label>
+                        <select name="genderid" id="gender" required class="form-control"></select>
+                        <label>Birth Date</label>
+                        <input type="date" name="birthdate" class="form-control" required value="" />
+                        <label>Phone number</label>
+                        <input type="tel" name="phonenumber" required class="form-control" value="" />
+                        <label>Email</label>
+                        <input type="email" name="email" required class="form-control" value="" />
+                        <label>Password</label>
+                        <input type="password" name="password" required class="form-control" value="" />
+                        <br />
+                        <input type="submit" value="Create Student" id="submit-create" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-student" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 25vw;
+            z-index: 3;
+            top: 5vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+    <script>
+        $("#open-create-student").click(function () {
+            $("#new-student").css("display", "block");
+                var facId = $("#faculty").val()
+                $.ajax({
+                    method: "POST",
+                    url: "/Editor/Students/GetGroupsByFaculty/",
+                    data: {
+                        facultyId: facId
+                    }
+                })
+                    .done(function (data) {
+                        document.getElementById("group").innerHTML = "";
+                        for (var i = 0; i < data.length; i++) {
+                            var group = document.createElement("option");
+                            group.value = data[i].id;
+                            group.innerText = data[i].name
+                            document.getElementById("group").appendChild(group);
+                        }
+                    })
+                    .fail(function (msg) {
+                        alert("fail");
+                    })
+            });
+
+        $("#close-create-student").click(function () {
+            $("#new-student").css("display", "none");
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Teachers/GetFaculties",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var fac = document.createElement("option");
+                    fac.value = data[i].id;
+                    fac.innerText = data[i].name
+                    document.getElementById("faculty").appendChild(fac);
+                }
+            },
+        });
+
+        $("#faculty").change(function (e) {
+            var facId = $(e.target).val()
+            $.ajax({
+                method: "POST",
+                url: "/Editor/Students/GetGroupsByFaculty/",
+                data: {
+                    facultyId: facId
+                }
+            })
+                .done(function (data) {
+                    document.getElementById("group").innerHTML = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var group = document.createElement("option");
+                        group.value = data[i].id;
+                        group.innerText = data[i].name 
+                        document.getElementById("group").appendChild(group);
+                    }
+                })
+                .fail(function (msg) {
+                    alert("fail");
+                })
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Editor/Teachers/GetGenders",
+            success: function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    var gen = document.createElement("option");
+                    gen.value = data[i].id;
+                    gen.innerText = data[i].name
+                    document.getElementById("gender").appendChild(gen);
+                }
+            },
+        });
+    </script>
+</body>
+</html>

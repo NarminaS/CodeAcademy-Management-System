@@ -7,10 +7,12 @@ using System.Threading.Tasks;
 using CodeAcademy.Areas.Admin.Models.ViewModels;
 using CodeAcademy.Models;
 using CodeAcademy.Services;
+using CodeAcademy.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CodeAcademy.Areas.Admin.Controllers
 {
@@ -57,7 +59,8 @@ namespace CodeAcademy.Areas.Admin.Controllers
                         if (result.Succeeded)
                         {
                             await _userManager.AddToRoleAsync(editor, "Editor");
-                            await SendConfirmaitionMail(editor);
+                            var urlHelper = HttpContext.RequestServices.GetRequiredService<IUrlHelper>();
+                            await this.SendConfirmaitionMail(editor, _userManager, urlHelper);
                             JsonResult js = Json(editor);
                             return js;
                         }
@@ -136,23 +139,5 @@ namespace CodeAcademy.Areas.Admin.Controllers
             return RedirectToAction("List");
         }
 
-        private async Task SendConfirmaitionMail(User user)
-        {
-            try
-            {
-                var _code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var callbackUrl = Url.Action("ConfirmEmail",
-                                                "Account",
-                                                new { userId = user.Id, code = _code },
-                                                protocol: HttpContext.Request.Scheme);
-                await new EmailService().SendEmailAsync(user.Name, user.Email, $"CodeAcademy - {user.Name} - confirmation",
-                                                        $"Sorry, I'm Narmina from P305, just testing my app. Confirm your registration via this link: <a href='{callbackUrl}'>link</a>");
-            }
-            catch (Exception ex)
-            {
-               //
-            }
-
-        }
     }
 }

@@ -30,7 +30,7 @@ namespace CodeAcademy
                     var appContext = scope.ServiceProvider.GetService<AppDbContext>();
                     await Initializer.SeedDefaultProfileImage(appContext);
                     await Initializer.SeedGenders(appContext);
-                    await Initializer.InitializeAsync(userManager, rolesManager, appContext);
+                    await Initializer.InitializeAsync(userManager, rolesManager);
                 }
                 catch (Exception ex)
                 {

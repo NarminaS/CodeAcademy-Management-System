@@ -195,3 +195,11 @@ C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\n
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Views\StatusCode\Status.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Teachers\List.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Groups\Index.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Students\Index.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Editor\Views\Account\ConfirmEmail.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\Home\Index.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\Books\Index.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\Shared\Error.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\_ViewImports.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\_ViewStart.g.cshtml.cs

@@ -7,12 +7,6 @@ namespace CodeAcademy.Models
 {
     public class Student:User
     {
-        public Student()
-        {
-            CourseCompletionStatus = new CourseCompletionStatus();
-            Group = new Group();
-        }
-
         public int CourseCompletionStatusId { get; set; }
         public CourseCompletionStatus CourseCompletionStatus { get; set; }
 

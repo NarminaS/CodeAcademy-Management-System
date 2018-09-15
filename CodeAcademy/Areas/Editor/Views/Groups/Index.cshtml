@@ -30,9 +30,18 @@
     </div>
     <br />
 
+    <ul class="list-group">
+    @foreach (var group in Model)
+    {
+        <li class="list-group-item">
+            <p>@group.Name</p>
+            <img src="@group.LogoPath" alt="GroupLogo" class="img img-responsive" />   
+        </li>
+    }
+     </ul>
     @* New group form *@
     <div class="container">
-        <div class="row">
+        <div class="row">ss
             <div class="col-sm-6">
                 <div id="new-group" class="custom-modal">
                     <h5 class="h5 text-center">New Group</h5>
@@ -44,15 +53,17 @@
                         <label>Name</label>
                         <input type="text" class="form-control" readonly id="new-group-name" name="name" value="" />
                         <label>Teacher</label>
-                        <select name="teacherid" id="teacher" class="form-control"></select>
+                        <select name="teacherid" id="teacher" required class="form-control"></select>
                         <label>Room</label>
-                        <select name="roomid" id="room" class="form-control"></select>
+                        <select name="roomid" id="room"  class="form-control"></select>
                         <label>Lesson Hours</label>
                         <select name="hourid" id="hour" class="form-control"></select>
                         <label>Lessons start date</label>
                         <input type="date" name="startdate" class="form-control" value="" />
                         <label>Lessons end date</label>
                         <input type="date" name="enddate" class="form-control" value="" />
+                        <label>Logo</label>
+                        <input type="file" class="btn btn-info" accept="image/*" name="file" value="Upload logo" />
                         <br />
                         <input type="submit" value="Create Group" id="submit-create" class="btn btn-success" />
                         <input type="button" value="Close" id="close-create-group" class="btn btn-danger" />
@@ -83,6 +94,26 @@
     <script>
         $("#open-create-group").click(function () {
             $("#new-group").css("display", "block");
+            var facId = $("#faculty").val();
+            $.ajax({
+                method: "POST",
+                url: "/Editor/Groups/GetTeachersByFaculty/",
+                data: {
+                    facultyId: facId
+                }
+            })
+                .done(function (data) {
+                    document.getElementById("teacher").innerHTML = "";
+                    for (var i = 0; i < data.length; i++) {
+                        var teacher = document.createElement("option");
+                        teacher.value = data[i].id;
+                        teacher.innerText = data[i].name + " " + data[i].surname
+                        document.getElementById("teacher").appendChild(teacher);
+                    }
+                })
+                .fail(function (msg) {
+                    alert("fail");
+                })
         });
 
         $("#close-create-group").click(function () {

@@ -30,7 +30,7 @@ namespace CodeAcademy.Models
             }
         }
 
-        public static async Task InitializeAsync(UserManager<User> userManager,RoleManager<Role> roleManager, AppDbContext context)
+        public static async Task InitializeAsync(UserManager<User> userManager,RoleManager<Role> roleManager)
         {
             string adminMail = "admin@code.edu.az";
             string adminPassword = "A_a123456";
@@ -44,7 +44,7 @@ namespace CodeAcademy.Models
             {
                 await roleManager.CreateAsync(new Role() { Name = "Editor" });
             }
-
+            
             if (await userManager.FindByNameAsync(adminMail) == null)
             {
                 User admin = new User

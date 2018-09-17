@@ -5,7 +5,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using CodeAcademy.Areas.Admin.Models.ViewModels;
 using CodeAcademy.Areas.Edu.Models;
+using CodeAcademy.Areas.Edu.Models.ViewModels;
 using CodeAcademy.Models;
+using CodeAcademy.Models.ViewModels;
 using CodeAcademy.Utilities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
@@ -33,15 +35,13 @@ namespace CodeAcademy.Areas.Edu.Controllers
 
         public IActionResult Index()
         {
-            var allBooks = _dbContext.Books.Include(x => x.Image).ThenInclude(i => i.Path)
-                                         .Include(x => x.Language).ThenInclude(l => l.Name)
-                                         .Include(x => x.TagPosts).Include(x => x.Likes);
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Add( BookCreateModel model)
+        public async Task<IActionResult> Add(BookCreateModel model)
         {
+
             if (ModelState.IsValid)
             {
                 string[] tags = model.Tags.Split(',');
@@ -66,15 +66,16 @@ namespace CodeAcademy.Areas.Edu.Controllers
                     LanguageId = model.LanguageId,
                     PageCount = model.PageCount,
                     Name = model.Name,
-                    FilePath = Path.Combine("/books",model.Book.FileName),
+                    FilePath = Path.Combine("/books", model.Book.FileName),
                     Image = img,
-                    User = await _userManager.Users.FirstOrDefaultAsync(x=>x.Email== HttpContext.User.Identity.Name)
+                    Faculty = await _dbContext.Faculties.FirstOrDefaultAsync(x => x.Id == model.FacultyId),
+                    User = await _userManager.Users.FirstOrDefaultAsync(x => x.Email == HttpContext.User.Identity.Name)
                 };
 
                 List<TagPost> tagPosts = new List<TagPost>();
                 foreach (var tag in bookTags)
                 {
-                   tagPosts.Add(new TagPost() { Post = book, Tag = tag });
+                    tagPosts.Add(new TagPost() { Post = book, Tag = tag });
                 }
 
                 book.TagPosts = tagPosts;
@@ -83,7 +84,7 @@ namespace CodeAcademy.Areas.Edu.Controllers
                 {
                     if (await _dbContext.SaveChangesAsync() > 0)
                     {
-                        return Json("Book successuly added");
+                        return Ok(book);
                     }
                 }
                 else
@@ -91,28 +92,100 @@ namespace CodeAcademy.Areas.Edu.Controllers
                     return Json("Wrong!!!");
                 }
             }
-            return Json("ok");
+            return Ok();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> GetAllBooks()
+        {
+            var allBooks = await _dbContext.Books.Include(x => x.Image)
+                                                    .Include(x => x.Language)
+                                                       .Include(x => x.TagPosts)
+                                                          .Include(x => x.Likes)
+                                                             .ToListAsync();
+            var model = allBooks.Select(x => new BookViewModel
+            {
+                Id = x.Id,
+                Author = x.Author,
+                Name = x.Name,
+                Description = x.Description,
+                Language = x.Language.Name,
+                ImagePath = x.Image.Path,
+                FilePath = x.FilePath,
+                PageCount = x.PageCount,
+                LikeCount = x.Likes.Count
+            }).ToList();
+            return Ok(model);
         }
 
         [HttpPost]
         public async Task<IActionResult> GetTagsByFacultyId(int id)
         {
-            //Student current = await _userManager.FindByNameAsync(HttpContext.User.Identity.Name) as Student;
-            var tags = await _dbContext.Tags.Where(x => x.FacultyId == id).ToListAsync();
+            var tags = await _dbContext.Tags.Where(x => x.FacultyId == id)
+                                            .Select(d => new DropdownViewModel { Id = d.Id, Name = d.Name })
+                                            .ToListAsync();
             return Json(tags);
         }
 
         [HttpGet]
         public IActionResult GetFaculties()
         {
-            var data = _dbContext.Faculties.Select(x => new FacultyViewModel() { Id = x.Id, Name = x.Name }).ToList();
+            var data = _dbContext.Faculties.Select(x => new DropdownViewModel() { Id = x.Id, Name = x.Name }).ToList();
             return Json(data);
         }
 
         [HttpGet]
         public IActionResult GetLanguages()
         {
-            var data = _dbContext.Languages.Select(x => new FacultyViewModel() { Id = x.Id, Name = x.Name }).ToList();
+            var data = _dbContext.Languages.Select(x => new DropdownViewModel() { Id = x.Id, Name = x.Name }).ToList();
+            return Json(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetBooksByFaculty(int facultyId)
+        {
+            var books = await _dbContext.Books.Where(x=>x.FacultyId==facultyId)
+                                              .Include(x=>x.Language)
+                                              .Include(x=>x.Image)
+                                              .Include(x=>x.Likes)
+                                              .ToListAsync();            
+
+            var data = books.Select(x => new BookViewModel()
+            {
+                Id = x.Id,
+                Author = x.Author,
+                Name = x.Name,
+                Description = x.Description,
+                Language = x.Language.Name,
+                ImagePath = x.Image.Path,
+                FilePath = x.FilePath,
+                PageCount = x.PageCount,
+                LikeCount = x.Likes.Count
+            });
+            return Json(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> GetBooksByLanguage(int languageId)
+        {
+            var books = await _dbContext.Books.Where(x => x.LanguageId == languageId)
+                                  .Include(x => x.Language)
+                                  .Include(x => x.Image)
+                                  .Include(x => x.Likes)
+                                  .ToListAsync();
+
+            var data = books.Select(x => new BookViewModel()
+            {
+                Id = x.Id,
+                Author = x.Author,
+                Name = x.Name,
+                Description = x.Description,
+                Language = x.Language.Name,
+                ImagePath = x.Image.Path,
+                FilePath = x.FilePath,
+                PageCount = x.PageCount,
+                LikeCount = x.Likes.Count
+            });
             return Json(data);
         }
     }

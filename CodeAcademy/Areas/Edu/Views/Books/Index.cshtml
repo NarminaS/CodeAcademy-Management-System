@@ -19,10 +19,38 @@
         <div class="row">
             <div class="col-sm-6">
                 <input type="button" class="btn btn-info" id="open-create-book" value="New Book" />
+                <input type="button" id="show-all" class="btn btn-warning" value="All Books" />
             </div>
         </div>
     </div>
     <br />
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-8">
+                <ul class="list-group" id="books"></ul>
+            </div>
+            <div class="col-sm-4">
+                <form id="search" method="post" asp-area="Edu" asp-controller="Books" asp-action="Search" >
+                    <input class="form-control" name="search" type="text" placeholder="Enter book name..." aria-label="Search">
+                    <input type="submit" class="btn btn-info" value="Search book" />
+                </form>
+                <br />
+
+                <form asp-area="Edu" asp-controller="Books" asp-action="GetBooksByFaculty" method="post">
+                    <label>Faculty</label>
+                    <select name="facultyid" id="faculty-search" class="form-control"></select>
+                </form>
+                <br />
+
+                <form asp-area="Edu" asp-controller="Books" asp-action="GetBooksByLanguage" method="post">
+                    <label>Language</label>
+                    <select name="languageid" id="language-search" class="form-control"></select>
+                </form>
+            </div>
+        </div>
+    </div>
+
 
     @* New book form *@
     <div class="container">
@@ -34,19 +62,19 @@
                         <label>Faculty</label>
                         <select name="facultyid" id="faculty" class="form-control"></select>
                         <label>Author</label>
-                        <input type="text" class="form-control" required name="author" value="" />
+                        <input type="text" class="form-control" id="author" required name="author" value="" />
                         <label>Name</label>
-                        <input type="text" class="form-control" required name="name" value="" />
+                        <input type="text" class="form-control" id="name" required name="name" value="" />
                         <label>Description</label>
                         <input type="text" class="form-control" id="description" required name="description" value="" />
                         <label>Language</label>
                         <select name="languageid" id="language" class="form-control"></select>
                         <label>Page count</label>
-                        <input type="number" class="form-control" required name="pagecount" value="" />
-                        <input type="file" name="book" required accept="application/pdf" class="btn btn-info" value="Upload Book" />
-                        <input type="file" name="cover" required accept="image/*" class="btn btn-info" value="Upload Book" />
+                        <input type="number" class="form-control" required id="pagecount" name="pagecount" value="" />
+                        <input type="file" name="book" id="book" required accept="application/pdf" class="btn file btn-info" value="Upload Book" />
+                        <input type="file" name="cover" id="cover" required accept="image/*" class="btn file btn-info" value="Upload Book" />
                         <br />
-                        <input type="text" readonly name="tags" class="form-control" id="book-tags"></input>
+                        <input type="text" readonly name="tags" class="form-control" id="book-tags"/>
                         <input type="submit" value="Create Book" id="submit-create" class="btn btn-success" />
                         <input type="button" value="Close" id="close-create-book" class="btn btn-danger" />
                     </form>
@@ -57,6 +85,13 @@
 
 
     <style>
+        .book{
+            display:inline-block;
+            height:15vh;
+        }
+        .book a *{
+            display:inline;
+        }
         .custom-modal {
             padding: 2vh;
             display: none;
@@ -69,6 +104,9 @@
             border: 1px solid black;
             border-radius: 1vh;
             background-color: #ababab;
+        }
+        .cover{
+            height:100%;
         }
     </style>
 
@@ -108,6 +146,10 @@
                     fac.value = data[i].id;
                     fac.innerText = data[i].name
                     document.getElementById("faculty").appendChild(fac);
+                    var facs = document.createElement("option");
+                    facs.value = data[i].id;
+                    facs.innerText = data[i].name
+                    document.getElementById("faculty-search").appendChild(facs);
                 }
             },
         });
@@ -121,8 +163,18 @@
                     lan.value = data[i].id;
                     lan.innerText = data[i].name
                     document.getElementById("language").appendChild(lan);
+                    var lans = document.createElement("option");
+                    lans.value = data[i].id;
+                    lans.innerText = data[i].name
+                    document.getElementById("language-search").appendChild(lans);
                 }
             },
+        });
+
+        var files = [];
+        var fileReader = new FileReader()
+        $('input[type=file]').on('change', function (e) {
+            files.push(e.target.files[0]);
         });
 
         $("#faculty").change(function (e) {
@@ -163,6 +215,89 @@
                 taglist += tag;
             }
             document.getElementById("book-tags").value = taglist.substring(0, taglist.length - 2);
+        });
+
+        $.ajax({
+            method: "GET",
+            url: "/Edu/Books/GetAllBooks",
+            success: function (data) {
+                FillBooksOnPage(data)
+            }
+        });
+
+        $("#show-all").click(function () {
+            document.getElementById("books").innerHTML = "";
+            $.ajax({
+                method: "GET",
+                url: "/Edu/Books/GetAllBooks",
+                success: function (data) {
+                    FillBooksOnPage(data)
+                }
+            });
+        });
+
+        function FillBooksOnPage(data) {
+            var books = document.getElementById("books");
+
+            for (var i = 0; i < data.length; i++) {
+
+                var book = document.createElement("li");
+                book.classList.add("list-group-item", "book");
+
+
+                var link = document.createElement("a");
+                link.target = "_blank";
+                link.href = data[i].filePath;
+                book.appendChild(link);
+
+                var cover = document.createElement("img");
+                cover.classList.add("img", "img-responsive", "cover")
+                cover.src = data[i].imagePath;
+                link.appendChild(cover);
+
+                var text = document.createElement("p");
+                text.classList.add("lead");
+                text.innerText = data[i].name + " - " + data[i].author;
+                link.appendChild(text);
+
+                books.appendChild(book);
+            }
+        }
+
+        $("#faculty-search").change(function (e) {
+            var facId = $(e.target).val();
+            $.ajax({
+                method: "POST",
+                url: "/Edu/Books/GetBooksByFaculty/facultyId",
+                data: {
+                    facultyId: facId
+                }
+            })
+                .done(function (obj) {
+                    document.getElementById("books").innerHTML = "";
+                    FillBooksOnPage(obj)
+                })
+                .fail(function (msg) {
+                    console.log(msg)
+                })
+        })
+
+        $("#language-search").change(function (e) {
+            var lanId = $(e.target).val()
+            $.ajax({
+                method: "POST",
+                url: "/Edu/Books/GetBooksByLanguage/languageId",
+                data: {
+                    languageId: lanId
+                }
+            })
+                .done(function (obj) {
+                    document.getElementById("books").innerHTML = "";
+                    FillBooksOnPage(obj)
+                })
+                .fail(function (msg) {
+                    console.log(msg)
+                })
         });
 
     </script>

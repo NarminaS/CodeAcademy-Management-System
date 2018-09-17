@@ -46,7 +46,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -65,7 +66,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -80,7 +82,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -111,7 +114,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<DateTime>("LessonsStartDate");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
 
                     b.Property<int>("RoomId");
 
@@ -145,7 +149,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Path");
+                    b.Property<string>("Path")
+                        .HasMaxLength(60);
 
                     b.HasKey("Id");
 
@@ -162,7 +167,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -191,7 +197,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("Monday");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
 
                     b.Property<bool>("Saturday");
 
@@ -303,7 +310,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(20);
 
                     b.HasKey("Id");
 
@@ -345,7 +353,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<bool>("IsDeleted");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .HasMaxLength(30);
 
                     b.HasKey("Id");
 
@@ -612,6 +621,8 @@ namespace CodeAcademy.Migrations
                     b.Property<string>("Description")
                         .HasColumnName("Book_Description");
 
+                    b.Property<int>("FacultyId");
+
                     b.Property<string>("FilePath");
 
                     b.Property<int>("ImageId");
@@ -623,6 +634,8 @@ namespace CodeAcademy.Migrations
                     b.Property<string>("Name");
 
                     b.Property<short>("PageCount");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasIndex("ImageId");
 
@@ -654,7 +667,8 @@ namespace CodeAcademy.Migrations
                     b.HasBaseType("CodeAcademy.Models.Post");
 
                     b.Property<string>("Description")
-                        .HasColumnName("Link_Description");
+                        .HasColumnName("Link_Description")
+                        .HasMaxLength(60);
 
                     b.Property<string>("Url");
 
@@ -910,6 +924,11 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Book", b =>
                 {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany("Books")
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CodeAcademy.Models.Image", "Image")
                         .WithMany()
                         .HasForeignKey("ImageId")

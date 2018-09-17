@@ -22,12 +22,18 @@ namespace CodeAcademy.Areas.Edu.Models
         public short PageCount { get; set; }
 
         [Required]
+        public int FacultyId { get; set; }  
+
+        [Required]
         public int LanguageId { get; set; }
 
+        [Required]
         public string Tags { get; set; }
 
+        [Required]
         public IFormFile Cover { get; set; }
 
+        [Required]
         public IFormFile Book { get; set; }
     }
 }

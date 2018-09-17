@@ -13,6 +13,7 @@ namespace CodeAcademy.Models
             Groups = new List<Group>();
         }
         public int Id { get; set; }
+        [MaxLength(20)]
         public string Name { get; set; }
 
         public bool Monday  { get; set; }

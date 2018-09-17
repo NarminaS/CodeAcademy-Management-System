@@ -67,7 +67,7 @@ using CodeAcademy.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(58, 337, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1e714699fe514b348db58dcfcedf8d19", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "26498a8f21ca4c208b7d36199cd165b1", async() => {
                 BeginContext(64, 324, true);
                 WriteLiteral(@"
     <meta name=""viewport"" content=""width=device-width"" />
@@ -91,12 +91,12 @@ using CodeAcademy.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(397, 210, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4efc8650eb754db8a1b49fd756749d77", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "75da3bbb6791404e95850bdcd7355ae0", async() => {
                 BeginContext(403, 111, true);
                 WriteLiteral("\r\n    <h2>ResetPasswordConfirmation</h2>\r\n    <br />\r\n    <p class=\"lead\">Your password has been reset. Please ");
                 EndContext();
                 BeginContext(514, 80, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "85d113fca0c046d394630451c118f25e", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8a555536f19643a1abc4681ed04f3a2e", async() => {
                     BeginContext(575, 15, true);
                     WriteLiteral("Click to log in");
                     EndContext();

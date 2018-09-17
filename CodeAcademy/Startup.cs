@@ -60,6 +60,8 @@ namespace CodeAcademy
 
             services.AddSignalR();
 
+            services.AddCors();
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
@@ -86,7 +88,7 @@ namespace CodeAcademy
             app.UseCookiePolicy();
 
             app.UseAuthentication();
-
+            app.UseCors(x=>x.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials());
             app.UseStatusCodePagesWithReExecute("/StatusCode/Status/{0}");
 
             app.UseStaticFiles();

@@ -145,7 +145,6 @@ C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\bin\Debug\n
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\bin\Debug\netcoreapp2.1\CodeAcademy.pdb
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\bin\Debug\netcoreapp2.1\CodeAcademy.Views.dll
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\bin\Debug\netcoreapp2.1\CodeAcademy.Views.pdb
-C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csprojAssemblyReference.cache
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csproj.CoreCompileInputs.cache
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.RazorAssemblyInfo.cache
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.RazorAssemblyInfo.cs
@@ -203,3 +202,4 @@ C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\n
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\Shared\_ValidationScriptsPartial.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\_ViewImports.g.cshtml.cs
 C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\Razor\Areas\Edu\Views\_ViewStart.g.cshtml.cs
+C:\Users\Руфат\source\CodeAcademy-Management-System\CodeAcademy\obj\Debug\netcoreapp2.1\CodeAcademy.csprojAssemblyReference.cache

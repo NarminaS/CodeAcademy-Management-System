@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CodeAcademy.Migrations
 {
-    public partial class Second : Migration
+    public partial class FacultyAddedToPost : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -30,7 +30,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -43,7 +43,7 @@ namespace CodeAcademy.Migrations
                 columns: table => new
                 {
                     Id = table.Column<byte>(nullable: false),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -57,7 +57,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
@@ -71,7 +71,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     Monday = table.Column<bool>(nullable: false),
                     Tuesday = table.Column<bool>(nullable: false),
                     Wednesday = table.Column<bool>(nullable: false),
@@ -80,8 +80,11 @@ namespace CodeAcademy.Migrations
                     Saturday = table.Column<bool>(nullable: false),
                     Sunday = table.Column<bool>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    BeginTime = table.Column<DateTime>(nullable: false),
-                    EndTime = table.Column<DateTime>(nullable: false)
+                    BeginHour = table.Column<byte>(nullable: false),
+                    BeginMinute = table.Column<byte>(nullable: false),
+                    EndHour = table.Column<byte>(nullable: false),
+                    EndMinute = table.Column<byte>(nullable: false),
+                    CreationDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,7 +97,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     Capacity = table.Column<byte>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
@@ -224,11 +227,11 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 20, nullable: true),
                     FacultyId = table.Column<int>(nullable: false),
-                    UserId = table.Column<string>(nullable: true),
                     TeacherId = table.Column<string>(nullable: true),
                     RoomId = table.Column<int>(nullable: false),
+                    ImageId = table.Column<int>(nullable: false),
                     CourseCompletionStatusId = table.Column<int>(nullable: false),
                     LessonHourId = table.Column<int>(nullable: false),
                     CreationDate = table.Column<DateTime>(nullable: false),
@@ -283,9 +286,10 @@ namespace CodeAcademy.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<string>(nullable: true),
                     CreationDate = table.Column<DateTime>(nullable: false),
+                    FacultyId = table.Column<int>(nullable: false),
                     LastUpdateDate = table.Column<DateTime>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
+                    PostType = table.Column<string>(nullable: false),
                     Header = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     Author = table.Column<string>(nullable: true),
@@ -299,7 +303,7 @@ namespace CodeAcademy.Migrations
                     PostId = table.Column<int>(nullable: true),
                     Comment_Description = table.Column<string>(nullable: true),
                     Url = table.Column<string>(nullable: true),
-                    Link_Description = table.Column<string>(nullable: true),
+                    Link_Description = table.Column<string>(maxLength: 60, nullable: true),
                     HasApprovedAnswer = table.Column<bool>(nullable: true),
                     Question_Description = table.Column<string>(nullable: true)
                 },
@@ -327,8 +331,8 @@ namespace CodeAcademy.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Path = table.Column<string>(nullable: true),
-                    Discriminator = table.Column<string>(nullable: false),
+                    Path = table.Column<string>(maxLength: 60, nullable: true),
+                    ImageType = table.Column<string>(nullable: false),
                     PostId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -348,7 +352,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 50, nullable: true),
                     ImageId = table.Column<int>(nullable: false),
                     HourCount = table.Column<short>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)
@@ -419,7 +423,7 @@ namespace CodeAcademy.Migrations
                     IsBlocked = table.Column<bool>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false),
-                    Discriminator = table.Column<string>(nullable: false),
+                    UserType = table.Column<string>(nullable: false),
                     CourseCompletionStatusId = table.Column<int>(nullable: true),
                     GroupId = table.Column<int>(nullable: true),
                     CertificateId = table.Column<int>(nullable: true),
@@ -472,7 +476,7 @@ namespace CodeAcademy.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Name = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(maxLength: 30, nullable: true),
                     FacultyId = table.Column<int>(nullable: false),
                     IsDeleted = table.Column<bool>(nullable: false)
                 },
@@ -631,6 +635,11 @@ namespace CodeAcademy.Migrations
                 column: "FacultyId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Groups_ImageId",
+                table: "Groups",
+                column: "ImageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Groups_LessonHourId",
                 table: "Groups",
                 column: "LessonHourId");
@@ -664,6 +673,16 @@ namespace CodeAcademy.Migrations
                 name: "IX_MenuItems_ImageId",
                 table: "MenuItems",
                 column: "ImageId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_FacultyId",
+                table: "Posts",
+                column: "FacultyId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Posts_FacultyId1",
+                table: "Posts",
+                column: "FacultyId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Posts_ImageId",
@@ -775,6 +794,14 @@ namespace CodeAcademy.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Groups_Images_ImageId",
+                table: "Groups",
+                column: "ImageId",
+                principalTable: "Images",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Likes_AspNetUsers_UserId",
                 table: "Likes",
                 column: "UserId",
@@ -799,6 +826,22 @@ namespace CodeAcademy.Migrations
                 onDelete: ReferentialAction.Restrict);
 
             migrationBuilder.AddForeignKey(
+                name: "FK_Posts_Faculties_FacultyId",
+                table: "Posts",
+                column: "FacultyId",
+                principalTable: "Faculties",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
+
+            migrationBuilder.AddForeignKey(
+                name: "FK_Posts_Faculties_FacultyId1",
+                table: "Posts",
+                column: "FacultyId",
+                principalTable: "Faculties",
+                principalColumn: "Id",
+                onDelete: ReferentialAction.NoAction);
+
+            migrationBuilder.AddForeignKey(
                 name: "FK_Posts_Images_ImageId",
                 table: "Posts",
                 column: "ImageId",
@@ -819,6 +862,14 @@ namespace CodeAcademy.Migrations
 
             migrationBuilder.DropForeignKey(
                 name: "FK_Posts_AspNetUsers_UserId",
+                table: "Posts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Posts_Faculties_FacultyId",
+                table: "Posts");
+
+            migrationBuilder.DropForeignKey(
+                name: "FK_Posts_Faculties_FacultyId1",
                 table: "Posts");
 
             migrationBuilder.DropForeignKey(
@@ -877,13 +928,13 @@ namespace CodeAcademy.Migrations
                 name: "CourseCompletionStatuses");
 
             migrationBuilder.DropTable(
-                name: "Faculties");
-
-            migrationBuilder.DropTable(
                 name: "LessonHours");
 
             migrationBuilder.DropTable(
                 name: "Rooms");
+
+            migrationBuilder.DropTable(
+                name: "Faculties");
 
             migrationBuilder.DropTable(
                 name: "Images");

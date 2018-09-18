@@ -12,6 +12,7 @@ namespace CodeAcademy.Models
         public User()
         {
             SocialProfiles = new List<SocialProfile>();
+            Likes = new List<Like>();
             Posts = new List<Post>();
         }
         public string Name { get; set; }
@@ -35,8 +36,11 @@ namespace CodeAcademy.Models
 
         public List<SocialProfile> SocialProfiles { get; set; }
 
+        public List<Like> Likes { get; set; }   
+
         public List<Post> Posts { get; set; }
 
+        public string UserType { get; set; }    
     }
 
 }

@@ -13,10 +13,7 @@ namespace CodeAcademy.Models
 
         public string Description { get; set; }
 
-        public short PageCount { get; set; }
-
-        public int FacultyId { get; set; }
-        public Faculty Faculty { get; set; }    
+        public short PageCount { get; set; } 
 
         public int LanguageId { get; set; }
         public Language Language { get; set; }

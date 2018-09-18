@@ -25,5 +25,11 @@ namespace CodeAcademy.Utilities
             
 
         }
+
+        public static User GetLoggedUser(this Controller controller, AppDbContext dbContext)
+        {
+            var email = controller.HttpContext.User.Identity.Name;
+            return dbContext.Users.FirstOrDefault(x => x.Email == email);
+        }
     }
 }

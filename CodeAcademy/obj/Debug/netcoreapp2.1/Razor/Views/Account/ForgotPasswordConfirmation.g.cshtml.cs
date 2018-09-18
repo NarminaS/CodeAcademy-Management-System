@@ -63,7 +63,7 @@ using CodeAcademy.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(58, 121, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c785ccfc503e43999e942324fc82006a", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c9da5fd3a1d24670b109af8f9965104b", async() => {
                 BeginContext(64, 108, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>ForgotPasswordConfirmation</title>\r\n");
                 EndContext();
@@ -83,7 +83,7 @@ using CodeAcademy.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(181, 112, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4e1176e810dd4a3b88b3c23251749f23", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "181fe3ef5e6444bba624a0eb440ef166", async() => {
                 BeginContext(187, 99, true);
                 WriteLiteral("\r\n    <h1>Forgot Password Confirmation</h1>\r\n    <p>Please check your email to reset password</p>\r\n");
                 EndContext();

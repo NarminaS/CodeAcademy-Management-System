@@ -13,6 +13,8 @@ namespace CodeAcademy.Models
         public bool IsDeleted { get; set; }
 
         [MaxLength(60),MinLength(5)]
-        public string Path { get; set; }    
+        public string Path { get; set; }
+
+        public string ImageType { get; set; }   
     }
 }

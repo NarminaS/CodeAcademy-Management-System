@@ -23,6 +23,9 @@ namespace CodeAcademy.Models
 
         public DateTime CreationDate { get; set; }
 
+        public int FacultyId { get; set; }
+        public Faculty Faculty { get; set; }
+
         public List<Like> Likes { get; set; }
 
         public List<Comment> Comments { get; set; }
@@ -34,5 +37,7 @@ namespace CodeAcademy.Models
         public List<PostImage> PostImages { get; set; }
 
         public bool IsDeleted { get; set; }
+
+        public string PostType { get; set; }    
     }
 }

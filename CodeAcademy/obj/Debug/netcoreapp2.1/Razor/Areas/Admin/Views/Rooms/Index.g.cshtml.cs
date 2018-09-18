@@ -83,7 +83,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(134, 194, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "adb12dcf40014f32b8175cc1049cd0c8", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1d1e685541a24b78a607a08d12e7c3c0", async() => {
                 BeginContext(140, 181, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Index</title>\r\n    <script src=\"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js\"></script>\r\n");
                 EndContext();
@@ -103,7 +103,7 @@ using CodeAcademy.Areas.Admin.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(330, 4600, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "abdaad25b2544d239c3bbcf2a18d231d", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4037619dab364bf0870b48414a6ee505", async() => {
                 BeginContext(336, 6, true);
                 WriteLiteral("\r\n    ");
                 EndContext();
@@ -193,7 +193,7 @@ WriteAttributeValue("", 992, room.Id, 992, 8, false);
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-8\">\r\n                <div id=\"new-room\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">New Room</h5>\r\n                    ");
                 EndContext();
                 BeginContext(1633, 731, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37830f2ad50843fbad1d90d1c1c15367", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "d5adf958ddf740cd97586c1a872c7e8d", async() => {
                     BeginContext(1755, 602, true);
                     WriteLiteral(@"
                         <label>Name</label>
@@ -242,7 +242,7 @@ __Microsoft_AspNetCore_Mvc_TagHelpers_FormTagHelper.Antiforgery = true;
                 WriteLiteral("    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-8\">\r\n                <div id=\"edit-room\" class=\"custom-modal\">\r\n                    <h5 class=\"h5 text-center\">Edit Room</h5>\r\n                    ");
                 EndContext();
                 BeginContext(2700, 824, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37579a092927475b9611891fed1698f7", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "86b1d2a17bb7447b81cf9b0aa519fabf", async() => {
                     BeginContext(2820, 697, true);
                     WriteLiteral(@"
                         <input type=""hidden"" id=""id"" name=""Id"" value="""" />

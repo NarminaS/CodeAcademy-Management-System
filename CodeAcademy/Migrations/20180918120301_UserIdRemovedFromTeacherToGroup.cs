@@ -2,21 +2,22 @@
 
 namespace CodeAcademy.Migrations
 {
-    public partial class RemoveTeacherId : Migration
+    public partial class UserIdRemovedFromTeacherToGroup : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
                 name: "UserId",
-                table: "Groups");
+                table: "TeacherToGroups");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            migrationBuilder.AddColumn<int>(
                 name: "UserId",
-                table: "Groups",
-                nullable: true);
+                table: "TeacherToGroups",
+                nullable: false,
+                defaultValue: 0);
         }
     }
 }

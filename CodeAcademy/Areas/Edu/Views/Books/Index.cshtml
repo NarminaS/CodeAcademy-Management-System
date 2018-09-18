@@ -31,8 +31,10 @@
                 <ul class="list-group" id="books"></ul>
             </div>
             <div class="col-sm-4">
-                <form id="search" method="post" asp-area="Edu" asp-controller="Books" asp-action="Search" >
-                    <input class="form-control" name="search" type="text" placeholder="Enter book name..." aria-label="Search">
+                <form id="search" method="post" asp-area="Edu" asp-controller="Books" asp-action="SearchBookByName" >
+                    <label>Book search</label>
+                    <input class="form-control" name="name" type="text" placeholder="Enter book name..." aria-label="Search">
+                    <br />
                     <input type="submit" class="btn btn-info" value="Search book" />
                 </form>
                 <br />
@@ -221,6 +223,8 @@
             method: "GET",
             url: "/Edu/Books/GetAllBooks",
             success: function (data) {
+                for (var i in data) {
+                }
                 FillBooksOnPage(data)
             }
         });
@@ -244,17 +248,46 @@
                 var book = document.createElement("li");
                 book.classList.add("list-group-item", "book");
 
+                var hiddenId = document.createElement("input");
+                hiddenId.setAttribute("type", "hidden");
+                hiddenId.value = data[i].id;
+
+                var likeBtn = document.createElement("input");
+                likeBtn.type = "button";
+                likeBtn.classList.add("btn", "btn-success", "like");
+                likeBtn.value = "Like" + " " + data[i].likeCount
+                likeBtn.addEventListener("click", function (e) {
+                    var bookId = $(e.target).next().val();
+                    $.ajax({
+                        method: "POST",
+                        url: "/Edu/Home/LikePost/postId",
+                        data: {
+                            postId: bookId
+                        }
+                    })
+                        .done(function (obj) {
+                            console.log(obj)
+                            var text = "Like " + obj;
+                            $(e.target).val(text)
+                        })
+                        .fail(function (msg) {
+                            console.log(msg)
+                        })
+                });
 
                 var link = document.createElement("a");
                 link.target = "_blank";
                 link.href = data[i].filePath;
+
                 book.appendChild(link);
+                book.appendChild(likeBtn);
+                book.appendChild(hiddenId);
 
                 var cover = document.createElement("img");
                 cover.classList.add("img", "img-responsive", "cover")
                 cover.src = data[i].imagePath;
                 link.appendChild(cover);
-
+               
                 var text = document.createElement("p");
                 text.classList.add("lead");
                 text.innerText = data[i].name + " - " + data[i].author;

@@ -50,5 +50,13 @@ namespace CodeAcademy.Utilities
                 return folderPath;
             return String.Empty;
         }
+
+        public string DefinePostImagePath(IFormFile file)
+        {
+            string folderPath = Path.Combine(_environment.WebRootPath, "images/posts", file.FileName);
+            if (!String.IsNullOrEmpty(folderPath))
+                return folderPath;
+            return String.Empty;
+        }
     }
 }

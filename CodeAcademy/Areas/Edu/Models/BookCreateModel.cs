@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using CodeAcademy.Attributes;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -10,6 +11,7 @@ namespace CodeAcademy.Areas.Edu.Models
     public class BookCreateModel
     {
         [Required]
+        [EntityName(ErrorMessage = "Enter valid author name")]
         public string Author { get; set; }
 
         [Required]

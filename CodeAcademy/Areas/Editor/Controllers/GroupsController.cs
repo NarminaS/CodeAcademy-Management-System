@@ -67,7 +67,11 @@ namespace CodeAcademy.Areas.Editor.Controllers
                     Teacher = _dbContext.Teachers.FirstOrDefault(x => x.Id == model.TeacherId),
                     ImageId = img.Id
                 };
+
+                TeacherToGroup teacherToGroup = new TeacherToGroup { Group = group, Teacher = group.Teacher, AddingDate = DateTime.Now };
+
                 await _dbContext.Groups.AddAsync(group);
+                await _dbContext.TeacherToGroups.AddAsync(teacherToGroup);
                 if (await _dbContext.SaveChangesAsync() > 0)
                 {
                     return Json("Ok!");

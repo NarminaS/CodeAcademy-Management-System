@@ -58,9 +58,15 @@ namespace CodeAcademy.Areas.Editor.Controllers
                     var result = await _userManager.CreateAsync(student, model.Password);
                     if (result.Succeeded)
                     {
+                        StudentToGroup studentToGroup = new StudentToGroup { Group = student.Group, Student = student, AddingDate = DateTime.Now };
+                        await _dbContext.StudentToGroups.AddAsync(studentToGroup);
                         await _userManager.AddToRoleAsync(student, "Student");
                         var urlHelper = HttpContext.RequestServices.GetRequiredService<IUrlHelper>();
                         await this.SendConfirmaitionMail(student, _userManager, urlHelper);
+                        if (await _dbContext.SaveChangesAsync()>0)
+                        {
+                            return Json(student);
+                        }
                         return Json(student.Name);
 
                     }

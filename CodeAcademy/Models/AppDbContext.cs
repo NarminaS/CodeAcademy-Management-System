@@ -10,10 +10,13 @@ namespace CodeAcademy.Models
     public class AppDbContext:IdentityDbContext<User>
     {
         public DbSet<Group> Groups { get; set; }
+        public DbSet<TeacherToGroup> TeacherToGroups { get; set; } 
+        public DbSet<StudentToGroup> StudentToGroups { get; set; }
         public DbSet<Faculty> Faculties { get; set; }   
         public DbSet<Room> Rooms { get; set; }
         public DbSet<Gender> Genders { get; set; }
-        public DbSet<Tag> Tags { get; set; }    
+        public DbSet<Tag> Tags { get; set; }
+        public DbSet<TagPost> TagPosts { get; set; }    
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<CourseCompletionStatus> CourseCompletionStatuses { get; set; } 
@@ -66,7 +69,12 @@ namespace CodeAcademy.Models
             builder.Entity<ProfileImage>().HasOne(u => u.User)
                                            .WithOne(p => p.ProfileImage)
                                            .HasForeignKey<User>(k=>k.ImageId);
-                                           
+
+            builder.Entity<Post>().HasDiscriminator<string>("PostType");
+
+            builder.Entity<Image>().HasDiscriminator<string>("ImageType");
+
+            builder.Entity<User>().HasDiscriminator<string>("UserType");
         }
     }
 }

@@ -11,7 +11,10 @@ namespace CodeAcademy.Models
         [DataType(DataType.Url)]
         public string Url { get; set; }
         
+        [MaxLength(20)]
+        public string InnerText { get; set; }
+
         [MaxLength(60)]
-        public string Description { get; set; }
+        public string Description { get; set; } 
     }
 }

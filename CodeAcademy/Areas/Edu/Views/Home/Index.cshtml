@@ -21,11 +21,112 @@
             <div class="col-sm-3"></div>
             <div class="col-sm-6">
                 <a asp-area="Edu" asp-controller="Books" asp-action="Index" class="btn btn-outline-dark">BOOK CRUD</a>
+                <input type="button" id="open-new-article" class="btn btn-outline-dark" value="New Aticle" />
             </div>
             <div class="col-sm-3"></div>
         </div>
     </div>
 
+    <ul class="list-group" id="posts"></ul>
 
+
+    @* New article form *@
+    <div class="container">
+        <div class="row">
+          
+            <div class="col-sm-6">
+                <div id="new-article" class="custom-modal">
+                    <h5 class="h5 text-center">New Article</h5>
+                    <form asp-area="Edu" asp-controller="Home" asp-action="CreateArticle" class="form-group" method="post" enctype="multipart/form-data">
+                        <label for="header">Header</label>
+                        <input type="text" class="form-control" name="header" id="header" value="" />
+                        <label for="description">Descrptio</label>
+                        <textarea class="form-control" id="description" name="description"></textarea>
+                        <label>Attach images</label>
+                        <input type="file" multiple class="btn btn-info" accept="image/*" name="files" value="Upload logo" />
+                        <input type="text" class="form-control" readonly id="tags" name="tags" value="" />
+                        <br />
+                        <input type="submit" value="Create Article" id="submit-create" class="btn btn-success" />
+                        <input type="button" value="Close" id="close-create-article" class="btn btn-danger" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <style>
+        .custom-modal {
+            padding: 2vh;
+            display: none;
+            position: fixed;
+            width: 22vw;
+            z-index: 3;
+            top: 15vh;
+            left: 35vw;
+            overflow: auto;
+            border: 1px solid black;
+            border-radius: 1vh;
+            background-color: #ababab;
+        }
+    </style>
+    <script>
+        var allTags = [];
+        var artTags = [];
+
+        $.ajax({
+            method: "GET",
+            url: "/Edu/Home/GetTags",
+            success: function (data) {
+                for (var i in data) {
+                    allTags.push(data[i].name.toLowerCase())
+                }
+            }
+        });
+
+        $("#description").keyup(function (e) {
+            var text = $(e.target).val()
+            var textArr = text.split(" ")
+            for (var i = 0; i < textArr.length; i++) {
+                if (allTags.indexOf(textArr[i].toLowerCase()) != -1 && artTags.indexOf(textArr[i].toLowerCase()) < 0) {
+                    artTags.push(textArr[i].toLowerCase());
+                }
+            }
+        });
+
+        $("#description").blur(function () {
+            var taglist = "";
+            $("#tags").val("");
+            for (var i = 0; i < artTags.length; i++) {
+                var tag = artTags[i] + " , ";
+                taglist += tag;
+            }
+            console.log(taglist)
+            document.getElementById("tags").value = taglist.substring(0, taglist.length - 2);
+        });
+
+        $("#close-create-article").click(function () {
+            $("#new-article").css("display", "none");
+        });
+
+        $("#open-new-article").click(function () {
+            $("#new-article").css("display", "block");
+        });
+
+
+        $.ajax({
+            method: "GET",
+            url: "/Edu/Home/GetAllPosts",
+            success: function (data) {
+                for (var i in data) {
+                    console.log(data[i]);
+                }
+            }
+        });
+
+
+
+    </script>
 </body>
 </html>

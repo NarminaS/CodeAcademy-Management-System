@@ -41,14 +41,13 @@ namespace CodeAcademy.Areas.Edu.Controllers
         [HttpPost]
         public async Task<IActionResult> Add(BookCreateModel model)
         {
-
             if (ModelState.IsValid)
             {
                 string[] tags = model.Tags.Split(',');
                 List<Tag> bookTags = new List<Tag>();
                 foreach (var tag in tags)
                 {
-                    Tag t = await _dbContext.Tags.FirstOrDefaultAsync(x => x.Name == tag.Trim());
+                    Tag t = await _dbContext.Tags.FirstOrDefaultAsync(x => x.Name.ToLower() == tag.Trim().ToLower());
                     bookTags.Add(t);
                 }
 
@@ -63,7 +62,7 @@ namespace CodeAcademy.Areas.Edu.Controllers
                     Author = model.Author,
                     CreationDate = DateTime.Now,
                     Description = model.Description,
-                    LanguageId = model.LanguageId,
+                    Language = await _dbContext.Languages.FirstOrDefaultAsync(x=>x.Id==model.LanguageId),
                     PageCount = model.PageCount,
                     Name = model.Name,
                     FilePath = Path.Combine("/books", model.Book.FileName),
@@ -80,17 +79,21 @@ namespace CodeAcademy.Areas.Edu.Controllers
 
                 book.TagPosts = tagPosts;
 
-                if (await _dbContext.AddAsync(book) != null)
+                if (await _dbContext.Books.AddAsync(book) != null)
                 {
                     if (await _dbContext.SaveChangesAsync() > 0)
                     {
-                        return Ok(book);
+                        return Json(new BookViewModel(book));
                     }
                 }
                 else
                 {
                     return Json("Wrong!!!");
                 }
+            }
+            else
+            {
+                ModelState.AddModelError("","Check your inputs");
             }
             return Ok();
         }
@@ -100,22 +103,11 @@ namespace CodeAcademy.Areas.Edu.Controllers
         {
             var allBooks = await _dbContext.Books.Include(x => x.Image)
                                                     .Include(x => x.Language)
-                                                       .Include(x => x.TagPosts)
+                                                       .Include(x => x.TagPosts).ThenInclude(t=>t.Tag)
                                                           .Include(x => x.Likes)
                                                              .ToListAsync();
-            var model = allBooks.Select(x => new BookViewModel
-            {
-                Id = x.Id,
-                Author = x.Author,
-                Name = x.Name,
-                Description = x.Description,
-                Language = x.Language.Name,
-                ImagePath = x.Image.Path,
-                FilePath = x.FilePath,
-                PageCount = x.PageCount,
-                LikeCount = x.Likes.Count
-            }).ToList();
-            return Ok(model);
+            var model = allBooks.Select(x => new BookViewModel(x)).ToList();
+            return Json(model);
         }
 
         [HttpPost]
@@ -144,24 +136,14 @@ namespace CodeAcademy.Areas.Edu.Controllers
         [HttpPost]
         public async Task<IActionResult> GetBooksByFaculty(int facultyId)
         {
-            var books = await _dbContext.Books.Where(x=>x.FacultyId==facultyId)
-                                              .Include(x=>x.Language)
-                                              .Include(x=>x.Image)
-                                              .Include(x=>x.Likes)
-                                              .ToListAsync();            
+            var books = await _dbContext.Books.Where(x => x.FacultyId == facultyId)
+                                              .Include(x => x.Language)
+                                              .Include(x => x.TagPosts).ThenInclude(t => t.Tag)
+                                              .Include(x => x.Image)
+                                              .Include(x => x.Likes)
+                                              .ToListAsync();
 
-            var data = books.Select(x => new BookViewModel()
-            {
-                Id = x.Id,
-                Author = x.Author,
-                Name = x.Name,
-                Description = x.Description,
-                Language = x.Language.Name,
-                ImagePath = x.Image.Path,
-                FilePath = x.FilePath,
-                PageCount = x.PageCount,
-                LikeCount = x.Likes.Count
-            });
+            var data = books.Select(x => new BookViewModel(x));
             return Json(data);
         }
 
@@ -170,23 +152,30 @@ namespace CodeAcademy.Areas.Edu.Controllers
         {
             var books = await _dbContext.Books.Where(x => x.LanguageId == languageId)
                                   .Include(x => x.Language)
+                                  .Include(x => x.TagPosts).ThenInclude(t => t.Tag)
                                   .Include(x => x.Image)
                                   .Include(x => x.Likes)
                                   .ToListAsync();
 
-            var data = books.Select(x => new BookViewModel()
-            {
-                Id = x.Id,
-                Author = x.Author,
-                Name = x.Name,
-                Description = x.Description,
-                Language = x.Language.Name,
-                ImagePath = x.Image.Path,
-                FilePath = x.FilePath,
-                PageCount = x.PageCount,
-                LikeCount = x.Likes.Count
-            });
+            var data = books.Select(x => new BookViewModel(x));
             return Json(data);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> SearchBookByName(BookSearchModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _dbContext.Books.Include(x => x.Image)
+                                                    .Include(x => x.Language)
+                                                    .Include(x => x.TagPosts).ThenInclude(t=>t.Tag)
+                                                    .Include(x => x.Likes)
+                                                    .Where(x => x.Name.ToLower().Contains(model.Name.ToLower()))
+                                                    .Select(x => new BookViewModel(x))
+                                                    .ToListAsync();
+                return Json(result);
+            }
+            return Json("No books found...");
         }
     }
 }

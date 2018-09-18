@@ -144,7 +144,7 @@ namespace CodeAcademy.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Discriminator")
+                    b.Property<string>("ImageType")
                         .IsRequired();
 
                     b.Property<bool>("IsDeleted");
@@ -156,7 +156,7 @@ namespace CodeAcademy.Migrations
 
                     b.ToTable("Images");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Image");
+                    b.HasDiscriminator<string>("ImageType").HasValue("Image");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.Language", b =>
@@ -269,12 +269,14 @@ namespace CodeAcademy.Migrations
 
                     b.Property<DateTime>("CreationDate");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<int>("FacultyId");
 
                     b.Property<bool>("IsDeleted");
 
                     b.Property<DateTime>("LastUpdateDate");
+
+                    b.Property<string>("PostType")
+                        .IsRequired();
 
                     b.Property<string>("UserId");
 
@@ -284,7 +286,7 @@ namespace CodeAcademy.Migrations
 
                     b.ToTable("Posts");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Post");
+                    b.HasDiscriminator<string>("PostType").HasValue("Post");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.RoleMenuItem", b =>
@@ -343,6 +345,27 @@ namespace CodeAcademy.Migrations
                     b.ToTable("SocialProfiles");
                 });
 
+            modelBuilder.Entity("CodeAcademy.Models.StudentToGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddingDate");
+
+                    b.Property<int>("GroupId");
+
+                    b.Property<string>("StudentId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("StudentToGroups");
+                });
+
             modelBuilder.Entity("CodeAcademy.Models.Tag", b =>
                 {
                     b.Property<int>("Id")
@@ -376,6 +399,27 @@ namespace CodeAcademy.Migrations
                     b.ToTable("TagPosts");
                 });
 
+            modelBuilder.Entity("CodeAcademy.Models.TeacherToGroup", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("AddingDate");
+
+                    b.Property<int>("GroupId");
+
+                    b.Property<string>("TeacherId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GroupId");
+
+                    b.HasIndex("TeacherId");
+
+                    b.ToTable("TeacherToGroups");
+                });
+
             modelBuilder.Entity("CodeAcademy.Models.User", b =>
                 {
                     b.Property<string>("Id")
@@ -389,9 +433,6 @@ namespace CodeAcademy.Migrations
                         .IsConcurrencyToken();
 
                     b.Property<DateTime>("CreatingDate");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -441,6 +482,9 @@ namespace CodeAcademy.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
+                    b.Property<string>("UserType")
+                        .IsRequired();
+
                     b.HasKey("Id");
 
                     b.HasIndex("GenderId");
@@ -458,7 +502,7 @@ namespace CodeAcademy.Migrations
 
                     b.ToTable("AspNetUsers");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("User");
+                    b.HasDiscriminator<string>("UserType").HasValue("User");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -603,9 +647,11 @@ namespace CodeAcademy.Migrations
                 {
                     b.HasBaseType("CodeAcademy.Models.Post");
 
-                    b.Property<string>("Description");
-
                     b.Property<string>("Header");
+
+                    b.Property<string>("Text");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Article");
 
@@ -618,10 +664,7 @@ namespace CodeAcademy.Migrations
 
                     b.Property<string>("Author");
 
-                    b.Property<string>("Description")
-                        .HasColumnName("Book_Description");
-
-                    b.Property<int>("FacultyId");
+                    b.Property<string>("Description");
 
                     b.Property<string>("FilePath");
 
@@ -635,7 +678,8 @@ namespace CodeAcademy.Migrations
 
                     b.Property<short>("PageCount");
 
-                    b.HasIndex("FacultyId");
+                    b.HasIndex("FacultyId")
+                        .HasName("IX_Posts_FacultyId1");
 
                     b.HasIndex("ImageId");
 
@@ -650,10 +694,12 @@ namespace CodeAcademy.Migrations
                 {
                     b.HasBaseType("CodeAcademy.Models.Post");
 
-                    b.Property<string>("Description")
-                        .HasColumnName("Comment_Description");
-
                     b.Property<int>("PostId");
+
+                    b.Property<string>("Text")
+                        .HasColumnName("Comment_Text");
+
+                    b.HasIndex("FacultyId");
 
                     b.HasIndex("PostId");
 
@@ -670,7 +716,12 @@ namespace CodeAcademy.Migrations
                         .HasColumnName("Link_Description")
                         .HasMaxLength(60);
 
+                    b.Property<string>("InnerText")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Url");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Link");
 
@@ -685,6 +736,8 @@ namespace CodeAcademy.Migrations
                         .HasColumnName("Question_Description");
 
                     b.Property<bool>("HasApprovedAnswer");
+
+                    b.HasIndex("FacultyId");
 
                     b.ToTable("Question");
 
@@ -791,7 +844,7 @@ namespace CodeAcademy.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CodeAcademy.Models.User", "User")
-                        .WithMany()
+                        .WithMany("Likes")
                         .HasForeignKey("UserId");
                 });
 
@@ -835,6 +888,18 @@ namespace CodeAcademy.Migrations
                         .HasForeignKey("UserId");
                 });
 
+            modelBuilder.Entity("CodeAcademy.Models.StudentToGroup", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CodeAcademy.Models.Student", "Student")
+                        .WithMany()
+                        .HasForeignKey("StudentId");
+                });
+
             modelBuilder.Entity("CodeAcademy.Models.Tag", b =>
                 {
                     b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
@@ -854,6 +919,18 @@ namespace CodeAcademy.Migrations
                         .WithMany("TagPosts")
                         .HasForeignKey("TagId")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.TeacherToGroup", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Group", "Group")
+                        .WithMany()
+                        .HasForeignKey("GroupId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("CodeAcademy.Models.Teacher", "Teacher")
+                        .WithMany()
+                        .HasForeignKey("TeacherId");
                 });
 
             modelBuilder.Entity("CodeAcademy.Models.User", b =>
@@ -922,11 +999,20 @@ namespace CodeAcademy.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
+            modelBuilder.Entity("CodeAcademy.Models.Article", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
             modelBuilder.Entity("CodeAcademy.Models.Book", b =>
                 {
                     b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
                         .WithMany("Books")
                         .HasForeignKey("FacultyId")
+                        .HasConstraintName("FK_Posts_Faculties_FacultyId1")
                         .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("CodeAcademy.Models.Image", "Image")
@@ -942,9 +1028,30 @@ namespace CodeAcademy.Migrations
 
             modelBuilder.Entity("CodeAcademy.Models.Comment", b =>
                 {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("CodeAcademy.Models.Post", "Post")
                         .WithMany("Comments")
                         .HasForeignKey("PostId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.Link", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CodeAcademy.Models.Question", b =>
+                {
+                    b.HasOne("CodeAcademy.Models.Faculty", "Faculty")
+                        .WithMany()
+                        .HasForeignKey("FacultyId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 

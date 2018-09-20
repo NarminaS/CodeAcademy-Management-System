@@ -53,7 +53,8 @@ namespace CodeAcademy.Utilities
 
         public string DefinePostImagePath(IFormFile file)
         {
-            string folderPath = Path.Combine(_environment.WebRootPath, "images/posts", file.FileName);
+            var newFileName = Guid.NewGuid().ToString() + file.FileName;
+            string folderPath = Path.Combine(_environment.WebRootPath, "images/posts", newFileName);
             if (!String.IsNullOrEmpty(folderPath))
                 return folderPath;
             return String.Empty;

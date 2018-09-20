@@ -2,10 +2,8 @@
 using CodeAcademy.Services;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Security.Policy;
 using System.Threading.Tasks;
 
 namespace CodeAcademy.Utilities
@@ -29,7 +27,7 @@ namespace CodeAcademy.Utilities
         public static User GetLoggedUser(this Controller controller, AppDbContext dbContext)
         {
             var email = controller.HttpContext.User.Identity.Name;
-            return dbContext.Users.FirstOrDefault(x => x.Email == email);
+            return dbContext.Users.Include(x => x.ProfileImage).FirstOrDefault(x => x.Email == email);
         }
     }
 }

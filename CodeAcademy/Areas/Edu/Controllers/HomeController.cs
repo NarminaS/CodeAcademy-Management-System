@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeAcademy.Areas.Edu.Models;
+using CodeAcademy.Areas.Edu.Models.ViewModels;
 using CodeAcademy.Models;
 using CodeAcademy.Models.ViewModels;
 using CodeAcademy.Utilities;
@@ -12,6 +13,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json.Linq;
 
 namespace CodeAcademy.Areas.Edu.Controllers
 {
@@ -39,8 +41,12 @@ namespace CodeAcademy.Areas.Edu.Controllers
         {
             List<Post> posts = new List<Post>();
             var allArticles = await _dbContext.Articles
-                                    .Include(x=>x.User)
-                                    .Include(x => x.TagPosts).ThenInclude(t => t.Tag).Include(x=>x.PostImages).Include(x => x.Likes).ToListAsync();
+                                 .Include(x => x.TagPosts).ThenInclude(t => t.Tag)
+                                 .Include(x => x.PostImages)
+                                 .Include(x => x.Likes)
+                                 .Include(x => x.User).ThenInclude(x => x.ProfileImage)
+                                 .Select(x => new ArticleViewModel(x)).ToListAsync();
+
             var allQuestions = await _dbContext.Questions
                                     .Include(x => x.User)
                                     .Include(x => x.TagPosts).ThenInclude(t => t.Tag).Include(x => x.PostImages).Include(x => x.Likes).ToListAsync();
@@ -50,14 +56,46 @@ namespace CodeAcademy.Areas.Edu.Controllers
             var allBooks = await _dbContext.Books
                                     .Include(x => x.Image)
                                     .Include(x => x.Language).Include(x => x.TagPosts).ThenInclude(t => t.Tag).Include(x => x.Likes).ToListAsync();
-            posts.AddRange(allArticles);
-            posts.AddRange(allQuestions);
-            posts.AddRange(allLinks);
-            posts.AddRange(allBooks);
+            //posts.AddRange(allArticles);
+            //posts.AddRange(allQuestions);
+            //posts.AddRange(allLinks);
+            //posts.AddRange(allBooks);
             posts.OrderBy(x => x.CreationDate);
             return Json(posts);
         }
 
+        public async Task<IActionResult> GetAllArticles()
+        {
+            List<ArticleViewModel> articles = new List<ArticleViewModel>();
+
+            try
+            {
+                articles = await _dbContext.Articles
+                                 .Include(x => x.TagPosts).ThenInclude(t => t.Tag)
+                                 .Include(x => x.PostImages)
+                                 .Include(x => x.Likes)
+                                 .Include(x => x.User).ThenInclude(x => x.ProfileImage)
+                                 .Select(x => new ArticleViewModel(x)).ToListAsync();
+
+                foreach (var a in articles)
+                {
+                    if (a.UserType=="Student")
+                    {
+                        a.StudentGroup = GetUserGroup(a.UserMail,_dbContext);
+                    }
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                //...
+            }
+           
+            return Json(articles);
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateArticle(ArticleCreateModel model)
         {
             if (ModelState.IsValid)
@@ -69,13 +107,17 @@ namespace CodeAcademy.Areas.Edu.Controllers
                     Tag t = await _dbContext.Tags.FirstOrDefaultAsync(x => x.Name.ToLower() == tag.Trim().ToLower());
                     articleTags.Add(t);
                 }
+
                 List<PostImage> postImages = new List<PostImage>();
-                foreach (var file in model.Files)
+                if (model.Files != null)
                 {
-                    PostImage img = new PostImage() { Path = Path.Combine("/images/posts", file.FileName) };
-                    postImages.Add(img);
-                    await _dbContext.Images.AddAsync(img);
-                    await Uploader.UploadToServer(new Uploader(_hostingEnvironment).DefinePostImagePath(file), file);
+                    foreach (var file in model.Files)
+                    {
+                        PostImage img = new PostImage() { Path = Path.Combine("/images/posts", file.FileName) };
+                        postImages.Add(img);
+                        await _dbContext.Images.AddAsync(img);
+                        await Uploader.UploadToServer(new Uploader(_hostingEnvironment).DefinePostImagePath(file), file);
+                    }
                 }
                 Article article = new Article()
                 {
@@ -87,22 +129,27 @@ namespace CodeAcademy.Areas.Edu.Controllers
                     PostImages = postImages
                 };
 
-                List<TagPost> artPosts = new List<TagPost>();
+                List<TagPost> artTags = new List<TagPost>();
                 foreach (var tag in articleTags)
                 {
-                    artPosts.Add(new TagPost() { Post = article, Tag = tag });
+                    artTags.Add(new TagPost() { Post = article, Tag = tag });
                 }
 
-                article.TagPosts = artPosts;
+                article.TagPosts = artTags;
 
                 if (await _dbContext.Articles.AddAsync(article) != null)
                 {
                     if (await _dbContext.SaveChangesAsync() > 0)
                     {
-                        return Json(article);
+                        ArticleViewModel viewModel = new ArticleViewModel(article);
+                        if (article.User.UserType=="Student")
+                        {
+                            viewModel.StudentGroup = GetUserGroup(article.User.Email, _dbContext);
+                        }
+                        return Json(viewModel);
                     }
                 }
-                else
+               else
                 {
                     return Json("Error adding new article");
                 }
@@ -114,6 +161,7 @@ namespace CodeAcademy.Areas.Edu.Controllers
             return Ok();
         }
 
+        [HttpPost]
         public async Task<IActionResult> LikePost(int postId)
         {
             User current =  this.GetLoggedUser(_dbContext);
@@ -150,6 +198,7 @@ namespace CodeAcademy.Areas.Edu.Controllers
             return Json(postToLike.Likes.Count);
         }
 
+
         private Faculty GetUserFaculty(User user)
         {
             if (_userManager.IsInRoleAsync(user,"Student").Result)
@@ -175,6 +224,14 @@ namespace CodeAcademy.Areas.Edu.Controllers
         {
             var data = _dbContext.Tags.Select(x => new DropdownViewModel() { Id = x.Id, Name = x.Name }).ToList();
             return Json(data);
+        }
+
+        private string GetUserGroup(string email, AppDbContext dbContext)
+        {
+                var t = Task.Factory.StartNew(() => dbContext.Students.Where(x => x.Email == email).Include(x => x.Group).SingleOrDefaultAsync()
+                .Result.Group.Name);
+                var r = t.Result;
+                return r;
         }
 
     }

@@ -71,7 +71,7 @@ using CodeAcademy.Models.ViewModels;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(125, 325, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2cc65fcb31bb4cf2a1665fc231b76e3b", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f8bce23c92c74db59a3c663770908efe", async() => {
                 BeginContext(131, 312, true);
                 WriteLiteral(@"
     <meta name=""viewport"" content=""width=device-width"" />
@@ -95,12 +95,12 @@ using CodeAcademy.Models.ViewModels;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(452, 1128, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4bcc4397a3fe4764a36edcb44dbd9f61", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "35fc0622c424484f86bf2f5fca778b95", async() => {
                 BeginContext(458, 164, true);
                 WriteLiteral("\r\n    <br />\r\n    <div class=\"container\">\r\n        <div class=\"row\">\r\n            <div class=\"col-sm-3\"></div>\r\n            <div class=\"col-sm-6\">\r\n                ");
                 EndContext();
                 BeginContext(622, 859, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6523e78191b44edda4d5821c6190e2f1", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("form", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "866b163a8cc14100be6aabcb1724b392", async() => {
                     BeginContext(715, 106, true);
                     WriteLiteral("\r\n                    <h2>Reset your password</h2>\r\n                    <input type=\"hidden\" name=\"userid\"");
                     EndContext();
